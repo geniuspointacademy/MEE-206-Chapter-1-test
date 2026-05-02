@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEE 206 Test Management | Genius Point Academy</title>
+    
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <style>
+        /* =========================================
+   MEE 206 TEST MANAGEMENT - CORE CSS
+   ========================================= */
+
+:root {
+    --primary-color: #005a9c; /* Academic Blue */
+    --secondary-color: #f4f7f6;
+    --success-color: #28a745; /* Green for answered/success */
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --text-main: #333333;
+    --text-muted: #6c757d;
+    --unanswered-bg: #e9ecef; /* Faint grey for unanswered */
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- Layout Containers --- */
+.container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.header {
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Forms & Inputs --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #00437a;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* --- Test Interface (Pagination & Questions) --- */
+.question-container {
+    padding: 20px 0;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.options-list {
+    list-style: none;
+}
+
+.options-list li {
+    margin-bottom: 10px;
+}
+
+.options-list label {
+    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    transition: background 0.2s;
+}
+
+.options-list label:hover {
+    background: #e2e6ea;
+}
+
+.options-list input {
+    margin-right: 10px;
+}
+
+/* --- Question Number Grid (Answered vs Unanswered) --- */
+.pagination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.page-num {
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.page-num.unanswered {
+    background-color: var(--unanswered-bg);
+    color: var(--text-muted);
+    border: 1px solid #ccc;
+}
+
+.page-num.answered {
+    background-color: var(--success-color); /* Green for answered */
+    color: white;
+    border: 1px solid #1e7e34;
+}
+
+.page-num.active {
+    border: 2px solid #000;
+    transform: scale(1.1);
+}
+
+/* --- Results & Modals --- */
+.result-card {
+    background: #f8f9fa;
+    border-left: 5px solid var(--primary-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.score-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 10px 0;
+}
+
+.advice-text {
+    font-style: italic;
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Utility Classes --- */
+.text-center { text-align: center; }
+.mt-3 { margin-top: 15px; }
+.mb-3 { margin-bottom: 15px; }
+  </style>
+  </head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>MEE 206 Test Management</h1>
+            <p>Hosted by ALHAJI | Tutor: Ó'YẸMÍ (Genius Point Academy)</p>
+        </div>
+
+        <div id="welcome-section">
+            <h2 class="text-center mb-3">Welcome, Student!</h2>
+            <p class="text-center mb-3">Please enter your Matriculation Number to check your MEE 206 Chapter 1 test result.</p>
+            <div class="form-group">
+                <input type="text" id="matric-input" placeholder="e.g. XYZ/12/3456" required>
+            </div>
+            <button id="search-btn" class="btn">Search Result</button>
+        </div>
+
+        <div id="not-found-section" class="hidden">
+            <h3 class="text-center" style="color: var(--danger-color);">Result not found!</h3>
+            <p class="text-center mt-3">We couldn't fetch a result for that matric number. Are you sure you took the physical test?</p>
+            
+            <div class="mt-3 text-center">
+                <button id="btn-took-test" class="btn btn-outline">Yes, I took it</button>
+                <button id="btn-want-take" class="btn">No, I want to take the test now</button>
+            </div>
+
+            <div id="query-form-area" class="hidden mt-3">
+                <p>Please provide your details so we can trace your script.</p>
+                <input type="text" id="query-name" placeholder="Full Name" class="mb-3">
+                <input type="text" id="query-matric" placeholder="Matric Number" class="mb-3">
+                <button id="submit-query-btn" class="btn btn-success">Submit Query</button>
+                <p class="mt-3 text-center text-muted" style="font-size: 0.85rem;">Or DM us on WhatsApp: <a href="https://wa.me/2347050376975">Click Here</a></p>
+            </div>
+        </div>
+
+        <div id="pre-result-section" class="hidden">
+            <h3>Before viewing your score...</h3>
+            <p class="mb-3 text-muted">Please answer these quick reflection questions. (Submissions are sent to the Admin).</p>
+            
+            <form id="reflection-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="form-group">
+                    <label>What is your expected score? (Out of 40)</label>
+                    <input type="number" id="expected-score" required>
+                </div>
+                <div class="form-group">
+                    <label>If your actual score is higher than expected, what could have caused it?</label>
+                    <textarea id="cause-higher" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>If your actual score is lower than expected, what could have caused it?</label>
+                    <textarea id="cause-lower" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>It was observed that many people performed woefully. What do you think caused this?</label>
+                    <textarea id="cause-woeful" rows="2" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Submit Response to Proceed to Score</button>
+            </form>
+        </div>
+
+        <div id="result-section" class="hidden">
+            <div class="result-card">
+                <h2 class="text-center">Your MEE 206 Result</h2>
+                <div class="score-display">
+                    <span id="display-score">--</span> / 40
+                </div>
+                <p class="text-center mb-3"><strong>Percentage:</strong> <span id="display-percentage">--</span>%</p>
+                
+                <div class="advice-text" id="display-advice">
+                    </div>
+            </div>
+
+            <div id="action-buttons">
+                <button id="view-script-btn" class="btn btn-outline">Request to see marked paper & corrections</button>
+                <div id="script-link-area" class="hidden mt-3 text-center">
+                    <a href="#" id="drive-link" target="_blank" class="btn btn-success">View Full Result & Corrections</a>
+                </div>
+
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+                
+                <h4 class="text-center mb-3">Do you wish to solidify your knowledge?</h4>
+                <button id="retake-init-btn" class="btn">Retake Chapter 1 CBT Test (₦200)</button>
+            </div>
+        </div>
+
+        <div id="payment-section" class="hidden">
+            <h3 class="text-center">Test Access Payment</h3>
+            <p class="text-center mt-3 mb-3">Access to the comprehensive 40-question CBT test (plus summary and explanations) costs <strong>₦200</strong>.</p>
+            <p class="text-center text-muted mb-3" style="font-size: 0.85rem;">Test can be retaken multiple times within 72 hours after payment.</p>
+            
+            <div class="form-group">
+                <input type="text" id="pay-name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="pay-email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="pay-matric" placeholder="Matric Number" required>
+            </div>
+            
+            <button id="pay-now-btn" class="btn btn-success">Pay ₦200 with Flutterwave</button>
+        </div>
+
+        <div id="cbt-section" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                <h3>CBT Interface</h3>
+                <span style="font-weight: bold; color: var(--danger-color);" id="timer-display">20:00</span>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">
+                    <span id="q-number">1.</span> <span id="q-text">Loading question...</span>
+                </div>
+                
+                <ul class="options-list" id="options-area"></ul>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button id="prev-btn" class="btn btn-outline" style="margin-top: 0;">Previous</button>
+                <button id="next-btn" class="btn" style="margin-top: 0;">Next</button>
+            </div>
+
+            <button id="submit-test-btn" class="btn btn-success mt-3 hidden">Submit Final Test</button>
+
+            <div class="pagination-grid" id="pagination-grid">
+                </div>
+        </div>
+
+  </div>
+  
+    <script>
+     // ==========================================
+// MEE 206 TEST MANAGEMENT - LOGIC (PART 1)
+// ==========================================
+
+// 1. THE STUDENT DATABASE
+const studentResults = [
+    { name: "Bamidele Tolani", matric: "FST/24/8492", score: 18, link: "https://drive.google.com/file/d/1xRnG4-GAD8l-x_dTYsOp9CeJkY071oLM/view?usp=drivesdk" },
+    { name: "Adewumi Winner", matric: "EEE/24/9945", score: 15, link: "https://drive.google.com/file/d/1S0tFu2F2YiM58_UpDNKKAYsjyGOn77_a/view?usp=drivesdk" },
+    { name: "Oyewole Aisha", matric: "EEE/24/0007", score: 19, link: "https://drive.google.com/file/d/1SwaJMHP7vykaDHZv8XtwIE-Tgcno2LoG/view?usp=drivesdk" },
+    { name: "Oluswgun", matric: "EEE/9995", score: 10, link: "https://drive.google.com/file/d/1tc4cvlKHvMYAMtFRBFgtCVZbdoxBM5IS/view?usp=drivesdk" }, // Note: Matric format slightly different
+    { name: "Jimoh David", matric: "EEE/24/9974", score: 11, link: "https://drive.google.com/file/d/1zYT2ZbDdZ1BCNSHbhwCTQ2ruZBjf9BKi/view?usp=drivesdk" },
+    { name: "Unknown", matric: "EEE/24/9943", score: 24, link: "https://drive.google.com/file/d/1kmdQVd3aQX9LnuC6sYorjq8rBe2A0ixh/view?usp=drivesdk" },
+    { name: "Nifemi", matric: "MME/24/0863", score: 13, link: "https://drive.google.com/file/d/1OrGUAe3c1Wz8kqTgKqVo2waqBvmRbwS_/view?usp=drivesdk" },
+    { name: "Feranmi", matric: "MEE/24/0822", score: 17, link: "https://drive.google.com/file/d/17OQE0ghvhAYE1Rm3nU12HFyP6t7S0Pj2/view?usp=drivesdk" },
+    { name: "Muhammed Lucky", matric: "EEE/24/9978", score: 16, link: "https://drive.google.com/file/d/1oNNoYNb-XANR3Mo4SiCd3iQzYPhrk5Zi/view?usp=drivesdk" },
+    { name: "Olumayowa Daniel", matric: "EEE/24/9994", score: 37, link: "https://drive.google.com/file/d/1LEfcto_pLAGQK3yCbW_0LPRuYLM44k7c/view?usp=drivesdk" },
+    { name: "Akinbode Uthman", matric: "EEE/24/9950", score: 18, link: "https://drive.google.com/file/d/1CfB4pGxQZ6Q0jXqeK2P22dGpXnRO76Lx/view?usp=drivesdk" },
+    { name: "Olarewaju Oluwatobi", matric: "EEE/24/9991", score: 14, link: "https://drive.google.com/file/d/1qt_3F4PhUBuXFIjcWkzdyHVnJc9liYYG/view?usp=drivesdk" },
+    { name: "Mejabi Oladapo", matric: "AGE/24/0496", score: 16, link: "https://drive.google.com/file/d/1JSxqpY7zQsYk8CemsRbTMnXSiRDevms6/view?usp=drivesdk" },
+    { name: "Adekanbi Jesufemi", matric: "CPE/25/8116", score: 16, link: "https://drive.google.com/file/d/1jVGQsHxJSQAHU_6g3Sc1JeMv7nKfoib4/view?usp=drivesdk" },
+    { name: "Tofeek AbdulMalik", matric: "IPE/24/2613", score: 12, link: "https://drive.google.com/file/d/1l8uSTHsAmfXBjcaMiT-Dun2VFji16RH8/view?usp=drivesdk" },
+    { name: "Akinboyewa Joseph", matric: "CPE/25/8132", score: 16, link: "https://drive.google.com/file/d/1LizDG-G6qhg7vAh0pLg1Rr01T50E5xvm/view?usp=drivesdk" },
+    { name: "Agboola Oladimeji", matric: "EEE/25/8211", score: 7, link: "https://drive.google.com/file/d/1nQzc3XZduphmm0K_1ZJStWRu7UcdIkpV/view?usp=drivesdk" },
+    { name: "Owoseni Kenneth", matric: "EEE/24/0003", score: 12, link: "https://drive.google.com/file/d/15t9YednbQywCxxDRdcRJzYg6I47Z1aRL/view?usp=drivesdk" },
+    { name: "Lawal Adam", matric: "MNE/24/0974", score: 15, link: "https://drive.google.com/file/d/1DuRljTgrJdDQDQTVK0CNB3yDrCibBX_e/view?usp=drivesdk" },
+    { name: "Yunus AbdulRahmon", matric: "EEE/25/8296", score: 16, link: "https://drive.google.com/file/d/1gfzarApRQ7pR1dos9wga4pBpm9-1Ytdx/view?usp=drivesdk" },
+    { name: "Unknown", matric: "EEE/24/9931", score: 6, link: "https://drive.google.com/file/d/16nb2r8vnQVCFru2FjqqhYlWpfUnymOIk/view?usp=drivesdk" }
+];
+
+let currentUser = null; // Will hold the data of the student who logs in
+
+// 2. DOM ELEMENTS
+const welcomeSection = document.getElementById('welcome-section');
+const notFoundSection = document.getElementById('not-found-section');
+const preResultSection = document.getElementById('pre-result-section');
+const resultSection = document.getElementById('result-section');
+const paymentSection = document.getElementById('payment-section');
+
+// 3. SEARCH LOGIC
+document.getElementById('search-btn').addEventListener('click', function() {
+    let searchMatric = document.getElementById('matric-input').value.trim().toUpperCase();
+    
+    if(searchMatric === "") {
+        alert("Please enter a valid matric number.");
+        return;
+    }
+
+    // Find student in array
+    currentUser = studentResults.find(student => student.matric.toUpperCase() === searchMatric);
+
+    welcomeSection.classList.add('hidden');
+   if (currentUser) {
+        // Result found! Show reflection form.
+        preResultSection.classList.remove('hidden');
+        
+        // Pre-fill name if we have it
+        if(currentUser.name !== "Unknown") {
+            document.getElementById('student-name').value = currentUser.name;
+            document.getElementById('student-name').disabled = true; // Lock it if we know it
+        }
+    } else {
+        // Result NOT found
+        notFoundSection.classList.remove('hidden');
+    }
+});
+
+// 4. NOT FOUND BUTTON LOGIC
+document.getElementById('btn-took-test').addEventListener('click', function() {
+    document.getElementById('query-form-area').classList.remove('hidden');
+});
+
+document.getElementById('submit-query-btn').addEventListener('click', function() {
+    alert("Query submitted! We will investigate and contact you. You can also DM us on WhatsApp.");
+    // Here you would normally send an email via backend
+});
+
+document.getElementById('btn-want-take').addEventListener('click', function() {
+    notFoundSection.classList.add('hidden');
+    paymentSection.classList.remove('hidden'); // Take them to payment page
+});
+// REAL EMAIL SUBMISSION VIA FORMSUBMIT.CO
+document.getElementById('reflection-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.innerText = "Submitting...";
+    submitBtn.disabled = true;
+
+    // Capture the data
+    const formData = new FormData();
+    formData.append('Name', document.getElementById('student-name').value);
+    formData.append('Matric', currentUser.matric);
+    formData.append('Expected_Score', document.getElementById('expected-score').value);
+    formData.append('Higher_Cause', document.getElementById('cause-higher').value);
+    formData.append('Lower_Cause', document.getElementById('cause-lower').value);
+    formData.append('Woeful_Performance_Cause', document.getElementById('cause-woeful').value);
+    // This stops Formsubmit from redirecting to their own thank you page
+    formData.append('_captcha', 'false'); 
+
+    // Send to your Formsubmit.co email endpoint (AJAX method)
+    fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    }).then(response => response.json())
+      .then(data => {
+        if (data.success === "true" || data.success === true) {
+            alert("Response submitted successfully to Admin! Proceeding to your result...");
+            preResultSection.classList.add('hidden');
+            generateResult();
+            resultSection.classList.remove('hidden');
+        } else {
+            throw new Error("Submission failed");
+        }
+    }).catch(error => {
+        alert("Oops! There was a network error or the email is unverified. Please check your connection.");
+        submitBtn.innerText = "Submit Response to Proceed to Score";
+        submitBtn.disabled = false;
+    });
+});
+
+
+// 6. GENERATE ADVICE AND DISPLAY SCORE
+function generateResult() {
+    const score = currentUser.score;
+    const percentage = ((score / 40) * 100).toFixed(1); // 1 decimal place
+    
+    document.getElementById('display-score').innerText = score;
+    document.getElementById('display-percentage').innerText = percentage;
+
+    // Generate dynamic motivation/advice based on score
+    let advice = "";
+    if (score < 15) {
+        advice = "This score shows you have significant gaps in your understanding of Chapter 1. Remember, thermodynamics builds on foundational concepts. Don't be discouraged, but you MUST take action. Recommendation: Go through the summarized material again and consider retaking the test to solidify your knowledge.";
+    } else if (score >= 15 && score < 25) {
+        advice = "You have an average grasp of the basics, but 'average' won't easily get you an A in Engineering! You are mixing up some core concepts. Recommendation: Review the areas you missed in your script, re-read the Chapter 1 PDF, and retake the test to boost your confidence.";
+    } else if (score >= 25 && score < 35) {
+        advice = "Good job! You have a solid understanding of the introductory concepts. However, there is still room for perfection. Review the few mistakes you made to ensure you are fully prepared for Chapter 2.";
+    } else {
+        advice = "Exceptional performance! 🌟 You have clearly mastered Chapter 1. Keep up this standard of excellence as we move into Chapter 2!";
+    }
+
+    document.getElementById('display-advice').innerText = advice;
+    
+    // Set the drive link for the script
+    document.getElementById('drive-link').href = currentUser.link;
+}
+
+// 7. VIEW SCRIPT BUTTON
+document.getElementById('view-script-btn').addEventListener('click', function() {
+    document.getElementById('script-link-area').classList.remove('hidden');
+    this.classList.add('hidden'); // Hide the button once clicked
+});
+
+// 8. RETAKE TEST INITIATION
+document.getElementById('retake-init-btn').addEventListener('click', function() {
+    resultSection.classList.add('hidden');
+    paymentSection.classList.remove('hidden');
+    
+    // Auto-fill payment form if possible
+    document.getElementById('pay-name').value = document.getElementById('student-name').value;
+    document.getElementById('pay-matric').value = currentUser.matric;
+});
+// --- 1. EXPANDED QUESTION BANKS ---
+const mcqBank = [
+    { type: "mcq", q: "Thermodynamics is the science that deals with the interaction between energy, heat, work and:", options: ["Chemical systems", "Material systems", "Physical bounds", "Isolated zones"], answer: "Material systems" },
+    { type: "mcq", q: "The word thermodynamics is derived from Greek words meaning:", options: ["Motion & Power", "Heat & Power/Motion", "Energy & Mass", "Work & Energy"], answer: "Heat & Power/Motion" },
+    { type: "mcq", q: "Everything external to a thermodynamic system is called:", options: ["Boundary", "Control volume", "Surroundings or environment", "Isolated zone"], answer: "Surroundings or environment" },
+    { type: "mcq", q: "The closed surface that separates the system from the surroundings is termed the:", options: ["Boundary", "Control Volume", "Wall", "Phase"], answer: "Boundary" },
+    { type: "mcq", q: "The space containing mass/matter is called the:", options: ["Boundary envelope", "Surroundings", "Control volume", "Heterogeneous phase"], answer: "Control volume" },
+    { type: "mcq", q: "In which system is there no mass transfer across the boundary, though volume could change?", options: ["Open system", "Closed system", "Isolated system", "Steady state system"], answer: "Closed system" },
+    { type: "mcq", q: "A car radiator and an air compressor are examples of what type of system?", options: ["Closed", "Isolated", "Homogeneous", "Open"], answer: "Open" },
+    { type: "mcq", q: "Which system has a fixed quantity of mass and heat energy, with no interaction with its surrounding?", options: ["Closed", "Heterogeneous", "Open", "Isolated"], answer: "Isolated" },
+     { type: "mcq", q: "A mixture of air and water vapour is an example of a:", options: ["Heterogeneous system", "Isolated system", "Homogeneous system", "Open system"], answer: "Homogeneous system" },
+    { type: "mcq", q: "Water plus oil is an example of a:", options: ["Homogeneous system", "Heterogeneous system", "Closed phase", "Derived state"], answer: "Heterogeneous system" },
+    { type: "mcq", q: "A quantity is said to be a property if its change in value between two states is independent of the:", options: ["Mass", "Process producing the change", "Temperature", "Surroundings"], answer: "Process producing the change" },
+    { type: "mcq", q: "Which of these is NOT a fundamental property of pure substances?", options: ["Pressure", "Temperature", "Internal Energy", "Enthalpy"], answer: "Enthalpy" },
+    { type: "mcq", q: "The formula for Gibbs free energy (G) is:", options: ["G=U+pV", "G=H-TS", "G=U-TS", "G=P-TV"], answer: "G=H-TS" },
+    { type: "mcq", q: "Intensive properties are independent of:", options: ["Temperature", "Pressure", "Mass of the system", "Specific volume"], answer: "Mass of the system" },
+    { type: "mcq", q: "The value of an extensive property increases as the system's ________ increases.", options: ["Temperature", "Pressure", "Mass", "Speed"], answer: "Mass" },
+    { type: "mcq", q: "Extensive properties divided by the unit mass associated with them give:", options: ["Specific properties", "Fundamental properties", "Homogeneous properties", "Exact differentials"], answer: "Specific properties" },
+    { type: "mcq", q: "If a system exhibits the same values of its properties at different times, it is said to be at:", options: ["Thermodynamic cycle", "Steady state", "Transient state", "Reversible state"], answer: "Steady state" },
+    { type: "mcq", q: "A process whose end state is equal in all extent to its initial state is a:", options: ["Cycle", "Non-flow process", "Steady flow process", "Transient process"], answer: "Cycle" },
+    { type: "mcq", q: "The differentials of point functions are:", options: ["Inexact", "Path dependent", "Exact or perfect", "Constant"], answer: "Exact or perfect" },
+    { type: "mcq", q: "Heat and Work are examples of:", options: ["Point functions", "Path functions", "Exact differentials", "Intensive properties"], answer: "Path functions" },
+    { type: "mcq", q: "A quasi-static process is a succession of equilibrium states characterized by:", options: ["Infinite slowness", "High speed", "Constant mass", "Transient heat"], answer: "Infinite slowness" },
+    { type: "mcq", q: "An adiabatic system is one which:", options: ["Has constant volume", "Has constant pressure", "Is thermally insulated from its surroundings", "Maintains constant entropy"], answer: "Is thermally insulated from its surroundings" },
+    { type: "mcq", q: "Which equation governs an isothermal process?", options: ["PV=C", "P/T=C", "V/T=C", "PV^γ=C"], answer: "PV=C" },
+    { type: "mcq", q: "In an isochoric process, which property is constant?", options: ["Pressure", "Temperature", "Volume", "Entropy"], answer: "Volume" },
+    { type: "mcq", q: "The formula for thermal efficiency is:", options: ["1 + (Q2/Q1)", "1 - (Q2/Q1)", "(Q1+Q2)/Q1", "1 - (Q1/Q2)"], answer: "1 - (Q2/Q1)" },
+    { type: "mcq", q: "Which of the following is an example of an irreversible process?", options: ["Frictionless relative motion", "Isothermal expansion", "Throttling", "Polytropic expansion"], answer: "Throttling" },
+    { type: "mcq", q: "Energy transfer across a boundary solely as a result of a temperature difference is called:", options: ["Work", "Internal Energy", "Heat", "Enthalpy"], answer: "Heat" },
+    { type: "mcq", q: "The zeroth law provides the basis for the measurement of:", options: ["Work", "Pressure", "Internal energy", "Temperature"], answer: "Temperature" },
+    { type: "mcq", q: "In practice, the third body referenced in the zeroth law is the:", options: ["Control volume", "Thermometer", "Surroundings", "Boundary"], answer: "Thermometer" }
+];
+
+const fitgBank = [
+    { type: "fitg", q: "The boundary of a system may either be fixed or ____________ depending on the system type.", answer: "moving" },
+    { type: "fitg", q: "The space containing mass/matter is called the ____________ volume.", answer: "control" },
+    { type: "fitg", q: "A system consisting of a single phase is termed a ____________ system.", answer: "homogeneous" },
+    { type: "fitg", q: "A system consisting of two or more phases is called a ____________ system.", answer: "heterogeneous" },
+    { type: "fitg", q: "Pure substances have ____________ fundamental properties.", answer: "five" },
+    { type: "fitg", q: "Enthalpy (H) is given by the formula H = ____________.", answer: "U + pV" },
+    { type: "fitg", q: "Helmholz free energy (F) is given by the formula F = ____________.", answer: "U - TS" },
+    { type: "fitg", q: "An extensive property divided by the unit mass associated with it gives its ____________ property.", answer: "specific" },
+    { type: "fitg", q: "A ____________ is a process or series of processes whose end state is equal in all extent to its initial state.", answer: "cycle" },
+    { type: "fitg", q: "The differentials of point functions are ____________ differentials.", answer: "exact" },
+    { type: "fitg", q: "The differentials of path functions are ____________ differentials.", answer: "inexact" },
+    { type: "fitg", q: "A ____________ process is a transformation from one equilibrium state to another with some properties varying.", answer: "process" },
+    { type: "fitg", q: "A characteristic feature of a quasi-static process is infinite ____________.", answer: "slowness" },
+    { type: "fitg", q: "The equation governing an adiabatic process is ____________.", answer: "PV^γ = C" },
+    { type: "fitg", q: "In an ____________ process, the pressure of the system or fluid is constant.", answer: "isobaric" },
+    { type: "fitg", q: "In an ____________ process, the entropy of the system or fluid is constant.", answer: "isentropic" },
+    { type: "fitg", q: "Heat transfer occurs solely because of the ____________ difference between two systems.", answer: "temperature" },
+    { type: "fitg", q: "The thermometer is the third body used to calibrate the ____________ law of thermodynamics.", answer: "zeroth" }
+];
+
+const tfBank = [
+    { type: "tf", q: "The boundary of a thermodynamic system must always be fixed and cannot move.", answer: "False" },
+    { type: "tf", q: "An isolated system has a fixed quantity of mass and heat energy that cannot cross the boundary.", answer: "True" },
+    { type: "tf", q: "Internal energy and Entropy are examples of derived properties.", answer: "False" },
+    { type: "tf", q: "Density and specific volume are examples of extensive properties.", answer: "False" },
+    { type: "tf", q: "Heat and work are point functions because they depend on the end states.", answer: "False" },
+    { type: "tf", q: "A quasi-static process is also called a reversible process.", answer: "True" },
+    { type: "tf", q: "An adiabatic system can exchange work with its surroundings, but not heat.", answer: "True" },
+    { type: "tf", q: "Frictionless relative motion is an example of an irreversible process.", answer: "False" },
+    { type: "tf", q: "Combustion, diffusion, and throttling are examples of irreversible processes.", answer: "True" },
+    { type: "tf", q: "If the energy interaction between the system and surroundings is not due to temperature difference, it must be work.", answer: "True" },
+    { type: "tf", q: "Heat is a transient phenomenon.", answer: "True" }
+];
+
+
+
+// --- 2. TEST STATE VARIABLES ---
+let activeTest = [];
+let userAnswers = {};
+let currentQuestionIndex = 0;
+let timeRemaining = 20 * 60; // 20 minutes in seconds
+let timerInterval;
+
+// --- 3. FLUTTERWAVE PAYMENT INTEGRATION ---
+document.getElementById('pay-now-btn').addEventListener('click', function() {
+    const name = document.getElementById('pay-name').value;
+    const email = document.getElementById('pay-email').value;
+    const matric = document.getElementById('pay-matric').value;
+
+    if(!name || !email || !matric) {
+        alert("Please fill all details to proceed to payment.");
+        return;
+    }
+
+    FlutterwaveCheckout({
+        public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X", // Your provided API Key
+        tx_ref: "GPA-MEE206-" + Date.now(),
+        amount: 200,
+        currency: "NGN",
+        payment_options: "card, banktransfer, ussd",
+        customer: {
+            email: email,
+            name: name,
+        },
+        customizations: {
+            title: "Genius Point Academy",
+            description: "MEE 206 Chapter 1 Retake Test Access",
+            logo: "https://your-logo-url-here.png", // Optional: Add your logo link here
+        },
+      callback: function (data) {
+            console.log("Payment successful!", data);
+            // Hide payment, generate test, start timer
+            document.getElementById('payment-section').classList.add('hidden');
+            document.getElementById('cbt-section').classList.remove('hidden');
+            initializeTest();
+        },
+        onclose: function() {
+            // Optional: alert if they close without paying
+        }
+    });
+});
+
+// --- 4. RANDOMIZATION & TEST GENERATION ---
+function shuffleArray(array) {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function initializeTest() {
+    // Select requested amounts (Math.min prevents crashing if you have less questions in the bank during testing)
+    const selectedMCQ = shuffleArray(mcqBank).slice(0, Math.min(25, mcqBank.length));
+    const selectedFITG = shuffleArray(fitgBank).slice(0, Math.min(10, fitgBank.length));
+    const selectedTF = shuffleArray(tfBank).slice(0, Math.min(5, tfBank.length));
+    
+    // Combine into one test array of 40 questions
+    activeTest = [...selectedMCQ, ...selectedFITG, ...selectedTF];
+    
+    // Reset state
+    userAnswers = {};
+    currentQuestionIndex = 0;
+    
+    generatePaginationGrid();
+    renderQuestion();
+    startTimer();
+}
+
+// --- 5. UI RENDERING & PAGINATION ---
+function generatePaginationGrid() {
+    const grid = document.getElementById('pagination-grid');
+    grid.innerHTML = '';
+    
+    activeTest.forEach((q, index) => {
+        const box = document.createElement('div');
+        box.className = 'page-num unanswered';
+        box.id = `grid-box-${index}`;
+        box.innerText = index + 1;
+        box.onclick = () => {
+            currentQuestionIndex = index;
+            renderQuestion();
+        };
+        grid.appendChild(box);
+    });
+}
+
+function renderQuestion() {
+    const qData = activeTest[currentQuestionIndex];
+    document.getElementById('q-number').innerText = (currentQuestionIndex + 1) + ".";
+    document.getElementById('q-text').innerText = qData.q;
+    
+    const optionsArea = document.getElementById('options-area');
+    optionsArea.innerHTML = ''; // Clear previous
+
+    if (qData.type === "mcq" || qData.type === "tf") {
+        let optionsToRender = qData.options || ["True", "False"]; // Fallback for T/F
+        
+        optionsToRender.forEach((opt, i) => {
+            const li = document.createElement('li');
+            const checked = userAnswers[currentQuestionIndex] === opt ? "checked" : "";
+            li.innerHTML = `
+                <label>
+                    <input type="radio" name="cbt-option" value="${opt}" ${checked} 
+                           onchange="saveAnswer('${opt}')">
+                    ${opt}
+                </label>
+            `;
+            optionsArea.appendChild(li);
+        });
+    } else if (qData.type === "fitg") {
+        const val = userAnswers[currentQuestionIndex] || "";
+        optionsArea.innerHTML = `
+            <input type="text" value="${val}" placeholder="Type your answer here..." 
+                   onkeyup="saveAnswer(this.value)" style="width: 100%; padding: 10px; margin-top: 10px;">
+        `;
+    }
+
+    // Update Grid UI
+    document.querySelectorAll('.page-num').forEach(el => el.classList.remove('active'));
+    document.getElementById(`grid-box-${currentQuestionIndex}`).classList.add('active');
+
+    // Show/Hide Submit Button on last question
+    if(currentQuestionIndex === activeTest.length - 1) {
+        document.getElementById('submit-test-btn').classList.remove('hidden');
+    } else {
+        document.getElementById('submit-test-btn').classList.add('hidden');
+    }
+}
+
+// --- 6. USER INTERACTIONS ---
+// Make this global so inline HTML handlers can see it
+window.saveAnswer = function(value) {
+    if(value.trim() !== "") {
+        userAnswers[currentQuestionIndex] = value;
+        document.getElementById(`grid-box-${currentQuestionIndex}`).classList.remove('unanswered');
+        document.getElementById(`grid-box-${currentQuestionIndex}`).classList.add('answered');
+    } else {
+        delete userAnswers[currentQuestionIndex];
+        document.getElementById(`grid-box-${currentQuestionIndex}`).classList.add('unanswered');
+        document.getElementById(`grid-box-${currentQuestionIndex}`).classList.remove('answered');
+    }
+};
+
+document.getElementById('next-btn').addEventListener('click', () => {
+    if (currentQuestionIndex < activeTest.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+    }
+});
+
+document.getElementById('prev-btn').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+    }
+});
+
+// --- 7. TIMER LOGIC ---
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        let m = Math.floor(timeRemaining / 60);
+        let s = timeRemaining % 60;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+        
+        document.getElementById('timer-display').innerText = m + ":" + s;
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert("Time is up! Auto-submitting your test.");
+            submitTest();
+        }
+    }, 1000);
+}
+// --- 8. SUBMISSION LOGIC ---
+document.getElementById('submit-test-btn').addEventListener('click', () => {
+    if(confirm("Are you sure you want to submit your test?")) {
+        submitTest();
+    }
+});
+
+function submitTest() {
+    clearInterval(timerInterval);
+    
+    let score = 0;
+    // Build the Solutions/Review HTML dynamically
+    let reviewHTML = '<div style="text-align: left; margin-top: 20px;"><h3 style="border-bottom: 2px solid #ccc; padding-bottom: 5px;">Test Solutions & Review</h3>';
+    
+    activeTest.forEach((q, index) => {
+        let userAns = userAnswers[index] || "";
+        let isCorrect = false;
+        
+        // Compare answers (ignoring case and extra spaces)
+        if(userAns.toString().trim().toLowerCase() === q.answer.toString().trim().toLowerCase()) {
+            score++;
+            isCorrect = true;
+        }
+        
+        let boxColor = isCorrect ? "#28a745" : "#dc3545"; // Green if correct, Red if wrong
+        
+        reviewHTML += `
+            <div style="margin-bottom: 15px; padding: 15px; background: #fff; border: 1px solid #ddd; border-left: 5px solid ${boxColor}; border-radius: 4px;">
+                <p style="margin-bottom: 8px;"><strong>Q${index + 1}:</strong> ${q.q}</p>
+                <p style="margin-bottom: 4px; color: #555;">Your Answer: <strong style="color: ${boxColor};">${userAns === "" ? "Skipped" : userAns}</strong></p>
+                ${!isCorrect ? `<p style="margin-bottom: 0;">Correct Answer: <strong style="color: #28a745;">${q.answer}</strong></p>` : ''}
+            </div>
+        `;
+    });
+    
+    reviewHTML += '</div>';
+
+    const percentage = ((score / activeTest.length) * 100).toFixed(1);
+    
+    // Hide CBT, show custom final Result
+    document.getElementById('cbt-section').classList.add('hidden');
+    
+    // We reuse the result card for the retake score
+    document.getElementById('result-section').classList.remove('hidden');
+    document.getElementById('display-score').innerText = score;
+    document.getElementById('display-percentage').innerText = percentage;
+    document.getElementById('display-advice').innerText = "Here is your Retake CBT performance breakdown. Review your mistakes below to solidify your knowledge!";
+    
+    // Inject the summaries and the full solutions breakdown
+    document.getElementById('action-buttons').innerHTML = `
+        <div class="text-center mt-3 mb-4">
+            <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="margin-bottom: 10px;">Download Chapter 1 Summary</a>
+            <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-success">Download Full Chapter 1 Document</a>
+        </div>
+        ${reviewHTML}
+    `;
+
+    // Optionally send the retake score to Formsubmit as well
+    const retakeData = new FormData();
+    retakeData.append('Subject', 'CBT Retake Score');
+    retakeData.append('Matric', document.getElementById('pay-matric').value || 'Unknown');
+    retakeData.append('Score', `${score}/40 (${percentage}%)`);
+    retakeData.append('_captcha', 'false'); 
+    
+    fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", {
+        method: "POST",
+        body: retakeData
+    }).catch(e => console.log("Silent error sending retake score"));
+}
+
+    </script>
+</body>
+</html>
+

@@ -19,100 +19,100 @@
             --border-light: #dce2e8;
             --unanswered-bg: #e9ecef;
             --nav-height: 60px;
-            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-card: 0 20px 30px -10px rgba(0,0,0,0.08);
             --radius-md: 16px;
             --radius-sm: 8px;
             --transition: all 0.2s ease;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
         body {
             background: linear-gradient(160deg, #e9eff5 0%, #dce3eb 100%);
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            display: flex; justify-content: center; align-items: flex-start;
-            min-height: 100vh; padding: 0; margin: 0;
-            color: var(--text-dark); line-height: 1.6; padding-top: var(--nav-height);
+            display:flex; justify-content:center; align-items:flex-start;
+            min-height:100vh; padding:0; margin:0;
+            color: var(--text-dark); line-height:1.6; padding-top: var(--nav-height);
         }
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
-            background: var(--primary); color: white; display: flex; align-items: center;
-            justify-content: space-between; padding: 0 2rem; z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2); flex-wrap: wrap;
+            position:fixed; top:0; left:0; width:100%; height:var(--nav-height);
+            background:var(--primary); color:white; display:flex; align-items:center;
+            justify-content:space-between; padding:0 2rem; z-index:1000;
+            box-shadow:0 2px 15px rgba(0,0,0,0.2); flex-wrap:wrap;
         }
-        .navbar .logo { font-weight: 800; font-size: 1.1rem; cursor: pointer; white-space: nowrap; }
-        .navbar .logo span { background: var(--accent); color: #0b1e2f; padding: 0.2rem 0.7rem; border-radius: 15px; font-size: 0.8rem; margin-left: 0.3rem; }
-        .nav-links { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); padding: 0.4rem 0.8rem; border-radius: 20px; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.15); }
-        .nav-links a.disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed; }
-        .hamburger { display: none; font-size: 1.6rem; cursor: pointer; background: none; border: none; color: white; }
-        .master-container { width: 100%; max-width: 800px; background: var(--card-bg); border-radius: 2rem; box-shadow: var(--shadow-card); padding: 2.2rem 2rem; margin: 1.5rem; border: 1px solid rgba(255,255,255,0.6); transition: all 0.3s; }
-        .announcement-bar { background: #fff8e1; border-left: 5px solid var(--accent); padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-weight: 500; display: none; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-        .academy-header { text-align: center; margin-bottom: 2rem; }
-        .academy-header h1 { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .academy-header h1 span { background: var(--primary); color: white; font-size: 0.9rem; padding: 0.2rem 0.9rem; border-radius: 20px; }
-        .subhead { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; border-bottom: 2px solid var(--border-light); padding-bottom: 1rem; margin-top: 0.3rem; }
-        .tutor-badge { background: #eef3fa; border-radius: 30px; padding: 0.3rem 1.5rem; font-size: 0.85rem; color: var(--primary-light); font-weight: 600; display: inline-block; margin-top: 0.5rem; }
-        .course-intro { background: #f8fafc; border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
-        .course-intro h3 { color: var(--primary); margin-bottom: 0.5rem; }
-        .course-intro .topics { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
-        .topic-tag { background: #e0e8f0; color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
-        .chapter-card { background: white; border: 2px solid var(--border-light); border-radius: var(--radius-sm); padding: 1rem; text-align: center; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 0.9rem; }
-        .chapter-card.active-chapter { border-color: var(--success); background: #f0faf4; }
-        .chapter-card.locked { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .chapter-card:hover:not(.locked) { border-color: var(--primary-light); transform: translateY(-2px); }
-        .section-card { background: #ffffff; border-radius: var(--radius-md); padding: 1.8rem 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); margin-top: 0.8rem; }
-        .hidden { display: none !important; }
-        .input-group { margin-bottom: 1rem; text-align: left; }
-        label { font-weight: 600; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.3rem; }
-        input, textarea, select { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.95rem; background: #fafbfc; transition: var(--transition); font-family: inherit; }
-        input:focus, textarea:focus { border-color: var(--primary-light); outline: none; box-shadow: 0 0 0 3px rgba(11,61,95,0.08); background: white; }
-        .btn { background: var(--primary); color: white; border: none; font-weight: 600; padding: 0.85rem 1.8rem; border-radius: 40px; cursor: pointer; width: 100%; font-size: 1rem; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.5rem; }
-        .btn:hover { background: #092d45; transform: translateY(-1px); }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
-        .btn-success { background: var(--success); }
-        .btn-accent { background: var(--accent); color: #0b1e2f; font-weight: 700; }
-        .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; width: auto; display: inline-flex; }
-        .btn-danger { background: var(--danger); }
-        .score-big { font-size: 3.8rem; font-weight: 800; color: var(--primary); text-align: center; line-height: 1; }
-        .advice-box { background: #f6f9fc; padding: 1.2rem; border-radius: 14px; color: #1e3b4f; margin: 1rem 0; border-left: 4px solid var(--accent); }
-        .pagination-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.8rem 0 0.5rem; justify-content: center; }
-        .page-num { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--unanswered-bg); border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; color: #2c3e50; font-size: 0.9rem; }
-        .page-num.answered { background: var(--success); color: white; }
-        .page-num.active { border: 3px solid var(--accent); transform: scale(1.08); }
-        .timer-box { background: #1e2b3c; color: white; padding: 0.4rem 1.2rem; border-radius: 30px; font-weight: 700; font-size: 1rem; }
-        hr { margin: 1.5rem 0; border: 0.5px solid #dfe6ed; }
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 0.8rem; }
-        .mt-3 { margin-top: 1.2rem; }
-        .mb-2 { margin-bottom: 0.8rem; }
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: var(--primary); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 1.4rem; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: var(--transition); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
-        .back-to-top.visible { opacity: 1; pointer-events: auto; }
-        .back-to-top:hover { background: #092d45; transform: translateY(-3px); }
-        .site-footer { text-align: center; padding: 1.5rem; margin-top: 2rem; border-top: 2px solid var(--border-light); color: var(--text-muted); font-size: 0.85rem; }
-        .site-footer a { color: var(--primary-light); text-decoration: none; font-weight: 600; }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
-        .admin-table th, .admin-table td { border: 1px solid var(--border-light); padding: 0.6rem; text-align: left; }
-        .admin-table th { background: var(--primary); color: white; }
-        .admin-table input { width: 100%; padding: 0.4rem; font-size: 0.8rem; }
-        @media (max-width: 700px) {
-            .nav-links { display: none; flex-direction: column; background: var(--primary); position: absolute; top: var(--nav-height); left: 0; width: 100%; padding: 1rem; gap: 0.5rem; }
-            .nav-links.open { display: flex; }
-            .hamburger { display: block; }
-            .master-container { margin: 0.8rem; padding: 1.5rem 1rem; border-radius: 1.2rem; }
-            .score-big { font-size: 2.8rem; }
-            .chapter-grid { grid-template-columns: repeat(2, 1fr); }
+        .navbar .logo { font-weight:800; font-size:1.1rem; cursor:pointer; white-space:nowrap; }
+        .navbar .logo span { background:var(--accent); color:#0b1e2f; padding:0.2rem 0.7rem; border-radius:15px; font-size:0.8rem; margin-left:0.3rem; }
+        .nav-links { display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap; }
+        .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:0.9rem; transition:var(--transition); padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; }
+        .nav-links a:hover, .nav-links a.active { background:rgba(255,255,255,0.15); }
+        .nav-links a.disabled { opacity:0.5; pointer-events:none; cursor:not-allowed; }
+        .hamburger { display:none; font-size:1.6rem; cursor:pointer; background:none; border:none; color:white; }
+        .master-container { width:100%; max-width:800px; background:var(--card-bg); border-radius:2rem; box-shadow:var(--shadow-card); padding:2.2rem 2rem; margin:1.5rem; border:1px solid rgba(255,255,255,0.6); transition:all 0.3s; }
+        .announcement-bar { background:#fff8e1; border-left:5px solid var(--accent); padding:0.8rem 1.2rem; border-radius:var(--radius-sm); margin-bottom:1.5rem; font-weight:500; display:none; animation:fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+        .academy-header { text-align:center; margin-bottom:2rem; }
+        .academy-header h1 { font-size:2rem; font-weight:700; color:var(--primary); }
+        .academy-header h1 span { background:var(--primary); color:white; font-size:0.9rem; padding:0.2rem 0.9rem; border-radius:20px; }
+        .subhead { color:var(--text-muted); font-size:0.95rem; font-weight:500; border-bottom:2px solid var(--border-light); padding-bottom:1rem; margin-top:0.3rem; }
+        .tutor-badge { background:#eef3fa; border-radius:30px; padding:0.3rem 1.5rem; font-size:0.85rem; color:var(--primary-light); font-weight:600; display:inline-block; margin-top:0.5rem; }
+        .course-intro { background:#f8fafc; border-radius:var(--radius-md); padding:1.5rem; margin-bottom:1.5rem; text-align:center; }
+        .course-intro h3 { color:var(--primary); margin-bottom:0.5rem; }
+        .course-intro .topics { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:0.8rem; }
+        .topic-tag { background:#e0e8f0; color:var(--primary); padding:0.3rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .chapter-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:0.8rem; margin:1.2rem 0; }
+        .chapter-card { background:white; border:2px solid var(--border-light); border-radius:var(--radius-sm); padding:1rem; text-align:center; cursor:pointer; transition:var(--transition); font-weight:600; font-size:0.9rem; }
+        .chapter-card.active-chapter { border-color:var(--success); background:#f0faf4; }
+        .chapter-card.locked { opacity:0.5; cursor:not-allowed; pointer-events:none; }
+        .chapter-card:hover:not(.locked) { border-color:var(--primary-light); transform:translateY(-2px); }
+        .section-card { background:#ffffff; border-radius:var(--radius-md); padding:1.8rem 1.5rem; box-shadow:var(--shadow-sm); border:1px solid var(--border-light); margin-top:0.8rem; }
+        .hidden { display:none !important; }
+        .input-group { margin-bottom:1rem; text-align:left; }
+        label { font-weight:600; font-size:0.9rem; color:var(--primary); display:block; margin-bottom:0.3rem; }
+        input, textarea, select { width:100%; padding:0.8rem 1rem; border:1px solid var(--border-light); border-radius:var(--radius-sm); font-size:0.95rem; background:#fafbfc; transition:var(--transition); font-family:inherit; }
+        input:focus, textarea:focus { border-color:var(--primary-light); outline:none; box-shadow:0 0 0 3px rgba(11,61,95,0.08); background:white; }
+        .btn { background:var(--primary); color:white; border:none; font-weight:600; padding:0.85rem 1.8rem; border-radius:40px; cursor:pointer; width:100%; font-size:1rem; transition:var(--transition); display:flex; align-items:center; justify-content:center; gap:0.4rem; margin-top:0.5rem; }
+        .btn:hover { background:#092d45; transform:translateY(-1px); }
+        .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
+        .btn-outline:hover { background:var(--primary); color:white; }
+        .btn-success { background:var(--success); }
+        .btn-accent { background:var(--accent); color:#0b1e2f; font-weight:700; }
+        .btn-sm { padding:0.5rem 1.2rem; font-size:0.85rem; width:auto; display:inline-flex; }
+        .btn-danger { background:var(--danger); }
+        .score-big { font-size:3.8rem; font-weight:800; color:var(--primary); text-align:center; line-height:1; }
+        .advice-box { background:#f6f9fc; padding:1.2rem; border-radius:14px; color:#1e3b4f; margin:1rem 0; border-left:4px solid var(--accent); }
+        .pagination-grid { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.8rem 0 0.5rem; justify-content:center; }
+        .page-num { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:var(--unanswered-bg); border-radius:10px; font-weight:700; cursor:pointer; transition:0.2s; color:#2c3e50; font-size:0.9rem; }
+        .page-num.answered { background:var(--success); color:white; }
+        .page-num.active { border:3px solid var(--accent); transform:scale(1.08); }
+        .timer-box { background:#1e2b3c; color:white; padding:0.4rem 1.2rem; border-radius:30px; font-weight:700; font-size:1rem; }
+        hr { margin:1.5rem 0; border:0.5px solid #dfe6ed; }
+        .text-center { text-align:center; }
+        .mt-2 { margin-top:0.8rem; }
+        .mt-3 { margin-top:1.2rem; }
+        .mb-2 { margin-bottom:0.8rem; }
+        .back-to-top { position:fixed; bottom:30px; right:30px; width:45px; height:45px; background:var(--primary); color:white; border:none; border-radius:50%; cursor:pointer; font-size:1.4rem; z-index:999; box-shadow:0 4px 12px rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:var(--transition); }
+        .back-to-top.visible { opacity:1; pointer-events:auto; }
+        .back-to-top:hover { background:#092d45; transform:translateY(-3px); }
+        .site-footer { text-align:center; padding:1.5rem; margin-top:2rem; border-top:2px solid var(--border-light); color:var(--text-muted); font-size:0.85rem; }
+        .site-footer a { color:var(--primary-light); text-decoration:none; font-weight:600; }
+        .admin-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; }
+        .admin-table th, .admin-table td { border:1px solid var(--border-light); padding:0.6rem; text-align:left; }
+        .admin-table th { background:var(--primary); color:white; }
+        .admin-table input { width:100%; padding:0.4rem; font-size:0.8rem; }
+        @media (max-width:700px) {
+            .nav-links { display:none; flex-direction:column; background:var(--primary); position:absolute; top:var(--nav-height); left:0; width:100%; padding:1rem; gap:0.5rem; }
+            .nav-links.open { display:flex; }
+            .hamburger { display:block; }
+            .master-container { margin:0.8rem; padding:1.5rem 1rem; border-radius:1.2rem; }
+            .score-big { font-size:2.8rem; }
+            .chapter-grid { grid-template-columns:repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar" id="navbar">
-        <div class="logo" onclick="scrollToTop();hideAllSections();document.getElementById('welcomeSection').classList.remove('hidden');">⚙️ MEE 206 <span>Hub</span></div>
+        <div class="logo" onclick="scrollToTop();hideAllSections();document.getElementById('welcomeSection').classList.remove('hidden');closeMenu();">⚙️ MEE 206 <span>Hub</span></div>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
         <div class="nav-links" id="navLinks">
             <a onclick="navigateTo('welcome')" class="active" id="navHome">🏠 Home</a>
@@ -134,21 +134,15 @@
             <div class="tutor-badge">ALHAJI Yakub Opeyemi Abideen</div>
         </div>
 
-        <!-- ═══════════ WELCOME ═══════════ -->
         <div id="welcomeSection">
             <div class="course-intro">
                 <h3>📚 MEE 206 – Basic Engineering Thermodynamics</h3>
                 <p style="color:var(--text-muted);">Master the fundamentals of energy, heat, work, and thermodynamic systems.</p>
                 <div class="topics">
-                    <span class="topic-tag">System & Control Volume</span>
-                    <span class="topic-tag">Properties & States</span>
-                    <span class="topic-tag">Zeroth Law</span>
-                    <span class="topic-tag">Work & Heat</span>
-                    <span class="topic-tag">1st Law</span>
-                    <span class="topic-tag">Cycles & Processes</span>
+                    <span class="topic-tag">System & Control Volume</span><span class="topic-tag">Properties & States</span><span class="topic-tag">Zeroth Law</span><span class="topic-tag">Work & Heat</span><span class="topic-tag">1st Law</span><span class="topic-tag">Cycles & Processes</span>
                 </div>
             </div>
-            <h4 style="text-align:center; margin-bottom:0.5rem;">📖 Available Chapters</h4>
+            <h4 style="text-align:center;margin-bottom:0.5rem;">📖 Available Chapters</h4>
             <div class="chapter-grid">
                 <div class="chapter-card active-chapter" onclick="navigateTo('chapter1')">✅ Chapter 1<br><small>Introduction & Fundamentals</small></div>
                 <div class="chapter-card locked">🔒 Chapter 2<br><small>Coming Soon</small></div>
@@ -160,13 +154,10 @@
                 <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number to view your score.</p>
                 <input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off">
                 <button id="searchBtn" class="btn">🔍 Search Result</button>
-                <p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">
-                    Didn't take the test? <a href="#" onclick="navigateTo('payment');return false;" style="color:var(--primary-light);font-weight:600;">Take it now for ₦200</a>
-                </p>
+                <p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">Didn't take the test? <a href="#" onclick="navigateTo('payment');return false;" style="color:var(--primary-light);font-weight:600;">Take it now for ₦200</a></p>
             </div>
         </div>
 
-        <!-- ═══════════ NOT FOUND ═══════════ -->
         <div id="notFoundSection" class="section-card hidden">
             <h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3>
             <p style="text-align:center;">We couldn't fetch a result for that matric number. Are you sure you took the physical test?</p>
@@ -176,14 +167,12 @@
             </div>
             <div id="queryArea" class="hidden" style="margin-top:1.5rem;">
                 <p><strong>Trace your script:</strong></p>
-                <input type="text" id="queryName" placeholder="Full Name">
-                <input type="text" id="queryMatric" placeholder="Matric Number" style="margin-top:0.5rem;">
+                <input type="text" id="queryName" placeholder="Full Name"><input type="text" id="queryMatric" placeholder="Matric Number" style="margin-top:0.5rem;">
                 <button id="submitQueryBtn" class="btn btn-success">Submit Query to Admin</button>
                 <p style="font-size:0.8rem;margin-top:0.8rem;">📞 Or DM us on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p>
             </div>
         </div>
 
-        <!-- ═══════════ REFLECTION ═══════════ -->
         <div id="reflectionSection" class="section-card hidden">
             <h3>📝 Quick Reflection Before Your Score</h3>
             <p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly. Submissions go to Admin.</p>
@@ -197,7 +186,6 @@
             </form>
         </div>
 
-        <!-- ═══════════ RESULT ═══════════ -->
         <div id="resultSection" class="section-card hidden">
             <div style="text-align:center;">
                 <div class="score-big"><span id="displayScore">0</span>/40</div>
@@ -205,103 +193,58 @@
                 <div class="advice-box" id="adviceText"></div>
             </div>
             <button id="viewScriptBtn" class="btn btn-outline">📄 Request Marked Paper & Corrections</button>
-            <div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;">
-                <a id="driveLink" href="#" target="_blank" class="btn btn-success">View Your Full Result</a>
-            </div>
-            <div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;">
-                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline">📝 View the Tutor's Marking Guide</a>
-            </div>
+            <div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;"><a id="driveLink" href="#" target="_blank" class="btn btn-success">View Your Full Result</a></div>
+            <div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;"><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline">📝 View the Tutor's Marking Guide</a></div>
             <hr>
             <p style="text-align:center;"><strong>Solidify your knowledge?</strong></p>
             <button id="retakeFromResultBtn" class="btn">🔁 Retake Chapter 1 CBT (₦200)</button>
             <div id="resourceLinksArea" class="hidden mt-3"></div>
         </div>
 
-        <!-- ═══════════ PAYMENT ═══════════ -->
         <div id="paymentSection" class="section-card hidden">
             <h3>💳 Unlock CBT Test Access</h3>
             <p>40 questions (25 MCQ, 10 Fill-in-Gap, 5 T/F) • 20 minutes • <strong>₦200 only</strong></p>
             <p style="font-size:0.85rem;color:var(--text-muted);">Retake multiple times within 72 hours. All attempts are recorded.</p>
             <div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;">
                 <p><strong>📌 After payment you'll get:</strong></p>
-                <ul style="list-style:none;padding:0;font-size:0.9rem;">
-                    <li>✅ Chapter 1 Summary (Quick Revision)</li>
-                    <li>✅ Full Chapter 1 Document</li>
-                    <li>✅ Tutor's Marking Guide</li>
-                    <li>✅ 40-Question CBT Test (Timed)</li>
-                    <li>✅ Score Recording & Attempt History</li>
-                </ul>
+                <ul style="list-style:none;padding:0;font-size:0.9rem;"><li>✅ Chapter 1 Summary (Quick Revision)</li><li>✅ Full Chapter 1 Document</li><li>✅ Tutor's Marking Guide</li><li>✅ 40-Question CBT Test (Timed)</li><li>✅ Score Recording & Attempt History</li></ul>
             </div>
             <input type="text" id="payName" placeholder="Full Name" required>
             <input type="email" id="payEmail" placeholder="Email Address" required style="margin-top:0.8rem;">
             <input type="text" id="payMatric" placeholder="Matric Number" required style="margin-top:0.8rem;">
             <button id="payNowBtn" class="btn btn-accent">🔒 Pay ₦200 Now</button>
-            <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">
-                Payment processed securely by Flutterwave • Beneficiary: Yakub Opeyemi Abideen
-            </p>
+            <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Payment processed securely by Flutterwave • Beneficiary: Yakub Opeyemi Abideen</p>
             <hr style="margin:1.5rem 0;">
             <p style="text-align:center;"><strong>Already paid?</strong></p>
-            <div style="display:flex;gap:0.5rem;">
-                <input type="text" id="returnMatricInput" placeholder="Enter your Matric Number" style="flex:2;">
-                <button id="checkPaymentStatusBtn" class="btn btn-outline" style="flex:1;">🔍 Check Access</button>
-            </div>
+            <div style="display:flex;gap:0.5rem;"><input type="text" id="returnMatricInput" placeholder="Enter your Matric Number" style="flex:2;"><button id="checkPaymentStatusBtn" class="btn btn-outline" style="flex:1;">🔍 Check Access</button></div>
             <div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div>
         </div>
 
-        <!-- ═══════════ STUDY GATEWAY ═══════════ -->
         <div id="studyGatewaySection" class="section-card hidden">
             <h3 style="text-align:center;">📚 Payment Successful! Prepare Before You Test</h3>
             <p style="text-align:center;color:var(--text-muted);margin-bottom:0.5rem;">Review these materials carefully. The test is timed — study first!</p>
             <p id="timeRemainingInfo" style="text-align:center;margin-bottom:1rem;font-weight:600;"></p>
             <div style="display:grid;gap:0.8rem;margin-bottom:1.5rem;">
-                <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">
-                    📘 <strong>Chapter 1 Summary</strong> — Quick revision notes
-                </a>
-                <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">
-                    📚 <strong>Full Chapter 1 Document</strong> — Complete textbook
-                </a>
-                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline" style="text-align:left;">
-                    📝 <strong>Tutor's Marking Guide</strong> — See how answers are graded
-                </a>
+                <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">📘 <strong>Chapter 1 Summary</strong> — Quick revision notes</a>
+                <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">📚 <strong>Full Chapter 1 Document</strong> — Complete textbook</a>
+                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline" style="text-align:left;">📝 <strong>Tutor's Marking Guide</strong> — See how answers are graded</a>
             </div>
             <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin-bottom:1.5rem;border-left:4px solid var(--accent);">
                 <h4 style="margin-bottom:0.5rem;">⏱️ Important Test Tips</h4>
-                <ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;">
-                    <li>✅ <strong>40 questions</strong> — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li>
-                    <li>✅ <strong>20 minutes</strong> countdown — pace yourself!</li>
-                    <li>✅ <strong>Green = answered</strong>, Grey = unanswered</li>
-                    <li>✅ Score <strong>≥ 20/40</strong> is a pass</li>
-                    <li>✅ You can <strong>retake multiple times</strong> within 72 hours</li>
-                    <li>✅ All your attempts are <strong>recorded & saved</strong></li>
-                </ul>
+                <ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;"><li>✅ <strong>40 questions</strong> — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li><li>✅ <strong>20 minutes</strong> countdown — pace yourself!</li><li>✅ <strong>Green = answered</strong>, Grey = unanswered</li><li>✅ Score <strong>≥ 20/40</strong> is a pass</li><li>✅ You can <strong>retake multiple times</strong> within 72 hours</li><li>✅ All your attempts are <strong>recorded & saved</strong></li></ul>
             </div>
-            <button id="startTestFromGatewayBtn" class="btn btn-accent" style="font-size:1.1rem;padding:1rem;">
-                🚀 I'm Ready — Start Test Now
-            </button>
-            <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--text-muted);">
-                ⚠️ Once you start, the 20-minute timer begins. Don't start until you're prepared!
-            </p>
+            <button id="startTestFromGatewayBtn" class="btn btn-accent" style="font-size:1.1rem;padding:1rem;">🚀 I'm Ready — Start Test Now</button>
+            <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--text-muted);">⚠️ Once you start, the 20-minute timer begins. Don't start until you're prepared!</p>
         </div>
 
-        <!-- ═══════════ CBT ═══════════ -->
         <div id="cbtSection" class="section-card hidden">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <h3>📝 CBT Interface</h3>
-                <span class="timer-box" id="timerDisplay">20:00</span>
-            </div>
-            <div style="margin:1.5rem 0;">
-                <div style="font-weight:700;font-size:1.1rem;"><span id="qNumber"></span>. <span id="qText"></span></div>
-                <div id="optionsArea" style="margin-top:1.2rem;"></div>
-            </div>
-            <div style="display:flex;gap:1rem;">
-                <button id="prevBtn" class="btn btn-outline">◀ Previous</button>
-                <button id="nextBtn" class="btn">Next ▶</button>
-            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><h3>📝 CBT Interface</h3><span class="timer-box" id="timerDisplay">20:00</span></div>
+            <div style="margin:1.5rem 0;"><div style="font-weight:700;font-size:1.1rem;"><span id="qNumber"></span>. <span id="qText"></span></div><div id="optionsArea" style="margin-top:1.2rem;"></div></div>
+            <div style="display:flex;gap:1rem;"><button id="prevBtn" class="btn btn-outline">◀ Previous</button><button id="nextBtn" class="btn">Next ▶</button></div>
             <button id="submitTestBtn" class="btn btn-success hidden" style="margin-top:1rem;">✅ Submit Final Test</button>
             <div class="pagination-grid" id="paginationGrid"></div>
         </div>
 
-        <!-- ═══════════ ADMIN ═══════════ -->
         <div id="adminSection" class="section-card hidden">
             <h3>🔐 Admin Portal</h3>
             <div id="adminLoginArea">
@@ -330,7 +273,6 @@
         </div>
     </div>
 
-    <!-- ═══════════ SINGLE SCRIPT BLOCK ═══════════ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
@@ -349,16 +291,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-
         const STUDENTS_COLLECTION = 'students';
         const SETTINGS_DOC = 'settings/announcement';
         let currentAdminUser = null;
         let currentPayerMatric = null;
 
-        onAuthStateChanged(auth, (user) => {
-            currentAdminUser = user;
-            console.log(user ? `👤 Admin: ${user.email}` : "👤 Logged out");
-        });
+        onAuthStateChanged(auth, (user) => { currentAdminUser = user; });
 
          // ══════════════════════════════════════
             // FULL QUESTION BANKS (100 MCQ, 50 FITG, 25 T/F)
@@ -723,29 +661,13 @@
                 { q: "Heat flows from lower to higher temperature naturally.", ans: "False" }
             ];
 
-        // ═══════════ FIREBASE CRUD OPERATIONS ═══════════
-        async function getStudents() {
-            try {
-                const snap = await getDocs(collection(db, STUDENTS_COLLECTION));
-                const arr = [];
-                snap.forEach(d => arr.push({ id: d.id, ...d.data() }));
-                return arr.length ? arr : [...defaultStudents];
-            } catch (e) { return [...defaultStudents]; }
-        }
-        async function saveStudent(s) {
-            if (s.id) await updateDoc(doc(db, STUDENTS_COLLECTION, s.id), s);
-            else { const ref = doc(collection(db, STUDENTS_COLLECTION)); await setDoc(ref, s);
-                s.id = ref.id; }
-        }
+        async function getStudents() { try { const snap = await getDocs(collection(db, STUDENTS_COLLECTION)); const arr = []; snap.forEach(d => arr.push({ id: d.id, ...d.data() })); return arr.length ? arr : [...defaultStudents]; } catch (e) { return [...defaultStudents]; } }
+        async function saveStudent(s) { if (s.id) await updateDoc(doc(db, STUDENTS_COLLECTION, s.id), s); else { const ref = doc(collection(db, STUDENTS_COLLECTION)); await setDoc(ref, s); s.id = ref.id; } }
         async function deleteStudentFromDB(id) { await deleteDoc(doc(db, STUDENTS_COLLECTION, id)); }
         async function saveAllStudents(arr) { for (const s of arr) await saveStudent(s); }
-        async function getAnnouncement() {
-            const snap = await getDoc(doc(db, SETTINGS_DOC));
-            return snap.exists() ? snap.data().message || '' : '';
-        }
+        async function getAnnouncement() { const snap = await getDoc(doc(db, SETTINGS_DOC)); return snap.exists() ? snap.data().message || '' : ''; }
         async function saveAnnouncementToDB(msg) { await setDoc(doc(db, SETTINGS_DOC), { message: msg }, { merge: true }); }
 
-        // ═══════════ DOM REFERENCES ═══════════
         const welcome = document.getElementById('welcomeSection');
         const notFound = document.getElementById('notFoundSection');
         const reflection = document.getElementById('reflectionSection');
@@ -757,20 +679,15 @@
 
         function hideAllSections() { [welcome, notFound, reflection, result, payment, studyGateway, cbt, admin].forEach(s => s.classList.add('hidden')); }
 
-        // ═══════════ NAVIGATION ═══════════
+        function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
+
         function navigateTo(target) {
             hideAllSections();
+            closeMenu();
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            if (target === 'welcome' || target === 'chapter1') { welcome.classList.remove('hidden');
-                document.getElementById('navHome').classList.add('active'); } else if (target === 'payment') payment.classList.remove('hidden');
-            else if (target === 'admin') {
-                admin.classList.remove('hidden');
-                document.getElementById('navAdmin').classList.add('active');
-                if (currentAdminUser) { document.getElementById('adminLoginArea').classList.add('hidden');
-                    document.getElementById('adminDashboard').classList.remove('hidden');
-                    showAdminTab('dashboard'); } else { document.getElementById('adminLoginArea').classList.remove('hidden');
-                    document.getElementById('adminDashboard').classList.add('hidden'); }
-            }
+            if (target === 'welcome' || target === 'chapter1') { welcome.classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); }
+            else if (target === 'payment') payment.classList.remove('hidden');
+            else if (target === 'admin') { admin.classList.remove('hidden'); document.getElementById('navAdmin').classList.add('active'); if (currentAdminUser) { document.getElementById('adminLoginArea').classList.add('hidden'); document.getElementById('adminDashboard').classList.remove('hidden'); showAdminTab('dashboard'); } else { document.getElementById('adminLoginArea').classList.remove('hidden'); document.getElementById('adminDashboard').classList.add('hidden'); } }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -778,458 +695,117 @@
         document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
         window.addEventListener('scroll', () => document.getElementById('backToTopBtn').classList.toggle('visible', window.scrollY > 300));
 
-        // ═══════════ ANNOUNCEMENT ═══════════
-        async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg;
-                bar.style.display = 'block'; } else bar.style.display = 'none'; }
+        async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg; bar.style.display = 'block'; } else bar.style.display = 'none'; }
         loadAnnouncement();
 
-        // ═══════════ SEARCH LOGIC ═══════════
-        document.getElementById('searchBtn').addEventListener('click', async () => {
-            studentResults = await getStudents();
-            const matric = document.getElementById('matricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter matric number');
-            currentUser = studentResults.find(s => s.matric.toUpperCase() === matric);
-            hideAllSections();
-            if (currentUser) { document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : '';
-                reflection.classList.remove('hidden'); } else notFound.classList.remove('hidden');
-        });
-        document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
-        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted! We will investigate.'));
-        document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections();
-            payment.classList.remove('hidden'); });
+        document.getElementById('searchBtn').addEventListener('click', async () => { studentResults = await getStudents(); const matric = document.getElementById('matricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric number'); currentUser = studentResults.find(s => s.matric.toUpperCase() === matric); hideAllSections(); if (currentUser) { try { await updateDoc(doc(db, 'students', currentUser.id), { checkedAt: Date.now() }); } catch(e){} document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : ''; reflection.classList.remove('hidden'); } else notFound.classList.remove('hidden'); });
 
-        // ═══════════ REFLECTION → RESULT ═══════════
-        document.getElementById('reflectionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData();
-            fd.append('Name', document.getElementById('studentName').value);
-            fd.append('Matric', currentUser.matric);
-            fd.append('Expected', document.getElementById('expectedScore').value);
-            fd.append('Higher', document.getElementById('higherCause').value);
-            fd.append('Lower', document.getElementById('lowerCause').value);
-            fd.append('Woeful', document.getElementById('woefulCause').value);
-            fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd });
-            hideAllSections();
-            showResult(currentUser);
-        });
+        document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
+        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted!'));
+        document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
+
+        document.getElementById('reflectionForm').addEventListener('submit', function(e) { e.preventDefault(); const fd = new FormData(); fd.append('Name', document.getElementById('studentName').value); fd.append('Matric', currentUser.matric); fd.append('Expected', document.getElementById('expectedScore').value); fd.append('Higher', document.getElementById('higherCause').value); fd.append('Lower', document.getElementById('lowerCause').value); fd.append('Woeful', document.getElementById('woefulCause').value); fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd }); hideAllSections(); showResult(currentUser); });
 
         function showResult(u) {
             document.getElementById('displayScore').innerText = u.score;
             document.getElementById('displayPercent').innerText = ((u.score / 40) * 100).toFixed(1);
             const score = u.score;
             let adviceList = [];
-            if (score < 10) {
-                adviceList = [
-                    "📚 <strong>Don't give up!</strong> This is just the beginning. Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner.",
-                    "💪 <strong>You have room to grow!</strong> Thermodynamics builds layer by layer. Focus on understanding the basic terminologies first — system, boundary, control volume.",
-                    "🌟 <strong>This score doesn't define you.</strong> It shows where you need to focus. Download the full Chapter 1 PDF and study pages 1-5 carefully before retaking.",
-                    "🔥 <strong>Turn this around!</strong> Many students who scored low on their first attempt ended up with A's. The key? Consistent revision and practice.",
-                    "🚀 <strong>Ready for lift-off?</strong> Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence!"
-                ];
-            } else if (score < 15) {
-                adviceList = [
-                    "📖 <strong>You're getting there!</strong> You have some foundation but significant gaps. Focus on the concepts of open vs closed systems and properties.",
-                    "🎯 <strong>Halfway to mastery!</strong> Review the areas you got wrong. Pay special attention to intensive vs extensive properties and thermodynamic processes.",
-                    "🔍 <strong>Identify your weak spots.</strong> Look at your marked script. Were you mixing up homogeneous vs heterogeneous systems? Fix those gaps!",
-                    "🏗️ <strong>Building your foundation.</strong> Chapter 1 is the bedrock of thermodynamics. Solidify your understanding of point functions, path functions, and cycles.",
-                    "💡 <strong>Light bulb moments ahead!</strong> Sometimes things click on the second or third review. Re-read the summary, then retake — you'll see improvement!"
-                ];
-            } else if (score < 20) {
-                adviceList = [
-                    "👍 <strong>Not bad!</strong> You're above average but not quite at the pass mark. Focus on the exact questions you missed and understand WHY the correct answer is right.",
-                    "📈 <strong>Close to passing!</strong> You're just a few marks away. Review irreversible vs reversible processes, isothermal vs adiabatic equations.",
-                    "🎓 <strong>Almost there!</strong> With a bit more focused study on the zeroth law, work vs heat concepts, you'll cross the 20-mark threshold easily.",
-                    "🧠 <strong>Your brain is absorbing!</strong> Thermodynamics concepts take time to settle. Give it another pass — you're closer than you think!",
-                    "⚡ <strong>Momentum is building!</strong> You've grasped the basics. Now refine your knowledge of derived properties (H, G, F) and specific properties."
-                ];
-            } else if (score < 30) {
-                adviceList = [
-                    "👏 <strong>Good job!</strong> You have a solid grasp of Chapter 1. Review your few mistakes to ensure you're fully prepared for Chapter 2.",
-                    "🏆 <strong>Well done!</strong> You're demonstrating strong understanding. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy.",
-                    "📊 <strong>Solid performance!</strong> You've mastered most concepts. Check which few questions you missed and make sure you understand them completely.",
-                    "🎖️ <strong>Above average excellence!</strong> Keep this momentum going. Chapter 2 will build on what you already know well.",
-                    "🔬 <strong>Strong foundation detected!</strong> You clearly studied. With a bit more attention to detail, you'll be hitting 35+ next time!"
-                ];
-            } else {
-                adviceList = [
-                    "🌟 <strong>Exceptional!</strong> You've demonstrated mastery of Chapter 1. Keep this standard of excellence as we move into Chapter 2!",
-                    "🏅 <strong>Outstanding performance!</strong> Your understanding of thermodynamics fundamentals is excellent. You're ready for more advanced concepts.",
-                    "💎 <strong>Top-tier result!</strong> You clearly put in the work. Share your study strategies with classmates — you could be a peer tutor!",
-                    "🚀 <strong>Crushing it!</strong> This level of understanding will serve you well not just in MEE 206 but throughout your engineering journey.",
-                    "👑 <strong>A+ material!</strong> Your grasp of systems, properties, cycles, and the zeroth law is superb. Chapter 2 awaits — you're ready!"
-                ];
-            }
+            if (score < 10) { adviceList = ["📚 <strong>Don't give up!</strong> This is just the beginning. Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner.", "💪 <strong>You have room to grow!</strong> Thermodynamics builds layer by layer. Focus on understanding the basic terminologies first.", "🌟 <strong>This score doesn't define you.</strong> It shows where you need to focus. Download the full Chapter 1 PDF and study carefully before retaking.", "🔥 <strong>Turn this around!</strong> Many students who scored low on their first attempt ended up with A's. Consistent revision is key.", "🚀 <strong>Ready for lift-off?</strong> Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence!" ]; }
+            else if (score < 15) { adviceList = ["📖 <strong>You're getting there!</strong> Focus on open vs closed systems and properties.", "🎯 <strong>Halfway to mastery!</strong> Review intensive vs extensive properties and thermodynamic processes.", "🔍 <strong>Identify your weak spots.</strong> Were you mixing up homogeneous vs heterogeneous systems? Fix those gaps!", "🏗️ <strong>Building your foundation.</strong> Solidify your understanding of point functions, path functions, and cycles.", "💡 <strong>Light bulb moments ahead!</strong> Re-read the summary, then retake — you'll see improvement!" ]; }
+            else if (score < 20) { adviceList = ["👍 <strong>Not bad!</strong> Focus on the exact questions you missed and understand WHY.", "📈 <strong>Close to passing!</strong> Review irreversible vs reversible processes, isothermal vs adiabatic equations.", "🎓 <strong>Almost there!</strong> Focus on zeroth law and work vs heat concepts.", "🧠 <strong>Your brain is absorbing!</strong> Give it another pass — you're closer than you think!", "⚡ <strong>Momentum is building!</strong> Refine your knowledge of derived properties (H, G, F)." ]; }
+            else if (score < 30) { adviceList = ["👏 <strong>Good job!</strong> Review your few mistakes for Chapter 2 readiness.", "🏆 <strong>Well done!</strong> Polish weak areas like thermal efficiency or Gibbs free energy.", "📊 <strong>Solid performance!</strong> Make sure you understand every missed question completely.", "🎖️ <strong>Above average!</strong> Chapter 2 will build on what you already know well.", "🔬 <strong>Strong foundation!</strong> With more attention to detail, you'll hit 35+!" ]; }
+            else { adviceList = ["🌟 <strong>Exceptional!</strong> You've mastered Chapter 1. Keep this standard for Chapter 2!", "🏅 <strong>Outstanding!</strong> You're ready for more advanced concepts.", "💎 <strong>Top-tier result!</strong> Share your strategies — you could be a peer tutor!", "🚀 <strong>Crushing it!</strong> This level will serve you throughout your engineering journey.", "👑 <strong>A+ material!</strong> Your grasp of thermodynamics is superb. Chapter 2 awaits!" ]; }
             document.getElementById('adviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
             document.getElementById('driveLink').href = u.link;
             result.classList.remove('hidden');
         }
         document.getElementById('viewScriptBtn').addEventListener('click', () => document.getElementById('scriptLinkArea').classList.remove('hidden'));
-        document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections();
-            payment.classList.remove('hidden'); });
+        document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
 
-        // ═══════════ PAYMENT (FLUTTERWAVE) ═══════════
-        document.getElementById('payNowBtn').addEventListener('click', () => {
-            const n = document.getElementById('payName').value.trim();
-            const e = document.getElementById('payEmail').value.trim();
-            const m = document.getElementById('payMatric').value.trim();
-            if (!n || !e || !m) return alert('Fill all fields');
-            FlutterwaveCheckout({
-                public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X",
-                tx_ref: "MEE206-" + Date.now(),
-                amount: 200,
-                currency: "NGN",
-                payment_options: "card, banktransfer, ussd",
-                customer: { email: e, name: n },
-                customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" },
-                callback: async function(response) {
-                    console.log("✅ Payment successful:", response);
-                    const matric = document.getElementById('payMatric').value.trim().toUpperCase();
-                    try {
-                        await setDoc(doc(db, 'payments', matric), {
-                            matric: matric,
-                            paidAt: Date.now(),
-                            expiresAt: Date.now() + (72 * 60 * 60 * 1000),
-                            txRef: response.tx_ref || 'N/A',
-                            attempts: 0
-                        }, { merge: true });
-                    } catch (e) { console.error("Failed to save payment:", e); }
-                    hideAllSections();
-                    showStudyGateway(matric);
-                },
-                onclose: function() { console.log("Payment window closed"); }
-            });
-        });
+        document.getElementById('payNowBtn').addEventListener('click', () => { const n = document.getElementById('payName').value.trim(); const e = document.getElementById('payEmail').value.trim(); const m = document.getElementById('payMatric').value.trim(); if (!n || !e || !m) return alert('Fill all fields'); FlutterwaveCheckout({ public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X", tx_ref: "MEE206-" + Date.now(), amount: 200, currency: "NGN", payment_options: "card, banktransfer, ussd", customer: { email: e, name: n }, customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" }, callback: async function(response) { const matric = document.getElementById('payMatric').value.trim().toUpperCase(); try { await setDoc(doc(db, 'payments', matric), { matric: matric, paidAt: Date.now(), expiresAt: Date.now() + (72 * 60 * 60 * 1000), txRef: response.tx_ref || 'N/A', attempts: 0 }, { merge: true }); } catch (e) {} hideAllSections(); showStudyGateway(matric); }, onclose: function() {} }); });
 
-        // ═══════════ CHECK RETURNING PAYER ═══════════
-        document.getElementById('checkPaymentStatusBtn')?.addEventListener('click', async () => {
-            const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter your matric number');
-            const resultDiv = document.getElementById('paymentStatusResult');
-            resultDiv.innerHTML = '🔄 Checking...';
-            try {
-                const snap = await getDoc(doc(db, 'payments', matric));
-                if (snap.exists()) {
-                    const data = snap.data();
-                    const remaining = data.expiresAt - Date.now();
-                    const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60)));
-                    if (hoursLeft > 0) {
-                        resultDiv.innerHTML = `
-                            <div style="background:#f0faf4;padding:1rem;border-radius:8px;">
-                                <p>✅ <strong>Access found!</strong></p>
-                                <p>⏱️ ${hoursLeft} hours remaining</p>
-                                <p>📊 Attempts used: ${data.attempts || 0}</p>
-                                <button class="btn btn-accent mt-2" onclick="window.resumeAccess('${matric}')">📚 Resume Access</button>
-                            </div>`;
-                    } else {
-                        resultDiv.innerHTML = `
-                            <div style="background:#fdf2f2;padding:1rem;border-radius:8px;">
-                                <p>⚠️ <strong>Access expired.</strong></p>
-                                <p>Your 72-hour window has ended. Please pay again to continue.</p>
-                            </div>`;
-                    }
-                } else {
-                    resultDiv.innerHTML = `
-                        <div style="background:#fff8e1;padding:1rem;border-radius:8px;">
-                            <p>❌ <strong>No payment record found.</strong></p>
-                            <p>Please make a payment to access the test materials.</p>
-                        </div>`;
-                }
-            } catch (e) { resultDiv.innerHTML = '❌ Error checking status. Try again.'; }
-        });
+        document.getElementById('checkPaymentStatusBtn')?.addEventListener('click', async () => { const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter your matric number'); const resultDiv = document.getElementById('paymentStatusResult'); resultDiv.innerHTML = '🔄 Checking...'; try { const snap = await getDoc(doc(db, 'payments', matric)); if (snap.exists()) { const data = snap.data(); const remaining = data.expiresAt - Date.now(); const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60))); if (hoursLeft > 0) { resultDiv.innerHTML = `<div style="background:#f0faf4;padding:1rem;border-radius:8px;"><p>✅ <strong>Access found!</strong></p><p>⏱️ ${hoursLeft} hours remaining</p><p>📊 Attempts: ${data.attempts||0}</p><button class="btn btn-accent mt-2" onclick="window.resumeAccess('${matric}')">📚 Resume</button></div>`; } else { resultDiv.innerHTML = `<div style="background:#fdf2f2;padding:1rem;border-radius:8px;"><p>⚠️ <strong>Expired.</strong></p><p>Please pay again.</p></div>`; } } else { resultDiv.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ <strong>No record.</strong></p><p>Please pay first.</p></div>`; } } catch (e) { resultDiv.innerHTML = '❌ Error.'; } });
+        window.resumeAccess = function(matric) { document.getElementById('payMatric').value = matric; hideAllSections(); showStudyGateway(matric); };
 
-        window.resumeAccess = function(matric) {
-            document.getElementById('payMatric').value = matric;
-            hideAllSections();
-            showStudyGateway(matric);
-        };
+        function showStudyGateway(matric) { currentPayerMatric = matric || document.getElementById('payMatric')?.value || ''; hideAllSections(); checkRemainingTime(currentPayerMatric); studyGateway.classList.remove('hidden'); }
+        async function checkRemainingTime(matric) { if (!matric) return; try { const snap = await getDoc(doc(db, 'payments', matric.toUpperCase())); if (snap.exists()) { const data = snap.data(); const remaining = data.expiresAt - Date.now(); const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60))); const timeInfo = document.getElementById('timeRemainingInfo'); if (timeInfo) { if (hoursLeft > 0) { timeInfo.innerHTML = `⏱️ <strong>${hoursLeft} hours remaining</strong> in your 72-hour access window.`; timeInfo.style.color = 'var(--success)'; document.getElementById('startTestFromGatewayBtn').disabled = false; } else { timeInfo.innerHTML = `⚠️ <strong>Access expired.</strong> Please pay again.`; timeInfo.style.color = 'var(--danger)'; document.getElementById('startTestFromGatewayBtn').disabled = true; } } } } catch (e) {} }
+        document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => { if (confirm('Start test? 20-min timer begins.')) { hideAllSections(); initializeCBT(); } });
 
-        // ═══════════ STUDY GATEWAY ═══════════
-        function showStudyGateway(matric) {
-            currentPayerMatric = matric || document.getElementById('payMatric')?.value || '';
-            hideAllSections();
-            checkRemainingTime(currentPayerMatric);
-            studyGateway.classList.remove('hidden');
-        }
-
-        async function checkRemainingTime(matric) {
-            if (!matric) return;
-            try {
-                const snap = await getDoc(doc(db, 'payments', matric.toUpperCase()));
-                if (snap.exists()) {
-                    const data = snap.data();
-                    const remaining = data.expiresAt - Date.now();
-                    const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60)));
-                    const timeInfo = document.getElementById('timeRemainingInfo');
-                    if (timeInfo) {
-                        if (hoursLeft > 0) {
-                            timeInfo.innerHTML = `⏱️ <strong>${hoursLeft} hours remaining</strong> in your 72-hour access window.`;
-                            timeInfo.style.color = 'var(--success)';
-                            document.getElementById('startTestFromGatewayBtn').disabled = false;
-                        } else {
-                            timeInfo.innerHTML = `⚠️ <strong>Access expired.</strong> Please pay again to continue.`;
-                            timeInfo.style.color = 'var(--danger)';
-                            document.getElementById('startTestFromGatewayBtn').disabled = true;
-                        }
-                    }
-                }
-            } catch (e) { console.error(e); }
-        }
-
-        document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => {
-            if (confirm('Start the test? The 20-minute timer will begin immediately.')) {
-                hideAllSections();
-                initializeCBT();
-            }
-        });
-
-        // ═══════════ CBT ENGINE ═══════════
-        function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));
-                [b[i], b[j]] = [b[j], b[i]]; } return b; }
-
-        function initializeCBT() {
-            activeTest = [...shuffle(mcqBank).slice(0, 25), ...shuffle(fitgBank).slice(0, 10), ...shuffle(tfBank).slice(0, 5)];
-            userAnswers = {};
-            currentIndex = 0;
-            timeLeft = 1200;
-            cbt.classList.remove('hidden');
-            renderQuestion();
-            startTimer();
-            renderPagination();
-        }
-
-        function renderQuestion() {
-            const q = activeTest[currentIndex];
-            document.getElementById('qNumber').innerText = currentIndex + 1;
-            document.getElementById('qText').innerText = q.q;
-            const oa = document.getElementById('optionsArea');
-            oa.innerHTML = '';
-            if (q.options) {
-                q.options.forEach(opt => {
-                    oa.innerHTML += `<label style="display:block;margin:8px 0;"><input type="radio" name="cbt" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt.replace(/'/g,"\\'")}')"> ${opt}</label>`;
-                });
-            } else {
-                oa.innerHTML = `<input type="text" value="${(userAnswers[currentIndex]||'').replace(/"/g,'&quot;')}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;">`;
-            }
-            document.getElementById('submitTestBtn').classList.toggle('hidden', currentIndex !== activeTest.length - 1);
-            document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('active', i === currentIndex));
-        }
-
-        window.saveAnswer = function(v) { if (v) userAnswers[currentIndex] = v;
-            else delete userAnswers[currentIndex];
-            document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i])); };
-
-        function renderPagination() { const g = document.getElementById('paginationGrid');
-            g.innerHTML = '';
-            activeTest.forEach((_, i) => { const d = document.createElement('div');
-                d.className = 'page-num';
-                d.innerText = i + 1;
-                d.onclick = () => { currentIndex = i;
-                    renderQuestion(); };
-                g.appendChild(d); }); }
-        document.getElementById('prevBtn').addEventListener('click', () => { if (currentIndex > 0) { currentIndex--;
-                renderQuestion(); } });
-        document.getElementById('nextBtn').addEventListener('click', () => { if (currentIndex < activeTest.length - 1) { currentIndex++;
-                renderQuestion(); } });
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`;
-                if (timeLeft <= 0) { clearInterval(timerInterval);
-                    alert('Time up! Submitting...');
-                    submitCBT(); }
-            }, 1000);
-        }
-        document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit your test?')) submitCBT(); });
-
-        // ═══════════ SUBMIT CBT (SAVES ATTEMPT TO FIRESTORE) ═══════════
-        async function submitCBT() {
-            clearInterval(timerInterval);
-            let score = 0;
-            activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; });
-            const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown';
-            try {
-                await setDoc(doc(collection(db, 'attempts')), {
-                    matric: matric,
-                    score: score,
-                    total: activeTest.length,
-                    chapter: 'chapter-1',
-                    timestamp: Date.now(),
-                });
-                const payRef = doc(db, 'payments', matric.toUpperCase());
-                const paySnap = await getDoc(payRef);
-                if (paySnap.exists()) { await updateDoc(payRef, { attempts: (paySnap.data().attempts || 0) + 1 }); }
-            } catch (e) { console.error("Failed to save attempt:", e); }
-            hideAllSections();
-            const perc = ((score / activeTest.length) * 100).toFixed(1);
-            document.getElementById('displayScore').innerText = score;
-            document.getElementById('displayPercent').innerText = perc;
-            document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done. Review your mistakes to improve further." :
-                "Not a pass yet. Study the materials and retake — you'll get it!";
-            document.getElementById('resourceLinksArea').classList.remove('hidden');
-            document.getElementById('resourceLinksArea').innerHTML = `
-                <div class="text-center mt-3">
-                    <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline mb-2">📘 Chapter 1 Summary</a>
-                    <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success">📚 Full Chapter 1 PDF</a>
-                </div>
-                <div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;">
-                    <p><strong>📊 Attempt Saved!</strong></p>
-                    <p>You can retake anytime within 72 hours. All attempts are tracked.</p>
-                    <button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 View My Attempt History</button>
-                </div>`;
-            result.classList.remove('hidden');
-            fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ Subject: 'CBT Score', Matric: matric, Score: `${score}/${activeTest.length} (${perc}%)` })
-            }).catch(() => {});
-        }
-
-        window.showOwnAttempts = async function(matric) {
-            const snap = await getDocs(collection(db, 'attempts'));
-            const attempts = [];
-            snap.forEach(doc => { if (doc.data().matric === matric) attempts.push(doc.data()); });
-            attempts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-            let html = '<h4>📊 Your Attempt History</h4>';
-            attempts.forEach((a, i) => { html +=
-                    `<div style="padding:0.8rem;margin:0.5rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${a.score>=20?'var(--success)':'var(--danger)'};"><strong>Attempt ${i+1}:</strong> ${a.score}/${a.total} (${((a.score/a.total)*100).toFixed(1)}%) <span style="color:var(--text-muted);font-size:0.8rem;">— ${new Date(a.timestamp).toLocaleString()}</span></div>`; });
-            document.getElementById('resourceLinksArea').innerHTML += html;
-        };
+        function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+        function initializeCBT() { activeTest = [...shuffle(mcqBank).slice(0, 25), ...shuffle(fitgBank).slice(0, 10), ...shuffle(tfBank).slice(0, 5)]; userAnswers = {}; currentIndex = 0; timeLeft = 1200; cbt.classList.remove('hidden'); renderQuestion(); startTimer(); renderPagination(); }
+        function renderQuestion() { const q = activeTest[currentIndex]; document.getElementById('qNumber').innerText = currentIndex + 1; document.getElementById('qText').innerText = q.q; const oa = document.getElementById('optionsArea'); oa.innerHTML = ''; if (q.options) { q.options.forEach(opt => { oa.innerHTML += `<label style="display:block;margin:8px 0;"><input type="radio" name="cbt" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt.replace(/'/g,"\\'")}')"> ${opt}</label>`; }); } else { oa.innerHTML = `<input type="text" value="${(userAnswers[currentIndex]||'').replace(/"/g,'&quot;')}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;">`; } document.getElementById('submitTestBtn').classList.toggle('hidden', currentIndex !== activeTest.length - 1); document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('active', i === currentIndex)); }
+        window.saveAnswer = function(v) { if (v) userAnswers[currentIndex] = v; else delete userAnswers[currentIndex]; document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i])); };
+        function renderPagination() { const g = document.getElementById('paginationGrid'); g.innerHTML = ''; activeTest.forEach((_, i) => { const d = document.createElement('div'); d.className = 'page-num'; d.innerText = i + 1; d.onclick = () => { currentIndex = i; renderQuestion(); }; g.appendChild(d); }); }
+        document.getElementById('prevBtn').addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; renderQuestion(); } });
+        document.getElementById('nextBtn').addEventListener('click', () => { if (currentIndex < activeTest.length - 1) { currentIndex++; renderQuestion(); } });
+        function startTimer() { clearInterval(timerInterval); timerInterval = setInterval(() => { timeLeft--; document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`; if (timeLeft <= 0) { clearInterval(timerInterval); alert('Time up!'); submitCBT(); } }, 1000); }
+        document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit?')) submitCBT(); });
+        async function submitCBT() { clearInterval(timerInterval); let score = 0; activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; }); const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown'; try { await setDoc(doc(collection(db, 'attempts')), { matric: matric, score: score, total: activeTest.length, chapter: 'chapter-1', timestamp: Date.now() }); const payRef = doc(db, 'payments', matric.toUpperCase()); const paySnap = await getDoc(payRef); if (paySnap.exists()) { await updateDoc(payRef, { attempts: (paySnap.data().attempts || 0) + 1 }); } } catch(e){} hideAllSections(); const perc = ((score / activeTest.length) * 100).toFixed(1); document.getElementById('displayScore').innerText = score; document.getElementById('displayPercent').innerText = perc; document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done." : "Not a pass yet. Retake!"; document.getElementById('resourceLinksArea').classList.remove('hidden'); document.getElementById('resourceLinksArea').innerHTML = `<div class="text-center mt-3"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline mb-2">📘 Chapter 1 Summary</a><a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success">📚 Full Chapter 1 PDF</a></div><div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;"><p><strong>📊 Attempt Saved!</strong></p><button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 My Attempt History</button></div>`; result.classList.remove('hidden'); fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ Subject: 'CBT Score', Matric: matric, Score: `${score}/${activeTest.length}` }) }).catch(()=>{}); }
+        window.showOwnAttempts = async function(matric) { const snap = await getDocs(collection(db, 'attempts')); const attempts = []; snap.forEach(doc => { if (doc.data().matric === matric) attempts.push(doc.data()); }); attempts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); let html = '<h4>📊 Your Attempt History</h4>'; attempts.forEach((a, i) => { html += `<div style="padding:0.8rem;margin:0.5rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${a.score>=20?'var(--success)':'var(--danger)'};"><strong>Attempt ${i+1}:</strong> ${a.score}/${a.total} (${((a.score/a.total)*100).toFixed(1)}%) <span style="color:var(--text-muted);font-size:0.8rem;">— ${new Date(a.timestamp).toLocaleString()}</span></div>`; }); document.getElementById('resourceLinksArea').innerHTML += html; };
 
         // ═══════════ ADMIN PANEL ═══════════
-        document.getElementById('adminLoginBtn').addEventListener('click', async () => {
-            const em = document.getElementById('adminEmail').value.trim();
-            const pw = document.getElementById('adminPassword').value;
-            if (!em || !pw) return alert('Enter email and password');
-            try {
-                await signInWithEmailAndPassword(auth, em, pw);
-                document.getElementById('adminLoginArea').classList.add('hidden');
-                document.getElementById('adminDashboard').classList.remove('hidden');
-                showAdminTab('dashboard');
-            } catch (err) { alert('Login failed: ' + err.message); }
-        });
+        document.getElementById('adminLoginBtn').addEventListener('click', async () => { const em = document.getElementById('adminEmail').value.trim(); const pw = document.getElementById('adminPassword').value; if (!em || !pw) return alert('Enter email and password'); try { await signInWithEmailAndPassword(auth, em, pw); document.getElementById('adminLoginArea').classList.add('hidden'); document.getElementById('adminDashboard').classList.remove('hidden'); await showAdminTab('dashboard'); } catch (err) { alert('Login failed: ' + err.message); } });
+        function logoutAdmin() { signOut(auth).then(() => { document.getElementById('adminLoginArea').classList.remove('hidden'); document.getElementById('adminDashboard').classList.add('hidden'); }); }
 
-        function logoutAdmin() { signOut(auth).then(() => { document.getElementById('adminLoginArea').classList.remove('hidden');
-                document.getElementById('adminDashboard').classList.add('hidden'); }); }
-
-        async function showAdminTab(tab) {
-            const ct = document.getElementById('adminTabContent');
-            if (tab === 'dashboard') ct.innerHTML = await renderDashboard();
-            else if (tab === 'students') { studentResults = await getStudents();
-                ct.innerHTML = renderStudentsTabHTML();
-                renderStudentTable(); } else if (tab === 'chapters') ct.innerHTML = await renderChaptersTab();
-            else if (tab === 'questions') ct.innerHTML = await renderQuestionsTab();
-            else if (tab === 'attempts') ct.innerHTML = await renderAttemptsTab();
-            else if (tab === 'announcement') ct.innerHTML = await renderAnnouncementTab();
-        }
+        async function showAdminTab(tab) { const ct = document.getElementById('adminTabContent'); switch(tab) { case 'dashboard': ct.innerHTML = await renderDashboard(); break; case 'students': ct.innerHTML = '<p style="text-align:center;padding:2rem;">🔄 Loading students...</p>'; studentResults = await getStudents(); ct.innerHTML = renderStudentsTabHTML(); setTimeout(() => renderStudentTable(), 100); break; case 'chapters': ct.innerHTML = await renderChaptersTab(); break; case 'questions': ct.innerHTML = await renderQuestionsTab(); break; case 'attempts': ct.innerHTML = await renderAttemptsTab(); break; case 'announcement': ct.innerHTML = await renderAnnouncementTab(); break; } }
 
         async function renderDashboard() {
             const students = await getStudents();
             const aSnap = await getDocs(collection(db, 'attempts'));
-            let totalA = 0,
-                passed = 0;
-            aSnap.forEach(d => { totalA++; if (d.data().score >= 20) passed++; });
+            const pSnap = await getDocs(collection(db, 'payments'));
             const cSnap = await getDocs(collection(db, 'chapters'));
+            let totalAttempts = 0, passedCount = 0;
+            aSnap.forEach(d => { totalAttempts++; if (d.data().score >= 20) passedCount++; });
+            const checkedStudents = students.filter(s => s.checkedAt).length;
             return `<h4>📊 Admin Dashboard</h4>
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0;">
-                    <div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.8rem;">Students</div></div>
-                    <div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.8rem;">Chapters</div></div>
-                    <div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${totalA}</div><div style="font-size:0.8rem;">Attempts</div></div>
-                    <div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${passed}</div><div style="font-size:0.8rem;">Passed</div></div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin:1.5rem 0;">
+                    <div style="background:#f0faf4;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.8rem;">Total Students</div></div>
+                    <div style="background:#eef3fa;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.8rem;">Chapters</div></div>
+                    <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:var(--accent);">${totalAttempts}</div><div style="font-size:0.8rem;">CBT Attempts</div></div>
+                    <div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:var(--danger);">${passedCount}</div><div style="font-size:0.8rem;">Passed (≥20)</div></div>
+                    <div style="background:#f5f0ff;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:#6b21a8;">${pSnap.size}</div><div style="font-size:0.8rem;">Paid Users</div></div>
+                    <div style="background:#e0f7fa;padding:1.2rem;border-radius:12px;text-align:center;"><div style="font-size:2.2rem;font-weight:800;color:#00695c;">${checkedStudents}</div><div style="font-size:0.8rem;">Results Checked</div></div>
                 </div>`;
         }
 
-        function renderStudentsTabHTML() {
-            return `<h4>📋 Student Results</h4>
-                <button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button>
-                <input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;">
-                <button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button>
-                <table class="admin-table"><thead><tr><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table>
-                <div id="studentAttemptsView" style="margin-top:1rem;"></div>`;
-        }
+        function renderStudentsTabHTML() { return `<h4>📋 Student Results (${studentResults.length})</h4><button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button><input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;"><button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button><table class="admin-table"><thead><tr><th>#</th><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>Checked</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table><div id="studentAttemptsView" style="margin-top:1rem;"></div>`; }
 
-        function renderStudentTable(filter = '') {
-            const tbody = document.getElementById('adminStudentBody'); if (!tbody) return;
-            tbody.innerHTML = '';
-            const filtered = filter ? studentResults.filter(s => s.matric.toUpperCase().includes(filter.toUpperCase())) :
-                studentResults;
-            filtered.forEach(s => { const i = studentResults.indexOf(s);
-                tbody.innerHTML +=
-                    `<tr><td><input value="${s.name}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value))"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`; });
-        }
+        function renderStudentTable(filter = '') { const tbody = document.getElementById('adminStudentBody'); if (!tbody) return; tbody.innerHTML = ''; const filtered = filter ? studentResults.filter(s => s.matric.toUpperCase().includes(filter.toUpperCase())) : studentResults; if (filtered.length === 0) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;">No students.</td></tr>'; return; } filtered.forEach(s => { const i = studentResults.indexOf(s); tbody.innerHTML += `<tr><td>${i+1}</td><td><input value="${s.name.replace(/"/g,'&quot;')}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value)||0)"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td>${s.checkedAt ? '✅' : '—'}</td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`; }); }
 
         window.updateStudent = (i, f, v) => { studentResults[i][f] = v; };
-        window.addStudentRow = () => { studentResults.push({ name: 'New', matric: 'NEW', score: 0, link: '#' });
-            renderStudentTable(); };
-        window.saveSingleStudent = async (i) => { await saveStudent(studentResults[i]);
-            alert('Saved!'); };
-        window.saveAllStudents = async () => { await saveAllStudents(studentResults);
-            alert('All saved to Firebase!'); };
-        window.deleteStudent = async (i) => { if (confirm('Delete?')) { if (studentResults[i].id) await deleteStudentFromDB(
-                    studentResults[i].id);
-                studentResults.splice(i, 1);
-                renderStudentTable(); } };
+        window.addStudentRow = () => { studentResults.push({ name: 'New', matric: 'NEW', score: 0, link: '#' }); renderStudentTable(); };
+        window.saveSingleStudent = async (i) => { await saveStudent(studentResults[i]); alert('Saved!'); };
+        window.saveAllStudents = async () => { if (!confirm(`Save all ${studentResults.length} students?`)) return; await saveAllStudents(studentResults); alert('Saved!'); };
+        window.deleteStudent = async (i) => { if (!confirm('Delete?')) return; if (studentResults[i].id) await deleteStudentFromDB(studentResults[i].id); studentResults.splice(i, 1); renderStudentTable(); };
         window.filterStudentTable = () => renderStudentTable(document.getElementById('studentSearchInput')?.value || '');
-        window.viewStudentAttempts = async (m) => { const snap = await getDocs(collection(db, 'attempts')); const att = [];
-            snap.forEach(d => { if (d.data().matric === m) att.push(d.data()); }); const v = document.getElementById(
-                'studentAttemptsView');
-            v.innerHTML = att.length ?
-                `<h5>📊 ${m}</h5><table class="admin-table"><tr><th>#</th><th>Score</th><th>Date</th></tr>${att.map((a,i)=>`<tr><td>${i+1}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>` :
-                '<p>No attempts.</p>'; };
+        window.viewStudentAttempts = async (m) => { const snap = await getDocs(collection(db, 'attempts')); const att = []; snap.forEach(d => { if (d.data().matric === m) att.push(d.data()); }); const v = document.getElementById('studentAttemptsView'); v.innerHTML = att.length ? `<h5>📊 ${m}</h5><table class="admin-table"><tr><th>#</th><th>Score</th><th>Date</th></tr>${att.map((a,i)=>`<tr><td>${i+1}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>` : '<p>No attempts.</p>'; };
 
-        async function renderChaptersTab() { const snap = await getDocs(collection(db, 'chapters')); const ch = [];
-            snap.forEach(d => ch.push({ id: d.id, ...d.data() })); return `<h4>📚 Chapters</h4><button class="btn btn-sm btn-success" onclick="window.showAddChapterForm()">+ Add</button>
-                <div id="addChapterForm" class="hidden" style="margin:1rem 0;"><input id="newChapterTitle" placeholder="Title"><input id="newChapterSummary" placeholder="Summary Link"><input id="newChapterFull" placeholder="Full Link"><button class="btn btn-sm btn-success" onclick="window.addChapter()">Save</button></div>
-                <table class="admin-table"><tr><th>Title</th><th>Status</th><th>Act</th></tr>${ch.map(c=>`<tr><td>${c.title||c.id}</td><td>${c.active?'✅':'🔒'}</td><td><button class="btn btn-sm btn-outline" onclick="window.toggleChapter('${c.id}',${!c.active})">Toggle</button><button class="btn btn-sm btn-danger" onclick="window.deleteChapter('${c.id}')">🗑</button></td></tr>`).join('')}</table>`; }
+        async function renderChaptersTab() { const snap = await getDocs(collection(db, 'chapters')); const ch = []; snap.forEach(d => ch.push({ id: d.id, ...d.data() })); return `<h4>📚 Chapters</h4><button class="btn btn-sm btn-success" onclick="window.showAddChapterForm()">+ Add</button><div id="addChapterForm" class="hidden" style="margin:1rem 0;padding:1rem;background:#f8fafc;border-radius:8px;"><input id="newChapterTitle" placeholder="Title"><input id="newChapterSummary" placeholder="Summary Link"><input id="newChapterFull" placeholder="Full Link"><button class="btn btn-sm btn-success" onclick="window.addChapter()">Save</button></div><table class="admin-table"><tr><th>Title</th><th>Status</th><th>Act</th></tr>${ch.map(c=>`<tr><td>${c.title||c.id}</td><td>${c.active?'✅':'🔒'}</td><td><button class="btn btn-sm btn-outline" onclick="window.toggleChapter('${c.id}',${!c.active})">Toggle</button><button class="btn btn-sm btn-danger" onclick="window.deleteChapter('${c.id}')">🗑</button></td></tr>`).join('')}</table>`; }
         window.showAddChapterForm = () => document.getElementById('addChapterForm').classList.remove('hidden');
-        window.addChapter = async () => { const t = document.getElementById('newChapterTitle').value.trim(); if (!t) return alert(
-                'Title required'); await setDoc(doc(db, 'chapters', t.toLowerCase().replace(/\s+/g, '-')), { title: t,
-                summaryLink: document.getElementById('newChapterSummary').value, fullLink: document.getElementById(
-                    'newChapterFull').value, active: true }); showAdminTab('chapters'); };
-        window.toggleChapter = async (id, a) => { await updateDoc(doc(db, 'chapters', id), { active: a });
-            showAdminTab('chapters'); };
-        window.deleteChapter = async (id) => { if (confirm('Delete?')) { await deleteDoc(doc(db, 'chapters', id));
-                showAdminTab('chapters'); } };
-        async function renderQuestionsTab() { return `<h4>❓ Questions</h4><p>Manage questions via Firebase Console.</p>`; }
-        async function renderAttemptsTab() { const snap = await getDocs(collection(db, 'attempts')); const att = [];
-            snap.forEach(d => att.push(d.data()));
-            att.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); return `<h4>📊 All Attempts (${att.length})</h4>
-                <table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${att.map(a=>`<tr><td>${a.matric}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`; }
-        async function renderAnnouncementTab() { const msg = await getAnnouncement(); return `<h4>📢 Announcement</h4>
-                <textarea id="announcementInput" rows="3" style="width:100%;">${msg}</textarea>
-                <button class="btn btn-success" onclick="window.saveAnnouncementMsg()">💾 Save</button>
-                <button class="btn btn-outline mt-2" onclick="window.clearAnnouncementMsg()">🗑 Clear</button>`; }
-        window.saveAnnouncementMsg = async () => { await saveAnnouncementToDB(document.getElementById('announcementInput')
-                .value);
-            loadAnnouncement();
-            alert('Saved!'); };
-        window.clearAnnouncementMsg = async () => { await saveAnnouncementToDB('');
-            loadAnnouncement(); };
+        window.addChapter = async () => { const t = document.getElementById('newChapterTitle').value.trim(); if (!t) return alert('Title required'); await setDoc(doc(db, 'chapters', t.toLowerCase().replace(/\s+/g,'-')), { title: t, summaryLink: document.getElementById('newChapterSummary').value, fullLink: document.getElementById('newChapterFull').value, active: true }); showAdminTab('chapters'); };
+        window.toggleChapter = async (id, a) => { await updateDoc(doc(db, 'chapters', id), { active: a }); showAdminTab('chapters'); };
+        window.deleteChapter = async (id) => { if (!confirm('Delete?')) return; await deleteDoc(doc(db, 'chapters', id)); showAdminTab('chapters'); };
 
-        // ═══════════ EXPORT GLOBALS ═══════════
-        window.navigateTo = navigateTo;
-        window.scrollToTop = scrollToTop;
-        window.hideAllSections = hideAllSections;
-        window.showAdminTab = showAdminTab;
-        window.logoutAdmin = logoutAdmin;
-        window.renderStudentTable = renderStudentTable;
+        async function renderQuestionsTab() { return `<h4>❓ Question Bank</h4><div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>MCQ: ${mcqBank.length} | FITG: ${fitgBank.length} | T/F: ${tfBank.length}</p><p><strong>Total: ${mcqBank.length+fitgBank.length+tfBank.length}</strong></p></div>`; }
+        async function renderAttemptsTab() { const snap = await getDocs(collection(db, 'attempts')); const att = []; snap.forEach(d => att.push(d.data())); att.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)); return `<h4>📊 All Attempts (${att.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${att.map(a=>`<tr><td>${a.matric}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`; }
+        async function renderAnnouncementTab() { const msg = await getAnnouncement(); return `<h4>📢 Announcement</h4><textarea id="announcementInput" rows="3" style="width:100%;">${msg}</textarea><button class="btn btn-success" onclick="window.saveAnnouncementMsg()">💾 Save</button><button class="btn btn-outline mt-2" onclick="window.clearAnnouncementMsg()">🗑 Clear</button>`; }
+        window.saveAnnouncementMsg = async () => { await saveAnnouncementToDB(document.getElementById('announcementInput').value); loadAnnouncement(); alert('Saved!'); };
+        window.clearAnnouncementMsg = async () => { await saveAnnouncementToDB(''); loadAnnouncement(); };
 
-        // ═══════════ SEED FIREBASE ON FIRST RUN ═══════════
+        window.navigateTo = navigateTo; window.scrollToTop = scrollToTop; window.hideAllSections = hideAllSections;
+        window.showAdminTab = showAdminTab; window.logoutAdmin = logoutAdmin; window.renderStudentTable = renderStudentTable;
+
+        // Seed Firestore
         (async function seedDefaults() {
             const sSnap = await getDocs(collection(db, STUDENTS_COLLECTION));
-            if (sSnap.empty) { for (const s of defaultStudents) await setDoc(doc(collection(db, STUDENTS_COLLECTION)),
-                    s); }
+            if (sSnap.empty) { for (const s of defaultStudents) await setDoc(doc(collection(db, STUDENTS_COLLECTION)), s); }
             const chSnap = await getDoc(doc(db, 'chapters', 'chapter-1'));
-            if (!chSnap.exists()) await setDoc(doc(db, 'chapters', 'chapter-1'), { title: 'Chapter 1: Introduction & Fundamentals',
-                summaryLink: 'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view', fullLink: 'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',
-                active: true, createdAt: Date.now() });
+            if (!chSnap.exists()) await setDoc(doc(db, 'chapters', 'chapter-1'), { title: 'Chapter 1: Introduction & Fundamentals', summaryLink: 'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view', fullLink: 'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view', active: true, createdAt: Date.now() });
             const annSnap = await getDoc(doc(db, SETTINGS_DOC));
             if (!annSnap.exists()) await setDoc(doc(db, SETTINGS_DOC), { message: '' });
-            console.log("🌱 Firestore seeded with default data");
+            console.log("🌱 Seeded");
         })();
-
-        console.log("✅ MEE 206 Test Hub — Production Ready");
     </script>
 </body>
 </html>

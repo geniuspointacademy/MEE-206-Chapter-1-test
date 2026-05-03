@@ -224,7 +224,7 @@
         <div id="paymentSection" class="section-card hidden">
             <h3>💳 Unlock CBT Test Access</h3>
             <p>40 questions (25 MCQ, 10 Fill-in-Gap, 5 T/F) • 20 minutes • <strong>₦200 only</strong></p>
-            <p style="font-size:0.85rem;color:var(--text-muted);">Retake multiple times within 72 hours. All attempts are recorded.</p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">Retake multiple times within 168 hours. All attempts are recorded.</p>
             <div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;">
                 <p><strong>📌 After payment you'll get:</strong></p>
                 <ul style="list-style:none;padding:0;font-size:0.9rem;">
@@ -266,7 +266,7 @@
                     <li>✅ <strong>20 minutes</strong> countdown — pace yourself!</li>
                     <li>✅ <strong>Green = answered</strong>, Grey = unanswered</li>
                     <li>✅ Score <strong>≥ 20/40</strong> is a pass</li>
-                    <li>✅ You can <strong>retake multiple times</strong> within 72 hours</li>
+                    <li>✅ You can <strong>retake multiple times</strong> within 168 hours</li>
                     <li>✅ All your attempts are <strong>recorded & saved</strong></li>
                 </ul>
             </div>
@@ -828,7 +828,7 @@
                     try {
                         await setDoc(doc(db, 'payments', matric), {
                             matric: matric, name: n, email: e,
-                            paidAt: Date.now(), expiresAt: Date.now() + (72 * 60 * 60 * 1000),
+                            paidAt: Date.now(), expiresAt: Date.now() + (168 * 60 * 60 * 1000),
                             txRef: response.tx_ref || 'N/A', attempts: 0
                         }, { merge: true });
                     } catch(e) { console.error(e); }

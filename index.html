@@ -7,112 +7,94 @@
     <script src="https://checkout.flutterwave.com/v3.js"></script>
     <style>
         :root {
-            --primary: #0b3d5f;
-            --primary-light: #1a5f8a;
-            --accent: #f4b400;
-            --success: #0f7b4e;
-            --danger: #b22234;
-            --gray-bg: #f0f4f8;
-            --card-bg: #ffffff;
-            --text-dark: #1e2b3c;
-            --text-muted: #4a5c6c;
-            --border-light: #dce2e8;
-            --unanswered-bg: #e9ecef;
-            --nav-height: 60px;
-            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
-            --radius-md: 16px;
-            --radius-sm: 8px;
-            --transition: all 0.2s ease;
+            --primary: #0b3d5f; --primary-light: #1a5f8a; --accent: #f4b400; --success: #0f7b4e; --danger: #b22234;
+            --gray-bg: #f0f4f8; --card-bg: #ffffff; --text-dark: #1e2b3c; --text-muted: #4a5c6c; --border-light: #dce2e8;
+            --unanswered-bg: #e9ecef; --nav-height: 60px; --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-card: 0 20px 30px -10px rgba(0,0,0,0.08); --radius-md: 16px; --radius-sm: 8px; --transition: all 0.2s ease;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
         body {
-            background: linear-gradient(160deg, #e9eff5 0%, #dce3eb 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            display: flex; justify-content: center; align-items: flex-start;
-            min-height: 100vh; padding: 0; margin: 0;
-            color: var(--text-dark); line-height: 1.6; padding-top: var(--nav-height);
+            background:linear-gradient(160deg, #e9eff5 0%, #dce3eb 100%);
+            font-family:'Inter', system-ui, -apple-system, sans-serif; display:flex; justify-content:center;
+            align-items:flex-start; min-height:100vh; padding:0; margin:0; color:var(--text-dark);
+            line-height:1.6; padding-top:var(--nav-height);
         }
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
-            background: var(--primary); color: white; display: flex; align-items: center;
-            justify-content: space-between; padding: 0 2rem; z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2); flex-wrap: wrap;
+            position:fixed; top:0; left:0; width:100%; height:var(--nav-height); background:var(--primary);
+            color:white; display:flex; align-items:center; justify-content:space-between; padding:0 2rem;
+            z-index:1000; box-shadow:0 2px 15px rgba(0,0,0,0.2); flex-wrap:wrap;
         }
-        .navbar .logo { font-weight: 800; font-size: 1.1rem; cursor: pointer; white-space: nowrap; }
-        .navbar .logo span { background: var(--accent); color: #0b1e2f; padding: 0.2rem 0.7rem; border-radius: 15px; font-size: 0.8rem; margin-left: 0.3rem; }
-        .nav-links { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); padding: 0.4rem 0.8rem; border-radius: 20px; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.15); }
-        .nav-links a.disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed; }
-        .hamburger { display: none; font-size: 1.6rem; cursor: pointer; background: none; border: none; color: white; }
-        .master-container { width: 100%; max-width: 800px; background: var(--card-bg); border-radius: 2rem; box-shadow: var(--shadow-card); padding: 2.2rem 2rem; margin: 1.5rem; border: 1px solid rgba(255,255,255,0.6); transition: all 0.3s; }
-        .announcement-bar { background: #fff8e1; border-left: 5px solid var(--accent); padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-weight: 500; display: none; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-        .academy-header { text-align: center; margin-bottom: 2rem; }
-        .academy-header h1 { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .academy-header h1 span { background: var(--primary); color: white; font-size: 0.9rem; padding: 0.2rem 0.9rem; border-radius: 20px; }
-        .subhead { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; border-bottom: 2px solid var(--border-light); padding-bottom: 1rem; margin-top: 0.3rem; }
-        .tutor-badge { background: #eef3fa; border-radius: 30px; padding: 0.3rem 1.5rem; font-size: 0.85rem; color: var(--primary-light); font-weight: 600; display: inline-block; margin-top: 0.5rem; }
-        .course-intro { background: #f8fafc; border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
-        .course-intro h3 { color: var(--primary); margin-bottom: 0.5rem; }
-        .course-intro .topics { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.8rem; }
-        .topic-tag { background: #e0e8f0; color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
-        .chapter-card { background: white; border: 2px solid var(--border-light); border-radius: var(--radius-sm); padding: 1rem; text-align: center; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 0.9rem; }
-        .chapter-card.active-chapter { border-color: var(--success); background: #f0faf4; }
-        .chapter-card.locked { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .chapter-card:hover:not(.locked) { border-color: var(--primary-light); transform: translateY(-2px); }
-        .section-card { background: #ffffff; border-radius: var(--radius-md); padding: 1.8rem 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); margin-top: 0.8rem; }
-        .hidden { display: none !important; }
-        .input-group { margin-bottom: 1rem; text-align: left; }
-        label { font-weight: 600; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.3rem; }
-        input, textarea, select { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.95rem; background: #fafbfc; transition: var(--transition); font-family: inherit; }
-        input:focus, textarea:focus { border-color: var(--primary-light); outline: none; box-shadow: 0 0 0 3px rgba(11,61,95,0.08); background: white; }
-        .btn { background: var(--primary); color: white; border: none; font-weight: 600; padding: 0.85rem 1.8rem; border-radius: 40px; cursor: pointer; font-size: 1rem; transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.5rem; }
-        .btn:hover { background: #092d45; transform: translateY(-1px); }
-        .btn-full { width: 100%; display: flex; }
-        .btn-auto { width: auto; display: inline-flex; padding: 0.6rem 1.5rem; }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
-        .btn-success { background: var(--success); }
-        .btn-accent { background: var(--accent); color: #0b1e2f; font-weight: 700; }
-        .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; width: auto; display: inline-flex; }
-        .btn-danger { background: var(--danger); }
-        .score-big { font-size: 3.8rem; font-weight: 800; color: var(--primary); text-align: center; line-height: 1; }
-        .advice-box { background: #f6f9fc; padding: 1.2rem; border-radius: 14px; color: #1e3b4f; margin: 1rem 0; border-left: 4px solid var(--accent); }
-        .pagination-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.8rem 0 0.5rem; justify-content: center; }
-        .page-num { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--unanswered-bg); border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; color: #2c3e50; font-size: 0.9rem; }
-        .page-num.answered { background: var(--success); color: white; }
-        .page-num.active { border: 3px solid var(--accent); transform: scale(1.08); }
-        .timer-box { background: #1e2b3c; color: white; padding: 0.4rem 1.2rem; border-radius: 30px; font-weight: 700; font-size: 1rem; }
-        hr { margin: 1.5rem 0; border: 0.5px solid #dfe6ed; }
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 0.8rem; }
-        .mt-3 { margin-top: 1.2rem; }
-        .mb-2 { margin-bottom: 0.8rem; }
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: var(--primary); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 1.4rem; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: var(--transition); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
-        .back-to-top.visible { opacity: 1; pointer-events: auto; }
-        .back-to-top:hover { background: #092d45; transform: translateY(-3px); }
-        .site-footer { text-align: center; padding: 1.5rem; margin-top: 2rem; border-top: 2px solid var(--border-light); color: var(--text-muted); font-size: 0.85rem; }
-        .site-footer a { color: var(--primary-light); text-decoration: none; font-weight: 600; }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
-        .admin-table th, .admin-table td { border: 1px solid var(--border-light); padding: 0.6rem; text-align: left; }
-        .admin-table th { background: var(--primary); color: white; }
-        .admin-table input { width: 100%; padding: 0.4rem; font-size: 0.8rem; }
-        @media (max-width: 700px) {
-            .nav-links { display: none; flex-direction: column; background: var(--primary); position: absolute; top: var(--nav-height); left: 0; width: 100%; padding: 1rem; gap: 0.5rem; }
-            .nav-links.open { display: flex; }
-            .hamburger { display: block; }
-            .master-container { margin: 0.8rem; padding: 1.5rem 1rem; border-radius: 1.2rem; }
-            .score-big { font-size: 2.8rem; }
-            .chapter-grid { grid-template-columns: repeat(2, 1fr); }
+        .navbar .logo { font-weight:800; font-size:1.1rem; cursor:pointer; white-space:nowrap; }
+        .navbar .logo span { background:var(--accent); color:#0b1e2f; padding:0.2rem 0.7rem; border-radius:15px; font-size:0.8rem; margin-left:0.3rem; }
+        .nav-links { display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap; }
+        .nav-links a { color:white; text-decoration:none; font-weight:600; font-size:0.9rem; transition:var(--transition); padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; }
+        .nav-links a:hover, .nav-links a.active { background:rgba(255,255,255,0.15); }
+        .nav-links a.disabled { opacity:0.5; pointer-events:none; cursor:not-allowed; }
+        .hamburger { display:none; font-size:1.6rem; cursor:pointer; background:none; border:none; color:white; }
+        .master-container { width:100%; max-width:800px; background:var(--card-bg); border-radius:2rem; box-shadow:var(--shadow-card); padding:2.2rem 2rem; margin:1.5rem; border:1px solid rgba(255,255,255,0.6); }
+        .announcement-bar { background:#fff8e1; border-left:5px solid var(--accent); padding:0.8rem 1.2rem; border-radius:var(--radius-sm); margin-bottom:1.5rem; font-weight:500; display:none; }
+        .academy-header { text-align:center; margin-bottom:2rem; }
+        .academy-header h1 { font-size:2rem; font-weight:700; color:var(--primary); }
+        .academy-header h1 span { background:var(--primary); color:white; font-size:0.9rem; padding:0.2rem 0.9rem; border-radius:20px; }
+        .subhead { color:var(--text-muted); font-size:0.95rem; font-weight:500; border-bottom:2px solid var(--border-light); padding-bottom:1rem; margin-top:0.3rem; }
+        .tutor-badge { background:#eef3fa; border-radius:30px; padding:0.3rem 1.5rem; font-size:0.85rem; color:var(--primary-light); font-weight:600; display:inline-block; margin-top:0.5rem; }
+        .course-intro { background:#f8fafc; border-radius:var(--radius-md); padding:1.5rem; margin-bottom:1.5rem; text-align:center; }
+        .course-intro h3 { color:var(--primary); margin-bottom:0.5rem; }
+        .topics { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-top:0.8rem; }
+        .topic-tag { background:#e0e8f0; color:var(--primary); padding:0.3rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .chapter-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:0.8rem; margin:1.2rem 0; }
+        .chapter-card { background:white; border:2px solid var(--border-light); border-radius:var(--radius-sm); padding:1rem; text-align:center; cursor:pointer; transition:var(--transition); font-weight:600; font-size:0.9rem; }
+        .chapter-card.active-chapter { border-color:var(--success); background:#f0faf4; }
+        .chapter-card.locked { opacity:0.5; cursor:not-allowed; pointer-events:none; }
+        .chapter-card:hover:not(.locked) { border-color:var(--primary-light); transform:translateY(-2px); }
+        .section-card { background:#ffffff; border-radius:var(--radius-md); padding:1.8rem 1.5rem; box-shadow:var(--shadow-sm); border:1px solid var(--border-light); margin-top:0.8rem; }
+        .hidden { display:none !important; }
+        input, textarea, select { width:100%; padding:0.8rem 1rem; border:1px solid var(--border-light); border-radius:var(--radius-sm); font-size:0.95rem; background:#fafbfc; transition:var(--transition); font-family:inherit; margin-bottom:0.5rem; }
+        input:focus, textarea:focus { border-color:var(--primary-light); outline:none; box-shadow:0 0 0 3px rgba(11,61,95,0.08); background:white; }
+        .btn { background:var(--primary); color:white; border:none; font-weight:600; padding:0.85rem 1.8rem; border-radius:40px; cursor:pointer; font-size:1rem; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; margin-top:0.5rem; }
+        .btn:hover { background:#092d45; transform:translateY(-1px); }
+        .btn-full { width:100%; display:flex; }
+        .btn-auto { width:auto; display:inline-flex; padding:0.6rem 1.5rem; }
+        .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
+        .btn-outline:hover { background:var(--primary); color:white; }
+        .btn-success { background:var(--success); }
+        .btn-accent { background:var(--accent); color:#0b1e2f; font-weight:700; }
+        .btn-sm { padding:0.5rem 1.2rem; font-size:0.85rem; width:auto; display:inline-flex; }
+        .btn-danger { background:var(--danger); }
+        .btn-whatsapp { background:#25D366; color:white; }
+        .btn-whatsapp:hover { background:#1ebe57; }
+        .score-big { font-size:3.8rem; font-weight:800; color:var(--primary); text-align:center; line-height:1; }
+        .advice-box { background:#f6f9fc; padding:1.2rem; border-radius:14px; color:#1e3b4f; margin:1rem 0; border-left:4px solid var(--accent); }
+        .pagination-grid { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.8rem 0 0.5rem; justify-content:center; }
+        .page-num { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:var(--unanswered-bg); border-radius:10px; font-weight:700; cursor:pointer; color:#2c3e50; font-size:0.9rem; }
+        .page-num.answered { background:var(--success); color:white; }
+        .page-num.active { border:3px solid var(--accent); transform:scale(1.08); }
+        .timer-box { background:#1e2b3c; color:white; padding:0.4rem 1.2rem; border-radius:30px; font-weight:700; font-size:1rem; }
+        hr { margin:1.5rem 0; border:0.5px solid #dfe6ed; }
+        .text-center { text-align:center; }
+        .mt-2 { margin-top:0.8rem; } .mt-3 { margin-top:1.2rem; } .mb-2 { margin-bottom:0.8rem; }
+        .back-to-top { position:fixed; bottom:30px; right:30px; width:45px; height:45px; background:var(--primary); color:white; border:none; border-radius:50%; cursor:pointer; font-size:1.4rem; z-index:999; box-shadow:0 4px 12px rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:var(--transition); }
+        .back-to-top.visible { opacity:1; pointer-events:auto; }
+        .back-to-top:hover { background:#092d45; transform:translateY(-3px); }
+        .site-footer { text-align:center; padding:1.5rem; margin-top:2rem; border-top:2px solid var(--border-light); color:var(--text-muted); font-size:0.85rem; }
+        .site-footer a { color:var(--primary-light); text-decoration:none; font-weight:600; }
+        .admin-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; }
+        .admin-table th, .admin-table td { border:1px solid var(--border-light); padding:0.6rem; text-align:left; }
+        .admin-table th { background:var(--primary); color:white; }
+        .admin-table input { width:100%; padding:0.4rem; font-size:0.8rem; }
+        .complaint-box { background:#fff8e1; border:2px solid var(--accent); border-radius:12px; padding:1.2rem; margin:1rem 0; }
+        @media (max-width:700px) {
+            .nav-links { display:none; flex-direction:column; background:var(--primary); position:absolute; top:var(--nav-height); left:0; width:100%; padding:1rem; gap:0.5rem; }
+            .nav-links.open { display:flex; }
+            .hamburger { display:block; }
+            .master-container { margin:0.8rem; padding:1.5rem 1rem; border-radius:1.2rem; }
+            .score-big { font-size:2.8rem; }
+            .chapter-grid { grid-template-columns:repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-
     <nav class="navbar" id="navbar">
         <div class="logo" onclick="scrollToTop();hideAllSections();document.getElementById('welcomeSection').classList.remove('hidden');closeMenu();">⚙️ MEE 206 <span>Hub</span></div>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
@@ -125,7 +107,6 @@
             <a onclick="navigateTo('admin')" id="navAdmin">🔐 Admin</a>
         </div>
     </nav>
-
     <button class="back-to-top" id="backToTopBtn" title="Back to top" onclick="scrollToTop()">↑</button>
 
     <div class="master-container" id="topAnchor">
@@ -138,196 +119,47 @@
 
         <!-- ═══════════ WELCOME ═══════════ -->
         <div id="welcomeSection">
-            <div class="course-intro">
-                <h3>📚 MEE 206 – Basic Engineering Thermodynamics</h3>
-                <p style="color:var(--text-muted);">Master the fundamentals of energy, heat, work, and thermodynamic systems.</p>
-                <div class="topics">
-                    <span class="topic-tag">System & Control Volume</span>
-                    <span class="topic-tag">Properties & States</span>
-                    <span class="topic-tag">Zeroth Law</span>
-                    <span class="topic-tag">Work & Heat</span>
-                    <span class="topic-tag">1st Law</span>
-                    <span class="topic-tag">Cycles & Processes</span>
-                </div>
-            </div>
-            <h4 style="text-align:center; margin-bottom:0.5rem;">📖 Available Chapters</h4>
+            <div class="course-intro"><h3>📚 MEE 206 – Basic Engineering Thermodynamics</h3><p style="color:var(--text-muted);">Master the fundamentals of energy, heat, work, and thermodynamic systems.</p><div class="topics"><span class="topic-tag">System & Control Volume</span><span class="topic-tag">Properties & States</span><span class="topic-tag">Zeroth Law</span><span class="topic-tag">Work & Heat</span><span class="topic-tag">1st Law</span><span class="topic-tag">Cycles & Processes</span></div></div>
+            <h4 style="text-align:center;margin-bottom:0.5rem;">📖 Available Chapters</h4>
             <div class="chapter-grid">
                 <div class="chapter-card active-chapter" onclick="navigateTo('chapter1')">✅ Chapter 1<br><small>Introduction & Fundamentals</small></div>
                 <div class="chapter-card locked">🔒 Chapter 2<br><small>Coming Soon</small></div>
                 <div class="chapter-card locked">🔒 Chapter 3<br><small>Coming Soon</small></div>
                 <div class="chapter-card locked">🔒 Chapter 4<br><small>Coming Soon</small></div>
             </div>
-            <div class="section-card" style="margin-top:0;">
-                <h2 style="text-align:center;">📋 Check Your Chapter 1 Result</h2>
-                <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number to view your score.</p>
-                <input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off">
-                <button id="searchBtn" class="btn btn-full">🔍 Search Result</button>
-                <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;">
-                    <a href="#" onclick="navigateTo('payment');return false;" class="btn btn-sm" style="background:var(--primary);color:white;">🆕 Take Test (₦200)</a>
-                    <a href="#" onclick="navigateTo('payment');setTimeout(()=>document.getElementById('returnMatricInput').focus(),300);return false;" class="btn btn-sm btn-outline">🔁 Already Paid? Resume</a>
-                </div>
-            </div>
+            <div class="section-card" style="margin-top:0;"><h2 style="text-align:center;">📋 Check Your Chapter 1 Result</h2><p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number to view your score.</p><input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off"><button id="searchBtn" class="btn btn-full">🔍 Search Result</button><div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;"><a href="#" onclick="navigateTo('payment');return false;" class="btn btn-sm" style="background:var(--primary);color:white;">🆕 Take Test (₦200)</a><a href="#" onclick="navigateTo('payment');setTimeout(()=>document.getElementById('returnMatricInput').focus(),300);return false;" class="btn btn-sm btn-outline">🔁 Already Paid? Resume</a></div></div>
         </div>
 
         <!-- ═══════════ NOT FOUND ═══════════ -->
-        <div id="notFoundSection" class="section-card hidden">
-            <h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3>
-            <p style="text-align:center;">We couldn't fetch a result for that matric number. Are you sure you took the physical test?</p>
-            <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;">
-                <button id="btnClaimTook" class="btn btn-outline btn-sm btn-auto">Yes, I took it</button>
-                <button id="btnWantTake" class="btn btn-sm btn-auto">No, I want to take test now</button>
-            </div>
-            <div id="queryArea" class="hidden" style="margin-top:1.5rem;">
-                <p><strong>Trace your script:</strong></p>
-                <input type="text" id="queryName" placeholder="Full Name">
-                <input type="text" id="queryMatric" placeholder="Matric Number" style="margin-top:0.5rem;">
-                <button id="submitQueryBtn" class="btn btn-success btn-full">Submit Query to Admin</button>
-                <p style="font-size:0.8rem;margin-top:0.8rem;">📞 Or DM us on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p>
-            </div>
-        </div>
+        <div id="notFoundSection" class="section-card hidden"><h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3><p style="text-align:center;">We couldn't fetch a result for that matric number.</p><div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;"><button id="btnClaimTook" class="btn btn-outline btn-sm btn-auto">Yes, I took it</button><button id="btnWantTake" class="btn btn-sm btn-auto">No, I want to take test now</button></div><div id="queryArea" class="hidden" style="margin-top:1.5rem;"><p><strong>Trace your script:</strong></p><input type="text" id="queryName" placeholder="Full Name"><input type="text" id="queryMatric" placeholder="Matric Number"><button id="submitQueryBtn" class="btn btn-success btn-full">Submit Query to Admin</button><p style="font-size:0.8rem;margin-top:0.8rem;">📞 Or DM on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p></div></div>
 
         <!-- ═══════════ REFLECTION ═══════════ -->
-        <div id="reflectionSection" class="section-card hidden">
-            <h3>📝 Quick Reflection Before Your Score</h3>
-            <p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly. Submissions go to Admin.</p>
-            <form id="reflectionForm">
-                <input type="text" id="studentName" placeholder="Full Name" required>
-                <input type="number" id="expectedScore" placeholder="Expected Score (out of 40)" required min="0" max="40" style="margin-top:0.8rem;">
-                <textarea id="higherCause" placeholder="If score is HIGHER than expected, what caused it?" rows="2" required style="margin-top:0.8rem;"></textarea>
-                <textarea id="lowerCause" placeholder="If score is LOWER than expected, what caused it?" rows="2" required style="margin-top:0.8rem;"></textarea>
-                <textarea id="woefulCause" placeholder="Many performed woefully. What do you think caused this?" rows="2" required style="margin-top:0.8rem;"></textarea>
-                <button type="submit" class="btn btn-success btn-full">Submit & Proceed to Score</button>
-            </form>
-        </div>
+        <div id="reflectionSection" class="section-card hidden"><h3>📝 Quick Reflection Before Your Score</h3><p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly.</p><form id="reflectionForm"><input type="text" id="studentName" placeholder="Full Name" required><input type="number" id="expectedScore" placeholder="Expected Score (out of 40)" required min="0" max="40"><textarea id="higherCause" placeholder="If score is HIGHER than expected, what caused it?" rows="2" required></textarea><textarea id="lowerCause" placeholder="If score is LOWER than expected, what caused it?" rows="2" required></textarea><textarea id="woefulCause" placeholder="Many performed woefully. What do you think caused this?" rows="2" required></textarea><button type="submit" class="btn btn-success btn-full">Submit & Proceed to Score</button></form></div>
 
         <!-- ═══════════ RESULT ═══════════ -->
-        <div id="resultSection" class="section-card hidden">
-            <div style="text-align:center;">
-                <div class="score-big"><span id="displayScore">0</span>/40</div>
-                <p style="font-weight:600;font-size:1.2rem;"><span id="displayPercent">0</span>%</p>
-                <div class="advice-box" id="adviceText"></div>
-            </div>
-            <button id="viewScriptBtn" class="btn btn-outline btn-full">📄 Request Marked Paper & Corrections</button>
-            <div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;">
-                <a id="driveLink" href="#" target="_blank" class="btn btn-success btn-full">View Your Full Result</a>
-            </div>
-            <div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;">
-                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-full">📝 View the Tutor's Marking Guide</a>
-            </div>
-            <hr>
-            <p style="text-align:center;"><strong>Solidify your knowledge?</strong></p>
-            <button id="retakeFromResultBtn" class="btn btn-full">🔁 Retake Chapter 1 CBT (₦200)</button>
-            <div id="resourceLinksArea" class="hidden mt-3"></div>
-        </div>
+        <div id="resultSection" class="section-card hidden"><div style="text-align:center;"><div class="score-big"><span id="displayScore">0</span>/40</div><p style="font-weight:600;font-size:1.2rem;"><span id="displayPercent">0</span>%</p><div class="advice-box" id="adviceText"></div></div><button id="viewScriptBtn" class="btn btn-outline btn-full">📄 Request Marked Paper & Corrections</button><div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;"><a id="driveLink" href="#" target="_blank" class="btn btn-success btn-full">View Your Full Result</a></div><div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;"><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-full">📝 View the Tutor's Marking Guide</a></div><hr><p style="text-align:center;"><strong>Solidify your knowledge?</strong></p><button id="retakeFromResultBtn" class="btn btn-full">🔁 Retake Chapter 1 CBT (₦200)</button><div id="resourceLinksArea" class="hidden mt-3"></div></div>
 
         <!-- ═══════════ PAYMENT ═══════════ -->
-        <div id="paymentSection" class="section-card hidden">
-            <h3>💳 Unlock CBT Test Access</h3>
-            <p>40 questions (25 MCQ, 10 Fill-in-Gap, 5 T/F) • 20 minutes • <strong>₦200 only</strong></p>
-            <p style="font-size:0.85rem;color:var(--text-muted);">Retake multiple times within 168 hours. All attempts are recorded.</p>
-            <div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;">
-                <p><strong>📌 After payment you'll get:</strong></p>
-                <ul style="list-style:none;padding:0;font-size:0.9rem;">
-                    <li>✅ Chapter 1 Summary (Quick Revision)</li>
-                    <li>✅ Full Chapter 1 Document</li>
-                    <li>✅ Tutor's Marking Guide</li>
-                    <li>✅ 40-Question CBT Test (Timed)</li>
-                    <li>✅ Score Recording & Attempt History</li>
-                </ul>
-            </div>
-            <input type="text" id="payName" placeholder="Full Name" required>
-            <input type="email" id="payEmail" placeholder="Email Address" required style="margin-top:0.8rem;">
-            <input type="text" id="payMatric" placeholder="Matric Number" required style="margin-top:0.8rem;">
-            <button id="payNowBtn" class="btn btn-accent btn-full">🔒 Pay ₦200 Now</button>
-            <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Payment processed securely by Flutterwave • Beneficiary: Yakub Opeyemi Abideen</p>
-            <hr style="margin:1.5rem 0;">
-            <p style="text-align:center;"><strong>Already paid?</strong></p>
-            <div style="display:flex;gap:0.5rem;">
-                <input type="text" id="returnMatricInput" placeholder="Enter your Matric Number" style="flex:2;">
-                <button id="checkPaymentStatusBtn" class="btn btn-outline btn-sm" style="flex:1;">🔍 Check Access</button>
-            </div>
-            <div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div>
-        </div>
+        <div id="paymentSection" class="section-card hidden"><h3>💳 Unlock CBT Test Access</h3><p>40 questions • 20 minutes • <strong>₦200 only</strong> • 168 hours access</p><div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;"><p><strong>📌 After payment you'll get:</strong></p><ul style="list-style:none;padding:0;font-size:0.9rem;"><li>✅ Chapter 1 Summary</li><li>✅ Full Chapter 1 Document</li><li>✅ Tutor's Marking Guide</li><li>✅ 40-Question CBT Test</li><li>✅ Score Recording & Attempt History</li></ul></div><input type="text" id="payName" placeholder="Full Name" required><input type="email" id="payEmail" placeholder="Email Address" required><input type="text" id="payMatric" placeholder="Matric Number" required><button id="payNowBtn" class="btn btn-accent btn-full">🔒 Pay ₦200 Now</button><p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Payment by Flutterwave • Beneficiary: Yakub Opeyemi Abideen</p><hr><p style="text-align:center;"><strong>Already paid?</strong></p><div style="display:flex;gap:0.5rem;"><input type="text" id="returnMatricInput" placeholder="Matric Number" style="flex:2;"><button id="checkPaymentStatusBtn" class="btn btn-outline btn-sm" style="flex:1;">🔍 Check</button></div><div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div><hr><p style="text-align:center;"><strong>Having issues?</strong></p><button id="showComplaintBtn" class="btn btn-outline btn-sm btn-auto">📝 Submit Complaint</button><div id="complaintFormArea" class="hidden complaint-box"><h4>📝 Payment Issue Complaint</h4><input type="text" id="complaintName" placeholder="Full Name"><input type="text" id="complaintMatric" placeholder="Matric Number"><input type="email" id="complaintEmail" placeholder="Email Address"><textarea id="complaintMessage" placeholder="Describe your issue... (e.g., paid but no access, wrong amount, etc.)" rows="3"></textarea><p style="font-size:0.8rem;"><strong>📎 Receipt (if available):</strong></p><input type="text" id="complaintReceipt" placeholder="Paste receipt link or transaction ID"><button id="submitComplaintBtn" class="btn btn-danger btn-sm">📤 Submit Complaint</button><p style="font-size:0.8rem;margin-top:0.5rem;">For immediate help: <button class="btn btn-whatsapp btn-sm" onclick="window.openWhatsAppHelp()">💬 Chat on WhatsApp Now</button></p></div></div>
 
         <!-- ═══════════ STUDY GATEWAY ═══════════ -->
-        <div id="studyGatewaySection" class="section-card hidden">
-            <h3 style="text-align:center;">📚 Payment Successful! Prepare Before You Test</h3>
-            <p style="text-align:center;color:var(--text-muted);margin-bottom:0.5rem;">Review these materials carefully. The test is timed — study first!</p>
-            <p id="timeRemainingInfo" style="text-align:center;margin-bottom:1rem;font-weight:600;"></p>
-            <div style="display:grid;gap:0.8rem;margin-bottom:1.5rem;">
-                <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📘 <strong>Chapter 1 Summary</strong> — Quick revision notes</a>
-                <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📚 <strong>Full Chapter 1 Document</strong> — Complete textbook</a>
-                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📝 <strong>Tutor's Marking Guide</strong> — See how answers are graded</a>
-            </div>
-            <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin-bottom:1.5rem;border-left:4px solid var(--accent);">
-                <h4 style="margin-bottom:0.5rem;">⏱️ Important Test Tips</h4>
-                <ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;">
-                    <li>✅ <strong>40 questions</strong> — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li>
-                    <li>✅ <strong>20 minutes</strong> countdown — pace yourself!</li>
-                    <li>✅ <strong>Green = answered</strong>, Grey = unanswered</li>
-                    <li>✅ Score <strong>≥ 20/40</strong> is a pass</li>
-                    <li>✅ You can <strong>retake multiple times</strong> within 168 hours</li>
-                    <li>✅ All your attempts are <strong>recorded & saved</strong></li>
-                </ul>
-            </div>
-            <button id="startTestFromGatewayBtn" class="btn btn-accent btn-full" style="font-size:1.1rem;padding:1rem;">🚀 I'm Ready — Start Test Now</button>
-            <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--text-muted);">⚠️ Once you start, the 20-minute timer begins. Don't start until you're prepared!</p>
-        </div>
+        <div id="studyGatewaySection" class="section-card hidden"><h3 style="text-align:center;">📚 Payment Successful! Prepare Before You Test</h3><p id="timeRemainingInfo" style="text-align:center;margin-bottom:1rem;font-weight:600;"></p><div style="display:grid;gap:0.8rem;margin-bottom:1.5rem;"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📘 Chapter 1 Summary</a><a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📚 Full Chapter 1 Document</a><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📝 Tutor's Marking Guide</a></div><div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin-bottom:1.5rem;border-left:4px solid var(--accent);"><h4>⏱️ Test Tips</h4><ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;"><li>✅ 40 questions — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li><li>✅ 20 minutes countdown</li><li>✅ Green = answered, Grey = unanswered</li><li>✅ Score ≥ 20/40 is a pass</li><li>✅ Retake multiple times within 168 hours</li></ul></div><button id="startTestFromGatewayBtn" class="btn btn-accent btn-full" style="font-size:1.1rem;padding:1rem;">🚀 I'm Ready — Start Test Now</button></div>
 
         <!-- ═══════════ CBT ═══════════ -->
-        <div id="cbtSection" class="section-card hidden">
-            <div style="display:flex;justify-content:space-between;align-items:center;"><h3>📝 CBT Interface</h3><span class="timer-box" id="timerDisplay">20:00</span></div>
-            <div style="margin:1.5rem 0;"><div style="font-weight:700;font-size:1.1rem;"><span id="qNumber"></span>. <span id="qText"></span></div><div id="optionsArea" style="margin-top:1.2rem;"></div></div>
-            <div style="display:flex;gap:1rem;"><button id="prevBtn" class="btn btn-outline btn-auto">◀ Previous</button><button id="nextBtn" class="btn btn-auto">Next ▶</button></div>
-            <button id="submitTestBtn" class="btn btn-success btn-full hidden" style="margin-top:1rem;">✅ Submit Final Test</button>
-            <div class="pagination-grid" id="paginationGrid"></div>
-        </div>
+        <div id="cbtSection" class="section-card hidden"><div style="display:flex;justify-content:space-between;align-items:center;"><h3>📝 CBT Interface</h3><span class="timer-box" id="timerDisplay">20:00</span></div><div style="margin:1.5rem 0;"><div style="font-weight:700;font-size:1.1rem;"><span id="qNumber"></span>. <span id="qText"></span></div><div id="optionsArea" style="margin-top:1.2rem;"></div></div><div style="display:flex;gap:1rem;"><button id="prevBtn" class="btn btn-outline btn-auto">◀ Previous</button><button id="nextBtn" class="btn btn-auto">Next ▶</button></div><button id="submitTestBtn" class="btn btn-success btn-full hidden" style="margin-top:1rem;">✅ Submit Final Test</button><div class="pagination-grid" id="paginationGrid"></div></div>
 
         <!-- ═══════════ ADMIN ═══════════ -->
-        <div id="adminSection" class="section-card hidden">
-            <h3>🔐 Admin Portal</h3>
-            <div id="adminLoginArea">
-                <p>🔐 Admin Authentication Required</p>
-                <input type="email" id="adminEmail" placeholder="Admin Email" style="margin-bottom:0.8rem;">
-                <input type="password" id="adminPassword" placeholder="Password">
-                <button id="adminLoginBtn" class="btn btn-full">Login</button>
-                <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Secure login via Firebase Authentication</p>
-            </div>
-            <div id="adminDashboard" class="hidden">
-                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                    <button class="btn btn-sm btn-success" onclick="window.showAdminTab('dashboard')">📊 Dashboard</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('students')">📋 Students</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('chapters')">📚 Chapters</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('attempts')">📊 Attempts</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('payments')">💳 Payments</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announce</button>
-                </div>
-                <div id="adminTabContent"></div>
-            </div>
-        </div>
+        <div id="adminSection" class="section-card hidden"><h3>🔐 Admin Portal</h3><div id="adminLoginArea"><p>🔐 Admin Authentication Required</p><input type="email" id="adminEmail" placeholder="Admin Email"><input type="password" id="adminPassword" placeholder="Password"><button id="adminLoginBtn" class="btn btn-full">Login</button></div><div id="adminDashboard" class="hidden"><div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;"><button class="btn btn-sm btn-success" onclick="window.showAdminTab('dashboard')">📊 Dashboard</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('students')">📋 Students</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('chapters')">📚 Chapters</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('attempts')">📊 Attempts</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('payments')">💳 Payments</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('manageAccess')">🔑 Access</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announce</button></div><div id="adminTabContent"></div></div></div>
 
-        <div class="site-footer">
-            <p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p>
-            <p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: Yakub Opeyemi Abideen</p>
-        </div>
+        <div class="site-footer"><p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p><p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: Yakub Opeyemi Abideen</p></div>
     </div>
 
-    <!-- ═══════════ SINGLE SCRIPT BLOCK ═══════════ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyD8LZC6Gmsit7akAqVE71vv3RQDhXgu484",
-            authDomain: "mee-206.firebaseapp.com",
-            projectId: "mee-206",
-            storageBucket: "mee-206.firebasestorage.app",
-            messagingSenderId: "807703454680",
-            appId: "1:807703454680:web:78c3c09c4e27e1f45688ad",
-            measurementId: "G-10LSB25JED"
-        };
-
+        const firebaseConfig = { apiKey: "AIzaSyD8LZC6Gmsit7akAqVE71vv3RQDhXgu484", authDomain: "mee-206.firebaseapp.com", projectId: "mee-206", storageBucket: "mee-206.firebasestorage.app", messagingSenderId: "807703454680", appId: "1:807703454680:web:78c3c09c4e27e1f45688ad", measurementId: "G-10LSB25JED" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
@@ -335,7 +167,6 @@
         const SETTINGS_DOC = 'settings/announcement';
         let currentAdminUser = null;
         let currentPayerMatric = null;
-
         onAuthStateChanged(auth, (user) => { currentAdminUser = user; });
 
         const defaultStudents = [
@@ -728,7 +559,6 @@
                 { q: "The control volume contains mass/matter.", ans: "True" },
                 { q: "Heat flows from lower to higher temperature naturally.", ans: "False" }
             ];
-
         async function getStudents() { try { const snap = await getDocs(collection(db, STUDENTS_COLLECTION)); const arr = []; snap.forEach(d => arr.push({ id: d.id, ...d.data() })); return arr.length ? arr : [...defaultStudents]; } catch (e) { return [...defaultStudents]; } }
         async function saveStudent(s) { if (s.id) await updateDoc(doc(db, STUDENTS_COLLECTION, s.id), s); else { const ref = doc(collection(db, STUDENTS_COLLECTION)); await setDoc(ref, s); s.id = ref.id; } }
         async function deleteStudentFromDB(id) { await deleteDoc(doc(db, STUDENTS_COLLECTION, id)); }
@@ -749,8 +579,7 @@
         function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
 
         function navigateTo(target) {
-            hideAllSections();
-            closeMenu();
+            hideAllSections(); closeMenu();
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
             if (target === 'welcome' || target === 'chapter1') { welcome.classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); }
             else if (target === 'payment') payment.classList.remove('hidden');
@@ -765,43 +594,23 @@
         async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg; bar.style.display = 'block'; } else bar.style.display = 'none'; }
         loadAnnouncement();
 
-        document.getElementById('searchBtn').addEventListener('click', async () => {
-            studentResults = await getStudents();
-            const matric = document.getElementById('matricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter matric number');
-            currentUser = studentResults.find(s => s.matric.toUpperCase() === matric);
-            hideAllSections();
-            if (currentUser) {
-                if (currentUser.id) { try { await updateDoc(doc(db, STUDENTS_COLLECTION, currentUser.id), { checkedAt: Date.now() }); } catch(e){} }
-                document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : '';
-                reflection.classList.remove('hidden');
-            } else notFound.classList.remove('hidden');
-        });
-
+        document.getElementById('searchBtn').addEventListener('click', async () => { studentResults = await getStudents(); const matric = document.getElementById('matricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric number'); currentUser = studentResults.find(s => s.matric.toUpperCase() === matric); hideAllSections(); if (currentUser) { if (currentUser.id) { try { await updateDoc(doc(db, STUDENTS_COLLECTION, currentUser.id), { checkedAt: Date.now() }); } catch(e){} } document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : ''; reflection.classList.remove('hidden'); } else notFound.classList.remove('hidden'); });
         document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
-        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted! We will investigate.'));
+        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted!'));
         document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
 
-        document.getElementById('reflectionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData();
-            fd.append('Name', document.getElementById('studentName').value); fd.append('Matric', currentUser.matric);
-            fd.append('Expected', document.getElementById('expectedScore').value); fd.append('Higher', document.getElementById('higherCause').value);
-            fd.append('Lower', document.getElementById('lowerCause').value); fd.append('Woeful', document.getElementById('woefulCause').value);
-            fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd });
-            hideAllSections(); showResult(currentUser);
-        });
+        document.getElementById('reflectionForm').addEventListener('submit', function(e) { e.preventDefault(); const fd = new FormData(); fd.append('Name', document.getElementById('studentName').value); fd.append('Matric', currentUser.matric); fd.append('Expected', document.getElementById('expectedScore').value); fd.append('Higher', document.getElementById('higherCause').value); fd.append('Lower', document.getElementById('lowerCause').value); fd.append('Woeful', document.getElementById('woefulCause').value); fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd }); hideAllSections(); showResult(currentUser); });
 
         function showResult(u) {
             document.getElementById('displayScore').innerText = u.score;
             document.getElementById('displayPercent').innerText = ((u.score / 40) * 100).toFixed(1);
             const score = u.score;
             let adviceList = [];
-            if (score < 10) { adviceList = ["📚 <strong>Don't give up!</strong> This is just the beginning. Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner.", "💪 <strong>You have room to grow!</strong> Thermodynamics builds layer by layer. Focus on understanding the basic terminologies first.", "🌟 <strong>This score doesn't define you.</strong> It shows where you need to focus. Download the full Chapter 1 PDF and study carefully before retaking.", "🔥 <strong>Turn this around!</strong> Many students who scored low on their first attempt ended up with A's. Consistent revision is key.", "🚀 <strong>Ready for lift-off?</strong> Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence!" ]; }
-            else if (score < 15) { adviceList = ["📖 <strong>You're getting there!</strong> Focus on open vs closed systems and properties.", "🎯 <strong>Halfway to mastery!</strong> Review intensive vs extensive properties and thermodynamic processes.", "🔍 <strong>Identify your weak spots.</strong> Were you mixing up homogeneous vs heterogeneous systems? Fix those gaps!", "🏗️ <strong>Building your foundation.</strong> Solidify your understanding of point functions, path functions, and cycles.", "💡 <strong>Light bulb moments ahead!</strong> Re-read the summary, then retake — you'll see improvement!" ]; }
-            else if (score < 20) { adviceList = ["👍 <strong>Not bad!</strong> Focus on the exact questions you missed and understand WHY.", "📈 <strong>Close to passing!</strong> Review irreversible vs reversible processes, isothermal vs adiabatic equations.", "🎓 <strong>Almost there!</strong> Focus on zeroth law and work vs heat concepts.", "🧠 <strong>Your brain is absorbing!</strong> Give it another pass — you're closer than you think!", "⚡ <strong>Momentum is building!</strong> Refine your knowledge of derived properties (H, G, F)." ]; }
-            else if (score < 30) { adviceList = ["👏 <strong>Good job!</strong> Review your few mistakes for Chapter 2 readiness.", "🏆 <strong>Well done!</strong> Polish weak areas like thermal efficiency or Gibbs free energy.", "📊 <strong>Solid performance!</strong> Make sure you understand every missed question completely.", "🎖️ <strong>Above average!</strong> Chapter 2 will build on what you already know well.", "🔬 <strong>Strong foundation!</strong> With more attention to detail, you'll hit 35+!" ]; }
-            else { adviceList = ["🌟 <strong>Exceptional!</strong> You've mastered Chapter 1. Keep this standard for Chapter 2!", "🏅 <strong>Outstanding!</strong> You're ready for more advanced concepts.", "💎 <strong>Top-tier result!</strong> Share your strategies — you could be a peer tutor!", "🚀 <strong>Crushing it!</strong> This level will serve you throughout your engineering journey.", "👑 <strong>A+ material!</strong> Your grasp of thermodynamics is superb. Chapter 2 awaits!" ]; }
+            if (score < 10) { adviceList = ["📚 Don't give up! Re-read the summary and retake.", "💪 Focus on basic terminologies first.", "🌟 Download the full PDF and study carefully.", "🔥 Consistent revision is key. Retake!", "🚀 Review the Marking Guide and retake!"]; }
+            else if (score < 15) { adviceList = ["📖 Focus on open vs closed systems.", "🎯 Review intensive vs extensive properties.", "🔍 Fix gaps in homogeneous vs heterogeneous.", "🏗️ Solidify point functions and cycles.", "💡 Re-read and retake — you'll improve!"]; }
+            else if (score < 20) { adviceList = ["👍 Focus on missed questions.", "📈 Review irreversible vs reversible.", "🎓 Focus on zeroth law and work vs heat.", "🧠 Give it another pass!", "⚡ Refine derived properties (H, G, F)."]; }
+            else if (score < 30) { adviceList = ["👏 Good job! Review few mistakes.", "🏆 Polish weak areas.", "📊 Solid performance!", "🎖️ Chapter 2 will build on this.", "🔬 You'll hit 35+ with more attention!"]; }
+            else { adviceList = ["🌟 Exceptional! Ready for Chapter 2!", "🏅 Outstanding understanding!", "💎 Top-tier result!", "🚀 Crushing it!", "👑 A+ material!"]; }
             document.getElementById('adviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
             document.getElementById('driveLink').href = u.link;
             result.classList.remove('hidden');
@@ -809,65 +618,40 @@
         document.getElementById('viewScriptBtn').addEventListener('click', () => document.getElementById('scriptLinkArea').classList.remove('hidden'));
         document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
 
-        document.getElementById('payNowBtn').addEventListener('click', () => {
-            const n = document.getElementById('payName').value.trim();
-            const e = document.getElementById('payEmail').value.trim();
-            const m = document.getElementById('payMatric').value.trim();
-            if (!n || !e || !m) return alert('Fill all fields');
-            FlutterwaveCheckout({
-                public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X",
-                tx_ref: "MEE206-" + Date.now(),
-                amount: 200,
-                currency: "NGN",
-                payment_options: "card, banktransfer, ussd",
-                customer: { email: e, name: n },
-                customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" },
-                callback: async function(response) {
-                    console.log('✅ Payment:', response);
-                    const matric = document.getElementById('payMatric').value.trim().toUpperCase();
-                    try {
-                        await setDoc(doc(db, 'payments', matric), {
-                            matric: matric, name: n, email: e,
-                            paidAt: Date.now(), expiresAt: Date.now() + (168 * 60 * 60 * 1000),
-                            txRef: response.tx_ref || 'N/A', attempts: 0
-                        }, { merge: true });
-                    } catch(e) { console.error(e); }
-                    hideAllSections(); showStudyGateway(matric);
-                }
-            });
-        });
-
-        document.getElementById('checkPaymentStatusBtn').addEventListener('click', async () => {
-            const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter matric');
-            const rd = document.getElementById('paymentStatusResult');
-            rd.innerHTML = '🔄 Checking...';
+        // ═══════════ COMPLAINT FORM ═══════════
+        document.getElementById('showComplaintBtn').addEventListener('click', () => { document.getElementById('complaintFormArea').classList.toggle('hidden'); });
+        document.getElementById('submitComplaintBtn').addEventListener('click', async () => {
+            const name = document.getElementById('complaintName').value.trim();
+            const matric = document.getElementById('complaintMatric').value.trim();
+            const email = document.getElementById('complaintEmail').value.trim();
+            const message = document.getElementById('complaintMessage').value.trim();
+            const receipt = document.getElementById('complaintReceipt').value.trim();
+            if (!name || !matric || !message) return alert('Fill at least: Name, Matric, and Message');
+            const fd = new FormData();
+            fd.append('Subject', 'Payment Issue Complaint');
+            fd.append('Name', name); fd.append('Matric', matric); fd.append('Email', email);
+            fd.append('Message', message); fd.append('Receipt', receipt);
             try {
-                const snap = await getDoc(doc(db, 'payments', matric));
-                if (snap.exists()) {
-                    const d = snap.data();
-                    const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000));
-                    rd.innerHTML = h > 0
-                        ? `<div style="background:#f0faf4;padding:1rem;border-radius:8px;"><p>✅ Access found! ⏱️ ${h}h remaining</p><button class="btn btn-accent btn-sm" onclick="window.resumeAccess('${matric}')">📚 Resume</button></div>`
-                        : `<div style="background:#fdf2f2;padding:1rem;border-radius:8px;"><p>⚠️ Expired. Pay again.</p></div>`;
-                } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No record found.</p></div>`;
-            } catch(e) { rd.innerHTML = '❌ Error.'; }
+                await fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd });
+                alert('✅ Complaint submitted! We will review and respond within 24 hours. For immediate help, use WhatsApp.');
+                document.getElementById('complaintFormArea').classList.add('hidden');
+                document.getElementById('complaintName').value = ''; document.getElementById('complaintMatric').value = '';
+                document.getElementById('complaintEmail').value = ''; document.getElementById('complaintMessage').value = '';
+                document.getElementById('complaintReceipt').value = '';
+            } catch(e) { alert('❌ Error submitting. Please use WhatsApp for immediate help.'); }
         });
+        window.openWhatsAppHelp = function() {
+            const msg = encodeURIComponent("Hello, I have an issue with my MEE 206 test payment. I paid but cannot access the test. Please help.");
+            window.open(`https://wa.me/2347050376975?text=${msg}`, '_blank');
+        };
+
+        // ═══════════ PAYMENT ═══════════
+        document.getElementById('payNowBtn').addEventListener('click', () => { const n = document.getElementById('payName').value.trim(); const e = document.getElementById('payEmail').value.trim(); const m = document.getElementById('payMatric').value.trim(); if (!n || !e || !m) return alert('Fill all fields'); FlutterwaveCheckout({ public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X", tx_ref: "MEE206-" + Date.now(), amount: 200, currency: "NGN", payment_options: "card, banktransfer, ussd", customer: { email: e, name: n }, customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" }, callback: async function(response) { const matric = document.getElementById('payMatric').value.trim().toUpperCase(); try { await setDoc(doc(db, 'payments', matric), { matric, name: n, email: e, paidAt: Date.now(), expiresAt: Date.now() + (168 * 60 * 60 * 1000), txRef: response.tx_ref || 'N/A', attempts: 0 }, { merge: true }); } catch(e) {} hideAllSections(); showStudyGateway(matric); } }); });
+        document.getElementById('checkPaymentStatusBtn').addEventListener('click', async () => { const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric'); const rd = document.getElementById('paymentStatusResult'); rd.innerHTML = '🔄 Checking...'; try { const snap = await getDoc(doc(db, 'payments', matric)); if (snap.exists()) { const d = snap.data(); const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000)); rd.innerHTML = h > 0 ? `<div style="background:#f0faf4;padding:1rem;border-radius:8px;"><p>✅ Access found! ⏱️ ${h}h remaining</p><button class="btn btn-accent btn-sm" onclick="window.resumeAccess('${matric}')">📚 Resume</button></div>` : `<div style="background:#fdf2f2;padding:1rem;border-radius:8px;"><p>⚠️ Expired. Pay again or submit complaint below.</p></div>`; } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No record. Pay first or submit complaint.</p></div>`; } catch(e) { rd.innerHTML = '❌ Error. Submit complaint below.'; } });
         window.resumeAccess = function(m) { document.getElementById('payMatric').value = m; hideAllSections(); showStudyGateway(m); };
 
         function showStudyGateway(matric) { currentPayerMatric = matric || document.getElementById('payMatric')?.value || ''; hideAllSections(); checkRemainingTime(currentPayerMatric); studyGateway.classList.remove('hidden'); }
-        async function checkRemainingTime(matric) {
-            if (!matric) return;
-            try {
-                const snap = await getDoc(doc(db, 'payments', matric.toUpperCase()));
-                if (snap.exists()) {
-                    const h = Math.max(0, Math.floor(((snap.data().expiresAt||0) - Date.now()) / 3600000));
-                    const ti = document.getElementById('timeRemainingInfo');
-                    if (ti) { ti.innerHTML = h > 0 ? `⏱️ <strong>${h} hours remaining</strong>` : '⚠️ Expired'; ti.style.color = h > 0 ? 'var(--success)' : 'var(--danger)';
-                        document.getElementById('startTestFromGatewayBtn').disabled = h <= 0; }
-                }
-            } catch(e) {}
-        }
+        async function checkRemainingTime(matric) { if (!matric) return; try { const snap = await getDoc(doc(db, 'payments', matric.toUpperCase())); if (snap.exists()) { const h = Math.max(0, Math.floor(((snap.data().expiresAt||0) - Date.now()) / 3600000)); const ti = document.getElementById('timeRemainingInfo'); if (ti) { ti.innerHTML = h > 0 ? `⏱️ <strong>${h} hours remaining</strong>` : '⚠️ Expired'; ti.style.color = h > 0 ? 'var(--success)' : 'var(--danger)'; document.getElementById('startTestFromGatewayBtn').disabled = h <= 0; } } } catch(e) {} }
         document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => { if (confirm('Start test?')) { hideAllSections(); initializeCBT(); } });
 
         function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
@@ -880,42 +664,16 @@
         function startTimer() { clearInterval(timerInterval); timerInterval = setInterval(() => { timeLeft--; document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`; if (timeLeft <= 0) { clearInterval(timerInterval); alert('Time up!'); submitCBT(); } }, 1000); }
         document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit?')) submitCBT(); });
 
-        async function submitCBT() {
-            clearInterval(timerInterval);
-            let score = 0;
-            activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; });
-            const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown';
-            try {
-                await setDoc(doc(collection(db, 'attempts')), { matric, score, total: activeTest.length, chapter: 'chapter-1', timestamp: Date.now() });
-                const pr = doc(db, 'payments', matric.toUpperCase());
-                const ps = await getDoc(pr);
-                if (ps.exists()) await updateDoc(pr, { attempts: (ps.data().attempts||0) + 1 });
-            } catch(e) {}
-            hideAllSections();
-            const perc = ((score / activeTest.length) * 100).toFixed(1);
-            document.getElementById('displayScore').innerText = score;
-            document.getElementById('displayPercent').innerText = perc;
-            document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done." : "Not a pass yet. Retake!";
-            document.getElementById('resourceLinksArea').classList.remove('hidden');
-            document.getElementById('resourceLinksArea').innerHTML = `<div class="text-center mt-3"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline btn-sm">📘 Summary</a> <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success btn-sm">📚 Full PDF</a></div><div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;"><p><strong>📊 Saved!</strong></p><button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 History</button></div>`;
-            result.classList.remove('hidden');
-        }
+        async function submitCBT() { clearInterval(timerInterval); let score = 0; activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; }); const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown'; try { await setDoc(doc(collection(db, 'attempts')), { matric, score, total: activeTest.length, chapter: 'chapter-1', timestamp: Date.now() }); const pr = doc(db, 'payments', matric.toUpperCase()); const ps = await getDoc(pr); if (ps.exists()) await updateDoc(pr, { attempts: (ps.data().attempts||0) + 1 }); } catch(e) {} hideAllSections(); const perc = ((score / activeTest.length) * 100).toFixed(1); document.getElementById('displayScore').innerText = score; document.getElementById('displayPercent').innerText = perc; document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done." : "Not a pass yet. Retake!"; document.getElementById('resourceLinksArea').classList.remove('hidden'); document.getElementById('resourceLinksArea').innerHTML = `<div class="text-center mt-3"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline btn-sm">📘 Summary</a> <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success btn-sm">📚 Full PDF</a></div><div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;"><p><strong>📊 Saved!</strong></p><button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 History</button></div>`; result.classList.remove('hidden'); }
         window.showOwnAttempts = async function(m) { const s = await getDocs(collection(db, 'attempts')); const a = []; s.forEach(d => { if (d.data().matric === m) a.push(d.data()); }); a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0)); let h = '<h4>📊 History</h4>'; a.forEach((x,i) => { h += `<div style="padding:0.6rem;margin:0.3rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${x.score>=20?'var(--success)':'var(--danger)'};">#${i+1}: ${x.score}/${x.total} — ${new Date(x.timestamp).toLocaleString()}</div>`; }); document.getElementById('resourceLinksArea').innerHTML += h; };
 
         // ═══════════ ADMIN ═══════════
         document.getElementById('adminLoginBtn').addEventListener('click', async () => { const e=document.getElementById('adminEmail').value.trim(); const p=document.getElementById('adminPassword').value; if(!e||!p)return alert('Enter credentials'); try{await signInWithEmailAndPassword(auth,e,p);document.getElementById('adminLoginArea').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');showAdminTab('dashboard');}catch(err){alert('Login failed: '+err.message);} });
         function logoutAdmin(){signOut(auth).then(()=>{document.getElementById('adminLoginArea').classList.remove('hidden');document.getElementById('adminDashboard').classList.add('hidden');});}
 
-        async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'announcement':ct.innerHTML=await renderAnnouncementTab();break;}}
+        async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'manageAccess':ct.innerHTML=await renderManageAccessTab();break;case'announcement':ct.innerHTML=await renderAnnouncementTab();break;}}
 
-        async function renderDashboard(){
-            const students=await getStudents();
-            const aSnap=await getDocs(collection(db,'attempts'));let ta=0,psd=0;aSnap.forEach(d=>{ta++;if(d.data().score>=20)psd++;});
-            const pSnap=await getDocs(collection(db,'payments'));let pd=0;pSnap.forEach(d=>{if(d.data().paidAt)pd++;});
-            const cSnap=await getDocs(collection(db,'chapters'));
-            let ck=0;students.forEach(s=>{if(s.checkedAt)ck++;});
-            return `<h4>📊 Dashboard</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem;margin:1.5rem 0;"><div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.75rem;">Students</div></div><div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.75rem;">Chapters</div></div><div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${ta}</div><div style="font-size:0.75rem;">Attempts</div></div><div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${psd}</div><div style="font-size:0.75rem;">Passed</div></div><div style="background:#f5f0ff;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#6b21a8;">${pd}</div><div style="font-size:0.75rem;">Paid</div></div><div style="background:#e0f7fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#00695c;">${ck}</div><div style="font-size:0.75rem;">Checked</div></div></div>`;
-        }
+        async function renderDashboard(){const students=await getStudents();const aSnap=await getDocs(collection(db,'attempts'));let ta=0,psd=0;aSnap.forEach(d=>{ta++;if(d.data().score>=20)psd++;});const pSnap=await getDocs(collection(db,'payments'));let pd=0;pSnap.forEach(d=>{if(d.data().paidAt)pd++;});const cSnap=await getDocs(collection(db,'chapters'));let ck=0;students.forEach(s=>{if(s.checkedAt)ck++;});return `<h4>📊 Dashboard</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem;margin:1.5rem 0;"><div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.75rem;">Students</div></div><div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.75rem;">Chapters</div></div><div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${ta}</div><div style="font-size:0.75rem;">Attempts</div></div><div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${psd}</div><div style="font-size:0.75rem;">Passed</div></div><div style="background:#f5f0ff;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#6b21a8;">${pd}</div><div style="font-size:0.75rem;">Paid</div></div><div style="background:#e0f7fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#00695c;">${ck}</div><div style="font-size:0.75rem;">Checked</div></div></div>`;}
 
         function renderStudentsTabHTML(){return `<h4>📋 Students (${studentResults.length})</h4><button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button><input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;"><button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button><table class="admin-table"><thead><tr><th>#</th><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>✓</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table><div id="studentAttemptsView" style="margin-top:1rem;"></div>`;}
         function renderStudentTable(filter=''){const tb=document.getElementById('adminStudentBody');if(!tb)return;tb.innerHTML='';const ff=filter?studentResults.filter(s=>s.matric.toUpperCase().includes(filter.toUpperCase())):studentResults;if(!ff.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;">No students.</td></tr>';return;}ff.forEach(s=>{const i=studentResults.indexOf(s);tb.innerHTML+=`<tr><td>${i+1}</td><td><input value="${s.name.replace(/"/g,'&quot;')}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value)||0)"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td>${s.checkedAt?'✅':'—'}</td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`;});}
@@ -935,6 +693,68 @@
 
         async function renderAttemptsTab(){const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0));return `<h4>📊 Attempts (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`;}
         async function renderPaymentsTab(){const s=await getDocs(collection(db,'payments'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.paidAt||0)-(x.paidAt||0));return `<h4>💳 Payments (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Paid</th><th>Expires</th><th>Att</th><th>Status</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.name||''}</td><td>${x.paidAt?new Date(x.paidAt).toLocaleString():''}</td><td>${x.expiresAt?new Date(x.expiresAt).toLocaleString():''}</td><td>${x.attempts||0}</td><td>${(x.expiresAt>Date.now())?'✅':'⚠️'}</td></tr>`).join('')}</table>`;}
+
+        // ═══════════ MANAGE ACCESS TAB ═══════════
+        async function renderManageAccessTab(){
+            const pSnap = await getDocs(collection(db, 'payments'));
+            const payments = [];
+            pSnap.forEach(d => payments.push({ id: d.id, ...d.data() }));
+            payments.sort((a,b) => (b.expiresAt||0) - (a.expiresAt||0));
+            return `<h4>🔑 Manual Access Management</h4>
+                <div style="background:#f8fafc;padding:1.2rem;border-radius:12px;margin:1rem 0;border:1px solid var(--border-light);"><h5>➕ Grant Access</h5>
+                    <input type="text" id="manualMatric" placeholder="Matric Number (Required)">
+                    <input type="text" id="manualName" placeholder="Student Name (Optional)">
+                    <input type="email" id="manualEmail" placeholder="Email (Optional)">
+                    <select id="manualDuration"><option value="24">24 hours</option><option value="72">3 days</option><option value="168" selected>7 days</option><option value="336">14 days</option><option value="720">30 days</option><option value="8760">1 year</option></select>
+                    <button class="btn btn-sm btn-success" onclick="window.grantManualAccess()">✅ Grant Access</button></div>
+                <div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>🔍 Check / Revoke</h5>
+                    <div style="display:flex;gap:0.5rem;"><input type="text" id="checkMatricInput" placeholder="Matric Number" style="flex:2;"><button class="btn btn-sm btn-outline" onclick="window.checkManualAccess()" style="flex:1;">🔍 Check</button></div>
+                    <div id="manualAccessResult" style="margin-top:0.8rem;"></div></div>
+                <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>📋 Active Access (${payments.length})</h5>
+                    <table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Expires</th><th>Hrs Left</th><th>Source</th><th>Act</th></tr>
+                    ${payments.map(p => { const h = Math.max(0, Math.floor(((p.expiresAt||0) - Date.now()) / 3600000)); const active = (p.expiresAt||0) > Date.now();
+                        return `<tr style="${active?'':'opacity:0.5;'}"><td><strong>${p.matric}</strong></td><td>${p.name||'—'}</td><td>${p.expiresAt?new Date(p.expiresAt).toLocaleDateString():'—'}</td><td style="color:${h>24?'var(--success)':h>0?'var(--accent)':'var(--danger)'};">${active?h+'h':'Expired'}</td><td>${p.manualGrant?'👤 Manual':'💳 Paid'}</td><td><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${p.matric}',168)">+7d</button><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${p.matric}',720)">+30d</button><button class="btn btn-sm btn-danger" onclick="window.revokeAccess('${p.matric}')">🗑</button></td></tr>`;
+                    }).join('')}</table></div>`;
+        }
+        window.grantManualAccess = async function() {
+            const matric = document.getElementById('manualMatric').value.trim().toUpperCase();
+            const name = document.getElementById('manualName').value.trim();
+            const email = document.getElementById('manualEmail').value.trim();
+            const dur = parseInt(document.getElementById('manualDuration').value);
+            if (!matric) return alert('Enter matric number');
+            await setDoc(doc(db, 'payments', matric), { matric, name: name||'Manual', email: email||'', paidAt: Date.now(), expiresAt: Date.now()+(dur*3600000), manualGrant: true, attempts: 0 }, { merge: true });
+            alert(`✅ Access granted for ${matric} (${dur}h)`);
+            document.getElementById('manualMatric').value = ''; document.getElementById('manualName').value = ''; document.getElementById('manualEmail').value = '';
+            showAdminTab('manageAccess');
+        };
+        window.checkManualAccess = async function() {
+            const matric = document.getElementById('checkMatricInput').value.trim().toUpperCase();
+            if (!matric) return alert('Enter matric');
+            const rd = document.getElementById('manualAccessResult');
+            rd.innerHTML = '🔄 Checking...';
+            const snap = await getDoc(doc(db, 'payments', matric));
+            if (snap.exists()) {
+                const d = snap.data();
+                const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000));
+                rd.innerHTML = `<div style="background:${h>0?'#f0faf4':'#fdf2f2'};padding:1rem;border-radius:8px;"><p>Matric: ${d.matric} | Name: ${d.name||'N/A'} | Status: ${h>0?'✅ Active':'⚠️ Expired'} | Hours: ${h} | Source: ${d.manualGrant?'👤 Manual':'💳 Paid'}</p><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${d.matric}',168)">+7d</button> <button class="btn btn-sm btn-outline" onclick="window.extendAccess('${d.matric}',720)">+30d</button> <button class="btn btn-sm btn-danger" onclick="window.revokeAccess('${d.matric}');document.getElementById('manualAccessResult').innerHTML='';">🗑 Revoke</button></div>`;
+            } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;">❌ No record for ${matric}</div>`;
+        };
+        window.extendAccess = async function(matric, hours) {
+            if (!confirm(`Extend ${matric} by ${hours}h?`)) return;
+            const ref = doc(db, 'payments', matric.toUpperCase());
+            const snap = await getDoc(ref);
+            const cur = snap.exists() ? (snap.data().expiresAt || Date.now()) : Date.now();
+            await setDoc(ref, { matric: matric.toUpperCase(), expiresAt: cur + (hours*3600000), extendedAt: Date.now() }, { merge: true });
+            alert(`✅ Extended by ${hours}h`);
+            showAdminTab('manageAccess');
+        };
+        window.revokeAccess = async function(matric) {
+            if (!confirm(`Revoke ALL access for ${matric}?`)) return;
+            await deleteDoc(doc(db, 'payments', matric.toUpperCase()));
+            alert(`🗑 Revoked`);
+            showAdminTab('manageAccess');
+        };
+
         async function renderAnnouncementTab(){const m=await getAnnouncement();return `<h4>📢 Announcement</h4><textarea id="announcementInput" rows="3" style="width:100%;">${m}</textarea><button class="btn btn-success btn-sm" onclick="window.saveAnnouncementMsg()">💾 Save</button><button class="btn btn-outline btn-sm mt-2" onclick="window.clearAnnouncementMsg()">🗑 Clear</button>`;}
         window.saveAnnouncementMsg=async()=>{await saveAnnouncementToDB(document.getElementById('announcementInput').value);loadAnnouncement();alert('Saved!');};
         window.clearAnnouncementMsg=async()=>{await saveAnnouncementToDB('');loadAnnouncement();};
@@ -942,15 +762,7 @@
         window.navigateTo=navigateTo;window.scrollToTop=scrollToTop;window.hideAllSections=hideAllSections;
         window.showAdminTab=showAdminTab;window.logoutAdmin=logoutAdmin;window.renderStudentTable=renderStudentTable;
 
-        (async function seed(){
-            const ss=await getDocs(collection(db,STUDENTS_COLLECTION));
-            if(ss.empty){for(const s of defaultStudents)await setDoc(doc(collection(db,STUDENTS_COLLECTION)),s);}
-            const cs=await getDoc(doc(db,'chapters','chapter-1'));
-            if(!cs.exists())await setDoc(doc(db,'chapters','chapter-1'),{title:'Chapter 1: Introduction & Fundamentals',summaryLink:'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view',fullLink:'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',active:true,createdAt:Date.now()});
-            const as=await getDoc(doc(db,SETTINGS_DOC));
-            if(!as.exists())await setDoc(doc(db,SETTINGS_DOC),{message:''});
-            console.log("🌱 Seeded");
-        })();
+        (async function seed(){const ss=await getDocs(collection(db,STUDENTS_COLLECTION));if(ss.empty){for(const s of defaultStudents)await setDoc(doc(collection(db,STUDENTS_COLLECTION)),s);}const cs=await getDoc(doc(db,'chapters','chapter-1'));if(!cs.exists())await setDoc(doc(db,'chapters','chapter-1'),{title:'Chapter 1',summaryLink:'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view',fullLink:'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',active:true});const as=await getDoc(doc(db,SETTINGS_DOC));if(!as.exists())await setDoc(doc(db,SETTINGS_DOC),{message:''});console.log("🌱 Seeded");})();
     </script>
 </body>
 </html>

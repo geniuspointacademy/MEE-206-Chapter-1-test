@@ -516,8 +516,8 @@
 <!-- Firebase SDKs -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-  import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-  
+ import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js"; 
   const firebaseConfig = {
     apiKey: "AIzaSyD8LZC6Gmsit7akAqVE71vv3RQDhXgu484",
     authDomain: "mee-206.firebaseapp.com",
@@ -696,12 +696,13 @@
         <!-- ═══════════ ADMIN PANEL ═══════════ -->
         <div id="adminSection" class="section-card hidden">
             <h3>🔐 Admin Portal</h3>
-            <div id="adminLoginArea">
-                <p>Enter admin password to access the dashboard.</p>
-                <input type="password" id="adminPassword" placeholder="Admin Password">
-                <button id="adminLoginBtn" class="btn">Login</button>
-                <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem;">Default: <code>genius2024</code></p>
-            </div>
+           <div id="adminLoginArea">
+    <p>🔐 Admin Authentication Required</p>
+    <input type="email" id="adminEmail" placeholder="Admin Email" style="margin-bottom:0.8rem;">
+    <input type="password" id="adminPassword" placeholder="Password">
+    <button id="adminLoginBtn" class="btn">Login</button>
+    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem;">Secure login via Firebase Authentication</p>
+</div>
             <div id="adminDashboard" class="hidden">
                 <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
                     <button class="btn btn-sm" onclick="showAdminTab('results')">📋 Student Results</button>
@@ -745,6 +746,19 @@
     const SETTINGS_DOC = 'settings/announcement';
 
     console.log("✅ Firebase connected — MEE 206 Test Hub");
+      const auth = getAuth(app);
+
+// Track auth state globally
+let currentAdminUser = null;
+
+onAuthStateChanged(auth, (user) => {
+    currentAdminUser = user;
+    if (user) {
+        console.log("👤 Admin logged in:", user.email);
+    } else {
+        console.log("👤 Admin logged out");
+    }
+});
             // ══════════════════════════════════════
             // STUDENT DATABASE
             // ══════════════════════════════════════
@@ -1234,8 +1248,19 @@
             case 'welcome': welcome.classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); break;
             case 'chapter1': welcome.classList.remove('hidden'); document.getElementById('navCh1').classList.add('active'); break;
             case 'payment': payment.classList.remove('hidden'); break;
-            case 'admin': admin.classList.remove('hidden'); document.getElementById('navAdmin').classList.add('active'); document.getElementById('adminLoginArea').classList.remove('hidden'); document.getElementById('adminDashboard').classList.add('hidden'); break;
-            default: welcome.classList.remove('hidden');
+           case 'admin': 
+    admin.classList.remove('hidden'); 
+    document.getElementById('navAdmin').classList.add('active');
+    // Check if already logged in
+    if (currentAdminUser) {
+        document.getElementById('adminLoginArea').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        showAdminTab('results');
+    } else {
+        document.getElementById('adminLoginArea').classList.remove('hidden');
+        document.getElementById('adminDashboard').classList.add('hidden');
+    }
+    break; default: welcome.classList.remove('hidden');
         }
         scrollToTop();
     }
@@ -1434,18 +1459,40 @@
     // ═══════════════════════════════════════════
     // ADMIN PANEL
     // ═══════════════════════════════════════════
-    const ADMIN_PASSWORD = 'genius2024';
-    let adminLoggedIn = false;
+  // Admin login with Firebase Auth
+document.getElementById('adminLoginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('adminEmail').value.trim();
+    const password = document.getElementById('adminPassword').value;
+    
+    if (!email || !password) {
+        alert('Please enter both email and password.');
+        return;
+    }
+    
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("✅ Admin logged in:", userCredential.user.email);
+        document.getElementById('adminLoginArea').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        await showAdminTab('results');
+    } catch (error) {
+        console.error("Login error:", error);
+        alert('Login failed: ' + error.message);
+    }
+});
 
-    document.getElementById('adminLoginBtn').addEventListener('click', () => {
-        if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
-            adminLoggedIn = true;
-            document.getElementById('adminLoginArea').classList.add('hidden');
-            document.getElementById('adminDashboard').classList.remove('hidden');
-            showAdminTab('results');
-        } else { alert('Wrong password!'); }
+// Logout function
+function logoutAdmin() {
+    signOut(auth).then(() => {
+        document.getElementById('adminLoginArea').classList.remove('hidden');
+        document.getElementById('adminDashboard').classList.add('hidden');
+        document.getElementById('adminEmail').value = '';
+        document.getElementById('adminPassword').value = '';
+        console.log("👋 Admin logged out");
+    }).catch((error) => {
+        console.error("Logout error:", error);
     });
-
+}
     function logoutAdmin() {
         adminLoggedIn = false;
         document.getElementById('adminLoginArea').classList.remove('hidden');
@@ -1545,6 +1592,24 @@
     })();
 
     console.log("✅ MEE 206 Test Hub ready — Firebase + Flutterwave");
+      // Auto-logout after 30 minutes of inactivity
+let inactivityTimer;
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        if (currentAdminUser) {
+            signOut(auth);
+            alert('👋 Auto-logged out due to inactivity.');
+            location.reload();
+        }
+    }, 30 * 60 * 1000); // 30 minutes
+}
+
+// Track user activity
+['click', 'keypress', 'scroll', 'mousemove'].forEach(event => {
+    document.addEventListener(event, resetInactivityTimer);
+});
 </script>
 </body>
 </html>

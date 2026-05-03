@@ -298,6 +298,34 @@
 
         onAuthStateChanged(auth, (user) => { currentAdminUser = user; });
 
+        const defaultStudents = [
+            { name: "Bamidele Tolani", matric: "FST/24/8492", score: 18, link: "https://drive.google.com/file/d/1xRnG4-GAD8l-x_dTYsOp9CeJkY071oLM/view?usp=drivesdk" },
+            { name: "Adewumi Winner", matric: "EEE/24/9945", score: 15, link: "https://drive.google.com/file/d/1S0tFu2F2YiM58_UpDNKKAYsjyGOn77_a/view?usp=drivesdk" },
+            { name: "Oyewole Aisha", matric: "EEE/24/0007", score: 19, link: "https://drive.google.com/file/d/1SwaJMHP7vykaDHZv8XtwIE-Tgcno2LoG/view?usp=drivesdk" },
+            { name: "Oluswgun", matric: "EEE/9995", score: 10, link: "https://drive.google.com/file/d/1tc4cvlKHvMYAMtFRBFgtCVZbdoxBM5IS/view?usp=drivesdk" },
+            { name: "Jimoh David", matric: "EEE/24/9974", score: 11, link: "https://drive.google.com/file/d/1zYT2ZbDdZ1BCNSHbhwCTQ2ruZBjf9BKi/view?usp=drivesdk" },
+            { name: "Unknown", matric: "EEE/24/9943", score: 24, link: "https://drive.google.com/file/d/1kmdQVd3aQX9LnuC6sYorjq8rBe2A0ixh/view?usp=drivesdk" },
+            { name: "Nifemi", matric: "MME/24/0863", score: 13, link: "https://drive.google.com/file/d/1OrGUAe3c1Wz8kqTgKqVo2waqBvmRbwS_/view?usp=drivesdk" },
+            { name: "Feranmi", matric: "MEE/24/0822", score: 17, link: "https://drive.google.com/file/d/17OQE0ghvhAYE1Rm3nU12HFyP6t7S0Pj2/view?usp=drivesdk" },
+            { name: "Muhammed Lucky", matric: "EEE/24/9978", score: 16, link: "https://drive.google.com/file/d/1oNNoYNb-XANR3Mo4SiCd3iQzYPhrk5Zi/view?usp=drivesdk" },
+            { name: "Olumayowa Daniel", matric: "EEE/24/9994", score: 37, link: "https://drive.google.com/file/d/1LEfcto_pLAGQK3yCbW_0LPRuYLM44k7c/view?usp=drivesdk" },
+            { name: "Akinbode Uthman", matric: "EEE/24/9950", score: 18, link: "https://drive.google.com/file/d/1CfB4pGxQZ6Q0jXqeK2P22dGpXnRO76Lx/view?usp=drivesdk" },
+            { name: "Olarewaju Oluwatobi", matric: "EEE/24/9991", score: 14, link: "https://drive.google.com/file/d/1qt_3F4PhUBuXFIjcWkzdyHVnJc9liYYG/view?usp=drivesdk" },
+            { name: "Mejabi Oladapo", matric: "AGE/24/0496", score: 16, link: "https://drive.google.com/file/d/1JSxqpY7zQsYk8CemsRbTMnXSiRDevms6/view?usp=drivesdk" },
+            { name: "Adekanbi Jesufemi", matric: "CPE/25/8116", score: 16, link: "https://drive.google.com/file/d/1jVGQsHxJSQAHU_6g3Sc1JeMv7nKfoib4/view?usp=drivesdk" },
+            { name: "Tofeek AbdulMalik", matric: "IPE/24/2613", score: 12, link: "https://drive.google.com/file/d/1l8uSTHsAmfXBjcaMiT-Dun2VFji16RH8/view?usp=drivesdk" },
+            { name: "Akinboyewa Joseph", matric: "CPE/25/8132", score: 16, link: "https://drive.google.com/file/d/1LizDG-G6qhg7vAh0pLg1Rr01T50E5xvm/view?usp=drivesdk" },
+            { name: "Agboola Oladimeji", matric: "EEE/25/8211", score: 7, link: "https://drive.google.com/file/d/1nQzc3XZduphmm0K_1ZJStWRu7UcdIkpV/view?usp=drivesdk" },
+            { name: "Owoseni Kenneth", matric: "EEE/24/0003", score: 12, link: "https://drive.google.com/file/d/15t9YednbQywCxxDRdcRJzYg6I47Z1aRL/view?usp=drivesdk" },
+            { name: "Lawal Adam", matric: "MNE/24/0974", score: 15, link: "https://drive.google.com/file/d/1DuRljTgrJdDQDQTVK0CNB3yDrCibBX_e/view?usp=drivesdk" },
+            { name: "Yunus AbdulRahmon", matric: "EEE/25/8296", score: 16, link: "https://drive.google.com/file/d/1gfzarApRQ7pR1dos9wga4pBpm9-1Ytdx/view?usp=drivesdk" },
+            { name: "Unknown", matric: "EEE/24/9931", score: 6, link: "https://drive.google.com/file/d/16nb2r8vnQVCFru2FjqqhYlWpfUnymOIk/view?usp=drivesdk" }
+        ];
+
+        let studentResults = [...defaultStudents];
+        let currentUser = null;
+        let activeTest = [], userAnswers = {}, currentIndex = 0, timerInterval, timeLeft = 1200;
+
          // ══════════════════════════════════════
             // FULL QUESTION BANKS (100 MCQ, 50 FITG, 25 T/F)
             // ══════════════════════════════════════

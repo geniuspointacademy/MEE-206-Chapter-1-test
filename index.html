@@ -671,7 +671,7 @@
         document.getElementById('adminLoginBtn').addEventListener('click', async () => { const e=document.getElementById('adminEmail').value.trim(); const p=document.getElementById('adminPassword').value; if(!e||!p)return alert('Enter credentials'); try{await signInWithEmailAndPassword(auth,e,p);document.getElementById('adminLoginArea').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');showAdminTab('dashboard');}catch(err){alert('Login failed: '+err.message);} });
         function logoutAdmin(){signOut(auth).then(()=>{document.getElementById('adminLoginArea').classList.remove('hidden');document.getElementById('adminDashboard').classList.add('hidden');});}
 
-        async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'manageAccess':ct.innerHTML=await renderManageAccessTab();break;case'announcement':ct.innerHTML=await renderAnnouncementTab();break;}}
+        async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'manageAccess':ct.innerHTML=await renderManageAccessTab();setTimeout(()=>attachManageAccessListeners(),200);break;case'announcement':ct.innerHTML=await renderAnnouncementTab();break;}}
 
         async function renderDashboard(){const students=await getStudents();const aSnap=await getDocs(collection(db,'attempts'));let ta=0,psd=0;aSnap.forEach(d=>{ta++;if(d.data().score>=20)psd++;});const pSnap=await getDocs(collection(db,'payments'));let pd=0;pSnap.forEach(d=>{if(d.data().paidAt)pd++;});const cSnap=await getDocs(collection(db,'chapters'));let ck=0;students.forEach(s=>{if(s.checkedAt)ck++;});return `<h4>📊 Dashboard</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem;margin:1.5rem 0;"><div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.75rem;">Students</div></div><div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.75rem;">Chapters</div></div><div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${ta}</div><div style="font-size:0.75rem;">Attempts</div></div><div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${psd}</div><div style="font-size:0.75rem;">Passed</div></div><div style="background:#f5f0ff;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#6b21a8;">${pd}</div><div style="font-size:0.75rem;">Paid</div></div><div style="background:#e0f7fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#00695c;">${ck}</div><div style="font-size:0.75rem;">Checked</div></div></div>`;}
 
@@ -693,76 +693,186 @@
 
         async function renderAttemptsTab(){const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0));return `<h4>📊 Attempts (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`;}
         async function renderPaymentsTab(){const s=await getDocs(collection(db,'payments'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.paidAt||0)-(x.paidAt||0));return `<h4>💳 Payments (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Paid</th><th>Expires</th><th>Att</th><th>Status</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.name||''}</td><td>${x.paidAt?new Date(x.paidAt).toLocaleString():''}</td><td>${x.expiresAt?new Date(x.expiresAt).toLocaleString():''}</td><td>${x.attempts||0}</td><td>${(x.expiresAt>Date.now())?'✅':'⚠️'}</td></tr>`).join('')}</table>`;}
+// ═══════════ MANAGE ACCESS TAB ═══════════
+async function renderManageAccessTab() {
+    const pSnap = await getDocs(collection(db, 'payments'));
+    const payments = [];
+    pSnap.forEach(d => payments.push({ id: d.id, ...d.data() }));
+    payments.sort((a, b) => (b.expiresAt || 0) - (a.expiresAt || 0));
+    return `<h4>🔑 Manual Access Management</h4>
+        <div style="background:#f8fafc;padding:1.2rem;border-radius:12px;margin:1rem 0;border:1px solid var(--border-light);">
+            <h5 style="margin-bottom:0.8rem;">➕ Grant Access</h5>
+            <input type="text" id="manualMatric" placeholder="Matric Number (Required)">
+            <input type="text" id="manualName" placeholder="Student Name (Optional)">
+            <input type="email" id="manualEmail" placeholder="Email (Optional)">
+            <select id="manualDuration">
+                <option value="24">24 hours</option>
+                <option value="72">3 days</option>
+                <option value="168" selected>7 days</option>
+                <option value="336">14 days</option>
+                <option value="720">30 days</option>
+                <option value="8760">1 year</option>
+            </select>
+            <button class="btn btn-sm btn-success" id="grantAccessBtn">✅ Grant Access</button>
+        </div>
+        <div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;margin:1rem 0;">
+            <h5 style="margin-bottom:0.8rem;">🔍 Check / Revoke Access</h5>
+            <div style="display:flex;gap:0.5rem;">
+                <input type="text" id="checkMatricInput" placeholder="Enter Matric Number" style="flex:2;">
+                <button class="btn btn-sm btn-outline" id="checkAccessBtn" style="flex:1;">🔍 Check</button>
+            </div>
+            <div id="manualAccessResult" style="margin-top:0.8rem;"></div>
+        </div>
+        <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin:1rem 0;">
+            <h5 style="margin-bottom:0.8rem;">📋 Active Access Records (${payments.length})</h5>
+            <div style="overflow-x:auto;">
+                <table class="admin-table">
+                    <thead><tr><th>Matric</th><th>Name</th><th>Expires</th><th>Hrs Left</th><th>Source</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${payments.length === 0 
+                            ? '<tr><td colspan="6" style="text-align:center;padding:1rem;">No access records yet.</td></tr>'
+                            : payments.map(p => {
+                                const hoursLeft = Math.max(0, Math.floor(((p.expiresAt || 0) - Date.now()) / 3600000));
+                                const isActive = (p.expiresAt || 0) > Date.now();
+                                return `<tr style="${isActive ? '' : 'opacity:0.5;'}">
+                                    <td><strong>${p.matric}</strong></td>
+                                    <td>${p.name || '—'}</td>
+                                    <td>${p.expiresAt ? new Date(p.expiresAt).toLocaleDateString() : '—'}</td>
+                                    <td style="color:${hoursLeft > 24 ? 'var(--success)' : hoursLeft > 0 ? 'var(--accent)' : 'var(--danger)'};">${isActive ? hoursLeft + 'h' : 'Expired'}</td>
+                                    <td>${p.manualGrant ? '👤 Manual' : '💳 Paid'}</td>
+                                    <td style="display:flex;gap:0.3rem;flex-wrap:wrap;">
+                                        <button class="btn btn-sm btn-outline extend7Btn" data-matric="${p.matric}">+7d</button>
+                                        <button class="btn btn-sm btn-outline extend30Btn" data-matric="${p.matric}">+30d</button>
+                                        <button class="btn btn-sm btn-danger revokeBtn" data-matric="${p.matric}">🗑</button>
+                                    </td>
+                                </tr>`;
+                            }).join('')
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>`;
+}
 
-        // ═══════════ MANAGE ACCESS TAB ═══════════
-        async function renderManageAccessTab(){
-            const pSnap = await getDocs(collection(db, 'payments'));
-            const payments = [];
-            pSnap.forEach(d => payments.push({ id: d.id, ...d.data() }));
-            payments.sort((a,b) => (b.expiresAt||0) - (a.expiresAt||0));
-            return `<h4>🔑 Manual Access Management</h4>
-                <div style="background:#f8fafc;padding:1.2rem;border-radius:12px;margin:1rem 0;border:1px solid var(--border-light);"><h5>➕ Grant Access</h5>
-                    <input type="text" id="manualMatric" placeholder="Matric Number (Required)">
-                    <input type="text" id="manualName" placeholder="Student Name (Optional)">
-                    <input type="email" id="manualEmail" placeholder="Email (Optional)">
-                    <select id="manualDuration"><option value="24">24 hours</option><option value="72">3 days</option><option value="168" selected>7 days</option><option value="336">14 days</option><option value="720">30 days</option><option value="8760">1 year</option></select>
-                    <button class="btn btn-sm btn-success" onclick="window.grantManualAccess()">✅ Grant Access</button></div>
-                <div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>🔍 Check / Revoke</h5>
-                    <div style="display:flex;gap:0.5rem;"><input type="text" id="checkMatricInput" placeholder="Matric Number" style="flex:2;"><button class="btn btn-sm btn-outline" onclick="window.checkManualAccess()" style="flex:1;">🔍 Check</button></div>
-                    <div id="manualAccessResult" style="margin-top:0.8rem;"></div></div>
-                <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>📋 Active Access (${payments.length})</h5>
-                    <table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Expires</th><th>Hrs Left</th><th>Source</th><th>Act</th></tr>
-                    ${payments.map(p => { const h = Math.max(0, Math.floor(((p.expiresAt||0) - Date.now()) / 3600000)); const active = (p.expiresAt||0) > Date.now();
-                        return `<tr style="${active?'':'opacity:0.5;'}"><td><strong>${p.matric}</strong></td><td>${p.name||'—'}</td><td>${p.expiresAt?new Date(p.expiresAt).toLocaleDateString():'—'}</td><td style="color:${h>24?'var(--success)':h>0?'var(--accent)':'var(--danger)'};">${active?h+'h':'Expired'}</td><td>${p.manualGrant?'👤 Manual':'💳 Paid'}</td><td><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${p.matric}',168)">+7d</button><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${p.matric}',720)">+30d</button><button class="btn btn-sm btn-danger" onclick="window.revokeAccess('${p.matric}')">🗑</button></td></tr>`;
-                    }).join('')}</table></div>`;
-        }
-        window.grantManualAccess = async function() {
+// ═══════════ ATTACH EVENT LISTENERS AFTER RENDERING ═══════════
+function attachManageAccessListeners() {
+    // Grant Access button
+    const grantBtn = document.getElementById('grantAccessBtn');
+    if (grantBtn) {
+        grantBtn.addEventListener('click', async () => {
             const matric = document.getElementById('manualMatric').value.trim().toUpperCase();
             const name = document.getElementById('manualName').value.trim();
             const email = document.getElementById('manualEmail').value.trim();
             const dur = parseInt(document.getElementById('manualDuration').value);
             if (!matric) return alert('Enter matric number');
-            await setDoc(doc(db, 'payments', matric), { matric, name: name||'Manual', email: email||'', paidAt: Date.now(), expiresAt: Date.now()+(dur*3600000), manualGrant: true, attempts: 0 }, { merge: true });
-            alert(`✅ Access granted for ${matric} (${dur}h)`);
-            document.getElementById('manualMatric').value = ''; document.getElementById('manualName').value = ''; document.getElementById('manualEmail').value = '';
-            showAdminTab('manageAccess');
-        };
-        window.checkManualAccess = async function() {
+            try {
+                await setDoc(doc(db, 'payments', matric), {
+                    matric: matric,
+                    name: name || 'Manual Grant',
+                    email: email || '',
+                    paidAt: Date.now(),
+                    expiresAt: Date.now() + (dur * 3600000),
+                    manualGrant: true,
+                    attempts: 0
+                }, { merge: true });
+                alert(`✅ Access granted for ${matric} (${dur} hours)`);
+                document.getElementById('manualMatric').value = '';
+                document.getElementById('manualName').value = '';
+                document.getElementById('manualEmail').value = '';
+                showAdminTab('manageAccess');
+            } catch (e) {
+                alert('❌ Error: ' + e.message);
+            }
+        });
+    }
+
+    // Check Access button
+    const checkBtn = document.getElementById('checkAccessBtn');
+    if (checkBtn) {
+        checkBtn.addEventListener('click', async () => {
             const matric = document.getElementById('checkMatricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter matric');
+            if (!matric) return alert('Enter matric number');
             const rd = document.getElementById('manualAccessResult');
             rd.innerHTML = '🔄 Checking...';
-            const snap = await getDoc(doc(db, 'payments', matric));
-            if (snap.exists()) {
-                const d = snap.data();
-                const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000));
-                rd.innerHTML = `<div style="background:${h>0?'#f0faf4':'#fdf2f2'};padding:1rem;border-radius:8px;"><p>Matric: ${d.matric} | Name: ${d.name||'N/A'} | Status: ${h>0?'✅ Active':'⚠️ Expired'} | Hours: ${h} | Source: ${d.manualGrant?'👤 Manual':'💳 Paid'}</p><button class="btn btn-sm btn-outline" onclick="window.extendAccess('${d.matric}',168)">+7d</button> <button class="btn btn-sm btn-outline" onclick="window.extendAccess('${d.matric}',720)">+30d</button> <button class="btn btn-sm btn-danger" onclick="window.revokeAccess('${d.matric}');document.getElementById('manualAccessResult').innerHTML='';">🗑 Revoke</button></div>`;
-            } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;">❌ No record for ${matric}</div>`;
-        };
-        window.extendAccess = async function(matric, hours) {
-            if (!confirm(`Extend ${matric} by ${hours}h?`)) return;
-            const ref = doc(db, 'payments', matric.toUpperCase());
-            const snap = await getDoc(ref);
-            const cur = snap.exists() ? (snap.data().expiresAt || Date.now()) : Date.now();
-            await setDoc(ref, { matric: matric.toUpperCase(), expiresAt: cur + (hours*3600000), extendedAt: Date.now() }, { merge: true });
-            alert(`✅ Extended by ${hours}h`);
-            showAdminTab('manageAccess');
-        };
-        window.revokeAccess = async function(matric) {
-            if (!confirm(`Revoke ALL access for ${matric}?`)) return;
-            await deleteDoc(doc(db, 'payments', matric.toUpperCase()));
-            alert(`🗑 Revoked`);
-            showAdminTab('manageAccess');
-        };
+            try {
+                const snap = await getDoc(doc(db, 'payments', matric));
+                if (snap.exists()) {
+                    const d = snap.data();
+                    const h = Math.max(0, Math.floor(((d.expiresAt || 0) - Date.now()) / 3600000));
+                    const isActive = (d.expiresAt || 0) > Date.now();
+                    rd.innerHTML = `<div style="background:${isActive ? '#f0faf4' : '#fdf2f2'};padding:1rem;border-radius:8px;">
+                        <p><strong>Matric:</strong> ${d.matric} | <strong>Name:</strong> ${d.name || 'N/A'}</p>
+                        <p><strong>Status:</strong> ${isActive ? '✅ Active' : '⚠️ Expired'} | <strong>Hours Left:</strong> ${h}</p>
+                        <p><strong>Source:</strong> ${d.manualGrant ? '👤 Manual Grant' : '💳 Payment'} | <strong>Attempts:</strong> ${d.attempts || 0}</p>
+                        <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
+                            <button class="btn btn-sm btn-outline" id="extend7Btn">+7 Days</button>
+                            <button class="btn btn-sm btn-outline" id="extend30Btn">+30 Days</button>
+                            <button class="btn btn-sm btn-danger" id="revokeBtn">🗑 Revoke</button>
+                        </div>
+                    </div>`;
+                    document.getElementById('extend7Btn').addEventListener('click', () => extendAccess(matric, 168));
+                    document.getElementById('extend30Btn').addEventListener('click', () => extendAccess(matric, 720));
+                    document.getElementById('revokeBtn').addEventListener('click', () => { revokeAccess(matric);
+                        rd.innerHTML = ''; });
+                } else {
+                    rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No access record found for <strong>${matric}</strong></p><p>Use the Grant Access form above to add them.</p></div>`;
+                }
+            } catch (e) {
+                rd.innerHTML = '❌ Error: ' + e.message;
+            }
+        });
+    }
 
-        async function renderAnnouncementTab(){const m=await getAnnouncement();return `<h4>📢 Announcement</h4><textarea id="announcementInput" rows="3" style="width:100%;">${m}</textarea><button class="btn btn-success btn-sm" onclick="window.saveAnnouncementMsg()">💾 Save</button><button class="btn btn-outline btn-sm mt-2" onclick="window.clearAnnouncementMsg()">🗑 Clear</button>`;}
-        window.saveAnnouncementMsg=async()=>{await saveAnnouncementToDB(document.getElementById('announcementInput').value);loadAnnouncement();alert('Saved!');};
-        window.clearAnnouncementMsg=async()=>{await saveAnnouncementToDB('');loadAnnouncement();};
+    // Extend +7d buttons
+    document.querySelectorAll('.extend7Btn').forEach(btn => {
+        btn.addEventListener('click', function() { extendAccess(this.dataset.matric, 168); });
+    });
 
-        window.navigateTo=navigateTo;window.scrollToTop=scrollToTop;window.hideAllSections=hideAllSections;
-        window.showAdminTab=showAdminTab;window.logoutAdmin=logoutAdmin;window.renderStudentTable=renderStudentTable;
+    // Extend +30d buttons
+    document.querySelectorAll('.extend30Btn').forEach(btn => {
+        btn.addEventListener('click', function() { extendAccess(this.dataset.matric, 720); });
+    });
 
-        (async function seed(){const ss=await getDocs(collection(db,STUDENTS_COLLECTION));if(ss.empty){for(const s of defaultStudents)await setDoc(doc(collection(db,STUDENTS_COLLECTION)),s);}const cs=await getDoc(doc(db,'chapters','chapter-1'));if(!cs.exists())await setDoc(doc(db,'chapters','chapter-1'),{title:'Chapter 1',summaryLink:'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view',fullLink:'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',active:true});const as=await getDoc(doc(db,SETTINGS_DOC));if(!as.exists())await setDoc(doc(db,SETTINGS_DOC),{message:''});console.log("🌱 Seeded");})();
+    // Revoke buttons
+    document.querySelectorAll('.revokeBtn').forEach(btn => {
+        btn.addEventListener('click', function() { revokeAccess(this.dataset.matric); });
+    });
+}
+
+async function extendAccess(matric, hours) {
+    if (!confirm(`Extend access for ${matric} by ${hours} hours?`)) return;
+    try {
+        const ref = doc(db, 'payments', matric.toUpperCase());
+        const snap = await getDoc(ref);
+        const currentExpiry = snap.exists() ? (snap.data().expiresAt || Date.now()) : Date.now();
+        await setDoc(ref, {
+            matric: matric.toUpperCase(),
+            expiresAt: currentExpiry + (hours * 3600000),
+            extendedAt: Date.now(),
+            extendedBy: hours
+        }, { merge: true });
+        alert(`✅ Extended by ${hours} hours for ${matric}`);
+        showAdminTab('manageAccess');
+    } catch (e) {
+        alert('❌ Error: ' + e.message);
+    }
+}
+
+async function revokeAccess(matric) {
+    if (!confirm(`⚠️ Revoke ALL access for ${matric}? This cannot be undone.`)) return;
+    try {
+        await deleteDoc(doc(db, 'payments', matric.toUpperCase()));
+        alert(`🗑 Access revoked for ${matric}`);
+        showAdminTab('manageAccess');
+    } catch (e) {
+        alert('❌ Error: ' + e.message);
+    }
+}
+
+// Make these available globally
+window.extendAccess = extendAccess;
+window.revokeAccess = revokeAccess;
+       
     </script>
 </body>
 </html>

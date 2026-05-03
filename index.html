@@ -79,7 +79,7 @@
         .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; width: auto; display: inline-flex; }
         .btn-danger { background: var(--danger); }
         .score-big { font-size: 3.8rem; font-weight: 800; color: var(--primary); text-align: center; line-height: 1; }
-        .advice-box { background: #f6f9fc; padding: 1.2rem; border-radius: 14px; font-style: italic; color: #1e3b4f; margin: 1rem 0; border-left: 4px solid var(--accent); }
+        .advice-box { background: #f6f9fc; padding: 1.2rem; border-radius: 14px; color: #1e3b4f; margin: 1rem 0; border-left: 4px solid var(--accent); }
         .pagination-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.8rem 0 0.5rem; justify-content: center; }
         .page-num { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--unanswered-bg); border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; color: #2c3e50; font-size: 0.9rem; }
         .page-num.answered { background: var(--success); color: white; }
@@ -119,6 +119,7 @@
             <a onclick="navigateTo('chapter1')" id="navCh1">📘 Chapter 1</a>
             <a class="disabled">📗 Chapter 2</a>
             <a class="disabled">📙 Chapter 3</a>
+            <a class="disabled">📕 Chapter 4</a>
             <a onclick="navigateTo('admin')" id="navAdmin">🔐 Admin</a>
         </div>
     </nav>
@@ -133,6 +134,7 @@
             <div class="tutor-badge">ALHAJI Yakub Opeyemi Abideen</div>
         </div>
 
+        <!-- ═══════════ WELCOME ═══════════ -->
         <div id="welcomeSection">
             <div class="course-intro">
                 <h3>📚 MEE 206 – Basic Engineering Thermodynamics</h3>
@@ -155,7 +157,7 @@
             </div>
             <div class="section-card" style="margin-top:0;">
                 <h2 style="text-align:center;">📋 Check Your Chapter 1 Result</h2>
-                <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number below to view your score.</p>
+                <p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number to view your score.</p>
                 <input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off">
                 <button id="searchBtn" class="btn">🔍 Search Result</button>
                 <p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">
@@ -164,22 +166,24 @@
             </div>
         </div>
 
+        <!-- ═══════════ NOT FOUND ═══════════ -->
         <div id="notFoundSection" class="section-card hidden">
             <h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3>
-            <p style="text-align:center;">We couldn't fetch a result for that matric number.</p>
+            <p style="text-align:center;">We couldn't fetch a result for that matric number. Are you sure you took the physical test?</p>
             <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
                 <button id="btnClaimTook" class="btn btn-outline" style="flex:1;">Yes, I took it</button>
-                <button id="btnWantTake" class="btn" style="flex:1;">No, I want to take test</button>
+                <button id="btnWantTake" class="btn" style="flex:1;">No, I want to take test now</button>
             </div>
             <div id="queryArea" class="hidden" style="margin-top:1.5rem;">
                 <p><strong>Trace your script:</strong></p>
                 <input type="text" id="queryName" placeholder="Full Name">
                 <input type="text" id="queryMatric" placeholder="Matric Number" style="margin-top:0.5rem;">
-                <button id="submitQueryBtn" class="btn btn-success">Submit Query</button>
-                <p style="font-size:0.8rem;margin-top:0.8rem;">📞 WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p>
+                <button id="submitQueryBtn" class="btn btn-success">Submit Query to Admin</button>
+                <p style="font-size:0.8rem;margin-top:0.8rem;">📞 Or DM us on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p>
             </div>
         </div>
 
+        <!-- ═══════════ REFLECTION ═══════════ -->
         <div id="reflectionSection" class="section-card hidden">
             <h3>📝 Quick Reflection Before Your Score</h3>
             <p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly. Submissions go to Admin.</p>
@@ -193,6 +197,7 @@
             </form>
         </div>
 
+        <!-- ═══════════ RESULT ═══════════ -->
         <div id="resultSection" class="section-card hidden">
             <div style="text-align:center;">
                 <div class="score-big"><span id="displayScore">0</span>/40</div>
@@ -201,7 +206,10 @@
             </div>
             <button id="viewScriptBtn" class="btn btn-outline">📄 Request Marked Paper & Corrections</button>
             <div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;">
-                <a id="driveLink" href="#" target="_blank" class="btn btn-success">View Full Result & Corrections</a>
+                <a id="driveLink" href="#" target="_blank" class="btn btn-success">View Your Full Result</a>
+            </div>
+            <div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;">
+                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline">📝 View the Tutor's Marking Guide</a>
             </div>
             <hr>
             <p style="text-align:center;"><strong>Solidify your knowledge?</strong></p>
@@ -209,15 +217,73 @@
             <div id="resourceLinksArea" class="hidden mt-3"></div>
         </div>
 
+        <!-- ═══════════ PAYMENT ═══════════ -->
         <div id="paymentSection" class="section-card hidden">
             <h3>💳 Unlock CBT Test Access</h3>
-            <p>40 questions (25 MCQ, 10 Fill-in-Gap, 5 T/F) • 20 minutes • <strong>₦200 only</strong>. Retake multiple times within 72 hours.</p>
+            <p>40 questions (25 MCQ, 10 Fill-in-Gap, 5 T/F) • 20 minutes • <strong>₦200 only</strong></p>
+            <p style="font-size:0.85rem;color:var(--text-muted);">Retake multiple times within 72 hours. All attempts are recorded.</p>
+            <div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;">
+                <p><strong>📌 After payment you'll get:</strong></p>
+                <ul style="list-style:none;padding:0;font-size:0.9rem;">
+                    <li>✅ Chapter 1 Summary (Quick Revision)</li>
+                    <li>✅ Full Chapter 1 Document</li>
+                    <li>✅ Tutor's Marking Guide</li>
+                    <li>✅ 40-Question CBT Test (Timed)</li>
+                    <li>✅ Score Recording & Attempt History</li>
+                </ul>
+            </div>
             <input type="text" id="payName" placeholder="Full Name" required>
             <input type="email" id="payEmail" placeholder="Email Address" required style="margin-top:0.8rem;">
             <input type="text" id="payMatric" placeholder="Matric Number" required style="margin-top:0.8rem;">
-            <button id="payNowBtn" class="btn btn-accent">🔒 Pay ₦200 with Flutterwave</button>
+            <button id="payNowBtn" class="btn btn-accent">🔒 Pay ₦200 Now</button>
+            <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">
+                Payment processed securely by Flutterwave • Beneficiary: Yakub Opeyemi Abideen
+            </p>
+            <hr style="margin:1.5rem 0;">
+            <p style="text-align:center;"><strong>Already paid?</strong></p>
+            <div style="display:flex;gap:0.5rem;">
+                <input type="text" id="returnMatricInput" placeholder="Enter your Matric Number" style="flex:2;">
+                <button id="checkPaymentStatusBtn" class="btn btn-outline" style="flex:1;">🔍 Check Access</button>
+            </div>
+            <div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div>
         </div>
 
+        <!-- ═══════════ STUDY GATEWAY ═══════════ -->
+        <div id="studyGatewaySection" class="section-card hidden">
+            <h3 style="text-align:center;">📚 Payment Successful! Prepare Before You Test</h3>
+            <p style="text-align:center;color:var(--text-muted);margin-bottom:0.5rem;">Review these materials carefully. The test is timed — study first!</p>
+            <p id="timeRemainingInfo" style="text-align:center;margin-bottom:1rem;font-weight:600;"></p>
+            <div style="display:grid;gap:0.8rem;margin-bottom:1.5rem;">
+                <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">
+                    📘 <strong>Chapter 1 Summary</strong> — Quick revision notes
+                </a>
+                <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline" style="text-align:left;">
+                    📚 <strong>Full Chapter 1 Document</strong> — Complete textbook
+                </a>
+                <a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline" style="text-align:left;">
+                    📝 <strong>Tutor's Marking Guide</strong> — See how answers are graded
+                </a>
+            </div>
+            <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin-bottom:1.5rem;border-left:4px solid var(--accent);">
+                <h4 style="margin-bottom:0.5rem;">⏱️ Important Test Tips</h4>
+                <ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;">
+                    <li>✅ <strong>40 questions</strong> — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li>
+                    <li>✅ <strong>20 minutes</strong> countdown — pace yourself!</li>
+                    <li>✅ <strong>Green = answered</strong>, Grey = unanswered</li>
+                    <li>✅ Score <strong>≥ 20/40</strong> is a pass</li>
+                    <li>✅ You can <strong>retake multiple times</strong> within 72 hours</li>
+                    <li>✅ All your attempts are <strong>recorded & saved</strong></li>
+                </ul>
+            </div>
+            <button id="startTestFromGatewayBtn" class="btn btn-accent" style="font-size:1.1rem;padding:1rem;">
+                🚀 I'm Ready — Start Test Now
+            </button>
+            <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--text-muted);">
+                ⚠️ Once you start, the 20-minute timer begins. Don't start until you're prepared!
+            </p>
+        </div>
+
+        <!-- ═══════════ CBT ═══════════ -->
         <div id="cbtSection" class="section-card hidden">
             <div style="display:flex;justify-content:space-between;align-items:center;">
                 <h3>📝 CBT Interface</h3>
@@ -235,6 +301,7 @@
             <div class="pagination-grid" id="paginationGrid"></div>
         </div>
 
+        <!-- ═══════════ ADMIN ═══════════ -->
         <div id="adminSection" class="section-card hidden">
             <h3>🔐 Admin Portal</h3>
             <div id="adminLoginArea">
@@ -246,10 +313,12 @@
             </div>
             <div id="adminDashboard" class="hidden">
                 <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                    <button class="btn btn-sm" onclick="window.showAdminTab('results')">📋 Student Results</button>
-                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announcement</button>
+                    <button class="btn btn-sm btn-success" onclick="window.showAdminTab('dashboard')">📊 Dashboard</button>
+                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('students')">📋 Students</button>
                     <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('chapters')">📚 Chapters</button>
-                    <button class="btn btn-sm btn-danger" onclick="window.logoutAdmin()">🚪 Logout</button>
+                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('questions')">❓ Questions</button>
+                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('attempts')">📊 Attempts</button>
+                    <button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announce</button>
                 </div>
                 <div id="adminTabContent"></div>
             </div>
@@ -257,7 +326,7 @@
 
         <div class="site-footer">
             <p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p>
-            <p>© 2024 Genius Point Academy • MEE 206 Test Management</p>
+            <p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: Yakub Opeyemi Abideen</p>
         </div>
     </div>
 
@@ -284,43 +353,14 @@
         const STUDENTS_COLLECTION = 'students';
         const SETTINGS_DOC = 'settings/announcement';
         let currentAdminUser = null;
+        let currentPayerMatric = null;
 
         onAuthStateChanged(auth, (user) => {
             currentAdminUser = user;
             console.log(user ? `👤 Admin: ${user.email}` : "👤 Logged out");
         });
-            // ══════════════════════════════════════
-            // STUDENT DATABASE
-            // ══════════════════════════════════════
-            const defaultStudents = [
-                { name: "Bamidele Tolani", matric: "FST/24/8492", score: 18, link: "https://drive.google.com/file/d/1xRnG4-GAD8l-x_dTYsOp9CeJkY071oLM/view?usp=drivesdk" },
-                { name: "Adewumi Winner", matric: "EEE/24/9945", score: 15, link: "https://drive.google.com/file/d/1S0tFu2F2YiM58_UpDNKKAYsjyGOn77_a/view?usp=drivesdk" },
-                { name: "Oyewole Aisha", matric: "EEE/24/0007", score: 19, link: "https://drive.google.com/file/d/1SwaJMHP7vykaDHZv8XtwIE-Tgcno2LoG/view?usp=drivesdk" },
-                { name: "Oluswgun", matric: "EEE/9995", score: 10, link: "https://drive.google.com/file/d/1tc4cvlKHvMYAMtFRBFgtCVZbdoxBM5IS/view?usp=drivesdk" },
-                { name: "Jimoh David", matric: "EEE/24/9974", score: 11, link: "https://drive.google.com/file/d/1zYT2ZbDdZ1BCNSHbhwCTQ2ruZBjf9BKi/view?usp=drivesdk" },
-                { name: "Unknown", matric: "EEE/24/9943", score: 24, link: "https://drive.google.com/file/d/1kmdQVd3aQX9LnuC6sYorjq8rBe2A0ixh/view?usp=drivesdk" },
-                { name: "Nifemi", matric: "MME/24/0863", score: 13, link: "https://drive.google.com/file/d/1OrGUAe3c1Wz8kqTgKqVo2waqBvmRbwS_/view?usp=drivesdk" },
-                { name: "Feranmi", matric: "MEE/24/0822", score: 17, link: "https://drive.google.com/file/d/17OQE0ghvhAYE1Rm3nU12HFyP6t7S0Pj2/view?usp=drivesdk" },
-                { name: "Muhammed Lucky", matric: "EEE/24/9978", score: 16, link: "https://drive.google.com/file/d/1oNNoYNb-XANR3Mo4SiCd3iQzYPhrk5Zi/view?usp=drivesdk" },
-                { name: "Olumayowa Daniel", matric: "EEE/24/9994", score: 37, link: "https://drive.google.com/file/d/1LEfcto_pLAGQK3yCbW_0LPRuYLM44k7c/view?usp=drivesdk" },
-                { name: "Akinbode Uthman", matric: "EEE/24/9950", score: 18, link: "https://drive.google.com/file/d/1CfB4pGxQZ6Q0jXqeK2P22dGpXnRO76Lx/view?usp=drivesdk" },
-                { name: "Olarewaju Oluwatobi", matric: "EEE/24/9991", score: 14, link: "https://drive.google.com/file/d/1qt_3F4PhUBuXFIjcWkzdyHVnJc9liYYG/view?usp=drivesdk" },
-                { name: "Mejabi Oladapo", matric: "AGE/24/0496", score: 16, link: "https://drive.google.com/file/d/1JSxqpY7zQsYk8CemsRbTMnXSiRDevms6/view?usp=drivesdk" },
-                { name: "Adekanbi Jesufemi", matric: "CPE/25/8116", score: 16, link: "https://drive.google.com/file/d/1jVGQsHxJSQAHU_6g3Sc1JeMv7nKfoib4/view?usp=drivesdk" },
-                { name: "Tofeek AbdulMalik", matric: "IPE/24/2613", score: 12, link: "https://drive.google.com/file/d/1l8uSTHsAmfXBjcaMiT-Dun2VFji16RH8/view?usp=drivesdk" },
-                { name: "Akinboyewa Joseph", matric: "CPE/25/8132", score: 16, link: "https://drive.google.com/file/d/1LizDG-G6qhg7vAh0pLg1Rr01T50E5xvm/view?usp=drivesdk" },
-                { name: "Agboola Oladimeji", matric: "EEE/25/8211", score: 7, link: "https://drive.google.com/file/d/1nQzc3XZduphmm0K_1ZJStWRu7UcdIkpV/view?usp=drivesdk" },
-                { name: "Owoseni Kenneth", matric: "EEE/24/0003", score: 12, link: "https://drive.google.com/file/d/15t9YednbQywCxxDRdcRJzYg6I47Z1aRL/view?usp=drivesdk" },
-                { name: "Lawal Adam", matric: "MNE/24/0974", score: 15, link: "https://drive.google.com/file/d/1DuRljTgrJdDQDQTVK0CNB3yDrCibBX_e/view?usp=drivesdk" },
-                { name: "Yunus AbdulRahmon", matric: "EEE/25/8296", score: 16, link: "https://drive.google.com/file/d/1gfzarApRQ7pR1dos9wga4pBpm9-1Ytdx/view?usp=drivesdk" },
-                { name: "Unknown", matric: "EEE/24/9931", score: 6, link: "https://drive.google.com/file/d/16nb2r8vnQVCFru2FjqqhYlWpfUnymOIk/view?usp=drivesdk" }
-            ];
 
-          
-    let studentResults = [...defaultStudents]; // Will be overwritten by Firestore fetch
-    let currentUser = null;
-    let activeTest = [], userAnswers = {}, currentIndex = 0, timerInterval, timeLeft = 1200;
-            // ══════════════════════════════════════
+         // ══════════════════════════════════════
             // FULL QUESTION BANKS (100 MCQ, 50 FITG, 25 T/F)
             // ══════════════════════════════════════
             const mcqBank = [
@@ -683,10 +723,8 @@
                 { q: "Heat flows from lower to higher temperature naturally.", ans: "False" }
             ];
 
-      // ═══════════════════════════════════════════
-    // FIREBASE CRUD OPERATIONS
-    // ═══════════════════════════════════════════
-    async function getStudents() {
+        // ═══════════ FIREBASE CRUD OPERATIONS ═══════════
+        async function getStudents() {
             try {
                 const snap = await getDocs(collection(db, STUDENTS_COLLECTION));
                 const arr = [];
@@ -707,18 +745,19 @@
         }
         async function saveAnnouncementToDB(msg) { await setDoc(doc(db, SETTINGS_DOC), { message: msg }, { merge: true }); }
 
-        // DOM refs
+        // ═══════════ DOM REFERENCES ═══════════
         const welcome = document.getElementById('welcomeSection');
         const notFound = document.getElementById('notFoundSection');
         const reflection = document.getElementById('reflectionSection');
         const result = document.getElementById('resultSection');
         const payment = document.getElementById('paymentSection');
+        const studyGateway = document.getElementById('studyGatewaySection');
         const cbt = document.getElementById('cbtSection');
         const admin = document.getElementById('adminSection');
 
-        function hideAllSections() { [welcome, notFound, reflection, result, payment, cbt, admin].forEach(s => s.classList.add('hidden')); }
+        function hideAllSections() { [welcome, notFound, reflection, result, payment, studyGateway, cbt, admin].forEach(s => s.classList.add('hidden')); }
 
-        // Navigation
+        // ═══════════ NAVIGATION ═══════════
         function navigateTo(target) {
             hideAllSections();
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -729,44 +768,37 @@
                 document.getElementById('navAdmin').classList.add('active');
                 if (currentAdminUser) { document.getElementById('adminLoginArea').classList.add('hidden');
                     document.getElementById('adminDashboard').classList.remove('hidden');
-                    showAdminTab('results'); } else { document.getElementById('adminLoginArea').classList.remove('hidden');
+                    showAdminTab('dashboard'); } else { document.getElementById('adminLoginArea').classList.remove('hidden');
                     document.getElementById('adminDashboard').classList.add('hidden'); }
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-        // Hamburger
         document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
         window.addEventListener('scroll', () => document.getElementById('backToTopBtn').classList.toggle('visible', window.scrollY > 300));
 
-        // Announcement
-        async function loadAnnouncement() {
-            const msg = await getAnnouncement();
-            const bar = document.getElementById('announcementBar');
-            if (msg) { bar.textContent = '📢 ' + msg;
-                bar.style.display = 'block'; } else bar.style.display = 'none';
-        }
+        // ═══════════ ANNOUNCEMENT ═══════════
+        async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg;
+                bar.style.display = 'block'; } else bar.style.display = 'none'; }
         loadAnnouncement();
 
-        // Search
+        // ═══════════ SEARCH LOGIC ═══════════
         document.getElementById('searchBtn').addEventListener('click', async () => {
             studentResults = await getStudents();
             const matric = document.getElementById('matricInput').value.trim().toUpperCase();
             if (!matric) return alert('Enter matric number');
             currentUser = studentResults.find(s => s.matric.toUpperCase() === matric);
             hideAllSections();
-            if (currentUser) {
-                document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : '';
-                reflection.classList.remove('hidden');
-            } else notFound.classList.remove('hidden');
+            if (currentUser) { document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : '';
+                reflection.classList.remove('hidden'); } else notFound.classList.remove('hidden');
         });
         document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
-        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted!'));
+        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted! We will investigate.'));
         document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections();
             payment.classList.remove('hidden'); });
 
-        // Reflection
+        // ═══════════ REFLECTION → RESULT ═══════════
         document.getElementById('reflectionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const fd = new FormData();
@@ -784,7 +816,50 @@
         function showResult(u) {
             document.getElementById('displayScore').innerText = u.score;
             document.getElementById('displayPercent').innerText = ((u.score / 40) * 100).toFixed(1);
-            document.getElementById('adviceText').innerText = u.score < 15 ? "Review and retake." : u.score < 25 ? "Good, review mistakes." : "Excellent!";
+            const score = u.score;
+            let adviceList = [];
+            if (score < 10) {
+                adviceList = [
+                    "📚 <strong>Don't give up!</strong> This is just the beginning. Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner.",
+                    "💪 <strong>You have room to grow!</strong> Thermodynamics builds layer by layer. Focus on understanding the basic terminologies first — system, boundary, control volume.",
+                    "🌟 <strong>This score doesn't define you.</strong> It shows where you need to focus. Download the full Chapter 1 PDF and study pages 1-5 carefully before retaking.",
+                    "🔥 <strong>Turn this around!</strong> Many students who scored low on their first attempt ended up with A's. The key? Consistent revision and practice.",
+                    "🚀 <strong>Ready for lift-off?</strong> Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence!"
+                ];
+            } else if (score < 15) {
+                adviceList = [
+                    "📖 <strong>You're getting there!</strong> You have some foundation but significant gaps. Focus on the concepts of open vs closed systems and properties.",
+                    "🎯 <strong>Halfway to mastery!</strong> Review the areas you got wrong. Pay special attention to intensive vs extensive properties and thermodynamic processes.",
+                    "🔍 <strong>Identify your weak spots.</strong> Look at your marked script. Were you mixing up homogeneous vs heterogeneous systems? Fix those gaps!",
+                    "🏗️ <strong>Building your foundation.</strong> Chapter 1 is the bedrock of thermodynamics. Solidify your understanding of point functions, path functions, and cycles.",
+                    "💡 <strong>Light bulb moments ahead!</strong> Sometimes things click on the second or third review. Re-read the summary, then retake — you'll see improvement!"
+                ];
+            } else if (score < 20) {
+                adviceList = [
+                    "👍 <strong>Not bad!</strong> You're above average but not quite at the pass mark. Focus on the exact questions you missed and understand WHY the correct answer is right.",
+                    "📈 <strong>Close to passing!</strong> You're just a few marks away. Review irreversible vs reversible processes, isothermal vs adiabatic equations.",
+                    "🎓 <strong>Almost there!</strong> With a bit more focused study on the zeroth law, work vs heat concepts, you'll cross the 20-mark threshold easily.",
+                    "🧠 <strong>Your brain is absorbing!</strong> Thermodynamics concepts take time to settle. Give it another pass — you're closer than you think!",
+                    "⚡ <strong>Momentum is building!</strong> You've grasped the basics. Now refine your knowledge of derived properties (H, G, F) and specific properties."
+                ];
+            } else if (score < 30) {
+                adviceList = [
+                    "👏 <strong>Good job!</strong> You have a solid grasp of Chapter 1. Review your few mistakes to ensure you're fully prepared for Chapter 2.",
+                    "🏆 <strong>Well done!</strong> You're demonstrating strong understanding. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy.",
+                    "📊 <strong>Solid performance!</strong> You've mastered most concepts. Check which few questions you missed and make sure you understand them completely.",
+                    "🎖️ <strong>Above average excellence!</strong> Keep this momentum going. Chapter 2 will build on what you already know well.",
+                    "🔬 <strong>Strong foundation detected!</strong> You clearly studied. With a bit more attention to detail, you'll be hitting 35+ next time!"
+                ];
+            } else {
+                adviceList = [
+                    "🌟 <strong>Exceptional!</strong> You've demonstrated mastery of Chapter 1. Keep this standard of excellence as we move into Chapter 2!",
+                    "🏅 <strong>Outstanding performance!</strong> Your understanding of thermodynamics fundamentals is excellent. You're ready for more advanced concepts.",
+                    "💎 <strong>Top-tier result!</strong> You clearly put in the work. Share your study strategies with classmates — you could be a peer tutor!",
+                    "🚀 <strong>Crushing it!</strong> This level of understanding will serve you well not just in MEE 206 but throughout your engineering journey.",
+                    "👑 <strong>A+ material!</strong> Your grasp of systems, properties, cycles, and the zeroth law is superb. Chapter 2 awaits — you're ready!"
+                ];
+            }
+            document.getElementById('adviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
             document.getElementById('driveLink').href = u.link;
             result.classList.remove('hidden');
         }
@@ -792,7 +867,7 @@
         document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections();
             payment.classList.remove('hidden'); });
 
-        // Payment
+        // ═══════════ PAYMENT (FLUTTERWAVE) ═══════════
         document.getElementById('payNowBtn').addEventListener('click', () => {
             const n = document.getElementById('payName').value.trim();
             const e = document.getElementById('payEmail').value.trim();
@@ -803,19 +878,116 @@
                 tx_ref: "MEE206-" + Date.now(),
                 amount: 200,
                 currency: "NGN",
+                payment_options: "card, banktransfer, ussd",
                 customer: { email: e, name: n },
-                customizations: { title: "Genius Point Academy", description: "MEE 206 CBT" },
-                callback: () => { hideAllSections();
-                    initializeCBT(); }
+                customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" },
+                callback: async function(response) {
+                    console.log("✅ Payment successful:", response);
+                    const matric = document.getElementById('payMatric').value.trim().toUpperCase();
+                    try {
+                        await setDoc(doc(db, 'payments', matric), {
+                            matric: matric,
+                            paidAt: Date.now(),
+                            expiresAt: Date.now() + (72 * 60 * 60 * 1000),
+                            txRef: response.tx_ref || 'N/A',
+                            attempts: 0
+                        }, { merge: true });
+                    } catch (e) { console.error("Failed to save payment:", e); }
+                    hideAllSections();
+                    showStudyGateway(matric);
+                },
+                onclose: function() { console.log("Payment window closed"); }
             });
         });
 
-        // CBT
+        // ═══════════ CHECK RETURNING PAYER ═══════════
+        document.getElementById('checkPaymentStatusBtn')?.addEventListener('click', async () => {
+            const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase();
+            if (!matric) return alert('Enter your matric number');
+            const resultDiv = document.getElementById('paymentStatusResult');
+            resultDiv.innerHTML = '🔄 Checking...';
+            try {
+                const snap = await getDoc(doc(db, 'payments', matric));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const remaining = data.expiresAt - Date.now();
+                    const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60)));
+                    if (hoursLeft > 0) {
+                        resultDiv.innerHTML = `
+                            <div style="background:#f0faf4;padding:1rem;border-radius:8px;">
+                                <p>✅ <strong>Access found!</strong></p>
+                                <p>⏱️ ${hoursLeft} hours remaining</p>
+                                <p>📊 Attempts used: ${data.attempts || 0}</p>
+                                <button class="btn btn-accent mt-2" onclick="window.resumeAccess('${matric}')">📚 Resume Access</button>
+                            </div>`;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div style="background:#fdf2f2;padding:1rem;border-radius:8px;">
+                                <p>⚠️ <strong>Access expired.</strong></p>
+                                <p>Your 72-hour window has ended. Please pay again to continue.</p>
+                            </div>`;
+                    }
+                } else {
+                    resultDiv.innerHTML = `
+                        <div style="background:#fff8e1;padding:1rem;border-radius:8px;">
+                            <p>❌ <strong>No payment record found.</strong></p>
+                            <p>Please make a payment to access the test materials.</p>
+                        </div>`;
+                }
+            } catch (e) { resultDiv.innerHTML = '❌ Error checking status. Try again.'; }
+        });
+
+        window.resumeAccess = function(matric) {
+            document.getElementById('payMatric').value = matric;
+            hideAllSections();
+            showStudyGateway(matric);
+        };
+
+        // ═══════════ STUDY GATEWAY ═══════════
+        function showStudyGateway(matric) {
+            currentPayerMatric = matric || document.getElementById('payMatric')?.value || '';
+            hideAllSections();
+            checkRemainingTime(currentPayerMatric);
+            studyGateway.classList.remove('hidden');
+        }
+
+        async function checkRemainingTime(matric) {
+            if (!matric) return;
+            try {
+                const snap = await getDoc(doc(db, 'payments', matric.toUpperCase()));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const remaining = data.expiresAt - Date.now();
+                    const hoursLeft = Math.max(0, Math.floor(remaining / (1000 * 60 * 60)));
+                    const timeInfo = document.getElementById('timeRemainingInfo');
+                    if (timeInfo) {
+                        if (hoursLeft > 0) {
+                            timeInfo.innerHTML = `⏱️ <strong>${hoursLeft} hours remaining</strong> in your 72-hour access window.`;
+                            timeInfo.style.color = 'var(--success)';
+                            document.getElementById('startTestFromGatewayBtn').disabled = false;
+                        } else {
+                            timeInfo.innerHTML = `⚠️ <strong>Access expired.</strong> Please pay again to continue.`;
+                            timeInfo.style.color = 'var(--danger)';
+                            document.getElementById('startTestFromGatewayBtn').disabled = true;
+                        }
+                    }
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => {
+            if (confirm('Start the test? The 20-minute timer will begin immediately.')) {
+                hideAllSections();
+                initializeCBT();
+            }
+        });
+
+        // ═══════════ CBT ENGINE ═══════════
         function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));
                 [b[i], b[j]] = [b[j], b[i]]; } return b; }
 
         function initializeCBT() {
-            activeTest = [...shuffle(mcqBank).slice(0, 3), ...shuffle(fitgBank).slice(0, 2), ...shuffle(tfBank).slice(0, 1)];
+            activeTest = [...shuffle(mcqBank).slice(0, 25), ...shuffle(fitgBank).slice(0, 10), ...shuffle(tfBank).slice(0, 5)];
             userAnswers = {};
             currentIndex = 0;
             timeLeft = 1200;
@@ -833,33 +1005,27 @@
             oa.innerHTML = '';
             if (q.options) {
                 q.options.forEach(opt => {
-                    oa.innerHTML += `<label style="display:block;margin:8px 0;"><input type="radio" name="cbt" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt}')"> ${opt}</label>`;
+                    oa.innerHTML += `<label style="display:block;margin:8px 0;"><input type="radio" name="cbt" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt.replace(/'/g,"\\'")}')"> ${opt}</label>`;
                 });
             } else {
-                oa.innerHTML = `<input type="text" value="${userAnswers[currentIndex]||''}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;">`;
+                oa.innerHTML = `<input type="text" value="${(userAnswers[currentIndex]||'').replace(/"/g,'&quot;')}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;">`;
             }
             document.getElementById('submitTestBtn').classList.toggle('hidden', currentIndex !== activeTest.length - 1);
             document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('active', i === currentIndex));
         }
 
-        window.saveAnswer = function(v) {
-            if (v) userAnswers[currentIndex] = v;
+        window.saveAnswer = function(v) { if (v) userAnswers[currentIndex] = v;
             else delete userAnswers[currentIndex];
-            document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i]));
-        };
+            document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i])); };
 
-        function renderPagination() {
-            const g = document.getElementById('paginationGrid');
+        function renderPagination() { const g = document.getElementById('paginationGrid');
             g.innerHTML = '';
-            activeTest.forEach((_, i) => {
-                const d = document.createElement('div');
+            activeTest.forEach((_, i) => { const d = document.createElement('div');
                 d.className = 'page-num';
                 d.innerText = i + 1;
                 d.onclick = () => { currentIndex = i;
                     renderQuestion(); };
-                g.appendChild(d);
-            });
-        }
+                g.appendChild(d); }); }
         document.getElementById('prevBtn').addEventListener('click', () => { if (currentIndex > 0) { currentIndex--;
                 renderQuestion(); } });
         document.getElementById('nextBtn').addEventListener('click', () => { if (currentIndex < activeTest.length - 1) { currentIndex++;
@@ -871,28 +1037,67 @@
                 timeLeft--;
                 document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`;
                 if (timeLeft <= 0) { clearInterval(timerInterval);
-                    alert('Time up!');
+                    alert('Time up! Submitting...');
                     submitCBT(); }
             }, 1000);
         }
-        document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit?')) submitCBT(); });
+        document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit your test?')) submitCBT(); });
 
-        function submitCBT() {
+        // ═══════════ SUBMIT CBT (SAVES ATTEMPT TO FIRESTORE) ═══════════
+        async function submitCBT() {
             clearInterval(timerInterval);
-            let sc = 0;
-            activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) sc++; });
+            let score = 0;
+            activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; });
+            const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown';
+            try {
+                await setDoc(doc(collection(db, 'attempts')), {
+                    matric: matric,
+                    score: score,
+                    total: activeTest.length,
+                    chapter: 'chapter-1',
+                    timestamp: Date.now(),
+                });
+                const payRef = doc(db, 'payments', matric.toUpperCase());
+                const paySnap = await getDoc(payRef);
+                if (paySnap.exists()) { await updateDoc(payRef, { attempts: (paySnap.data().attempts || 0) + 1 }); }
+            } catch (e) { console.error("Failed to save attempt:", e); }
             hideAllSections();
-            document.getElementById('displayScore').innerText = sc;
-            document.getElementById('displayPercent').innerText = ((sc / activeTest.length) * 100).toFixed(1);
-            document.getElementById('adviceText').innerText = "CBT complete!";
+            const perc = ((score / activeTest.length) * 100).toFixed(1);
+            document.getElementById('displayScore').innerText = score;
+            document.getElementById('displayPercent').innerText = perc;
+            document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done. Review your mistakes to improve further." :
+                "Not a pass yet. Study the materials and retake — you'll get it!";
             document.getElementById('resourceLinksArea').classList.remove('hidden');
             document.getElementById('resourceLinksArea').innerHTML = `
-                <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline mb-2">📘 Summary</a>
-                <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success">📚 Full PDF</a>`;
+                <div class="text-center mt-3">
+                    <a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline mb-2">📘 Chapter 1 Summary</a>
+                    <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success">📚 Full Chapter 1 PDF</a>
+                </div>
+                <div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;">
+                    <p><strong>📊 Attempt Saved!</strong></p>
+                    <p>You can retake anytime within 72 hours. All attempts are tracked.</p>
+                    <button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 View My Attempt History</button>
+                </div>`;
             result.classList.remove('hidden');
+            fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Subject: 'CBT Score', Matric: matric, Score: `${score}/${activeTest.length} (${perc}%)` })
+            }).catch(() => {});
         }
 
-        // Admin
+        window.showOwnAttempts = async function(matric) {
+            const snap = await getDocs(collection(db, 'attempts'));
+            const attempts = [];
+            snap.forEach(doc => { if (doc.data().matric === matric) attempts.push(doc.data()); });
+            attempts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            let html = '<h4>📊 Your Attempt History</h4>';
+            attempts.forEach((a, i) => { html +=
+                    `<div style="padding:0.8rem;margin:0.5rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${a.score>=20?'var(--success)':'var(--danger)'};"><strong>Attempt ${i+1}:</strong> ${a.score}/${a.total} (${((a.score/a.total)*100).toFixed(1)}%) <span style="color:var(--text-muted);font-size:0.8rem;">— ${new Date(a.timestamp).toLocaleString()}</span></div>`; });
+            document.getElementById('resourceLinksArea').innerHTML += html;
+        };
+
+        // ═══════════ ADMIN PANEL ═══════════
         document.getElementById('adminLoginBtn').addEventListener('click', async () => {
             const em = document.getElementById('adminEmail').value.trim();
             const pw = document.getElementById('adminPassword').value;
@@ -901,44 +1106,57 @@
                 await signInWithEmailAndPassword(auth, em, pw);
                 document.getElementById('adminLoginArea').classList.add('hidden');
                 document.getElementById('adminDashboard').classList.remove('hidden');
-                showAdminTab('results');
+                showAdminTab('dashboard');
             } catch (err) { alert('Login failed: ' + err.message); }
         });
 
-        function logoutAdmin() {
-            signOut(auth).then(() => {
-                document.getElementById('adminLoginArea').classList.remove('hidden');
-                document.getElementById('adminDashboard').classList.add('hidden');
-            });
-        }
+        function logoutAdmin() { signOut(auth).then(() => { document.getElementById('adminLoginArea').classList.remove('hidden');
+                document.getElementById('adminDashboard').classList.add('hidden'); }); }
 
         async function showAdminTab(tab) {
             const ct = document.getElementById('adminTabContent');
-            studentResults = await getStudents();
-            if (tab === 'results') {
-                ct.innerHTML = `<h4>📋 Students</h4><button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button>
-                <table class="admin-table"><thead><tr><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table>`;
-                renderStudentTable();
-            } else if (tab === 'announcement') {
-                const m = await getAnnouncement();
-                ct.innerHTML = `<h4>📢 Announcement</h4><textarea id="announcementInput" rows="3" style="width:100%;">${m}</textarea>
-                <button class="btn btn-success" onclick="window.saveAnnouncementMsg()">💾 Save</button>`;
-            } else ct.innerHTML = `<h4>📚 Chapters</h4><p>Ch1 ✅ | Ch2 🔒 | Ch3 🔒</p>`;
+            if (tab === 'dashboard') ct.innerHTML = await renderDashboard();
+            else if (tab === 'students') { studentResults = await getStudents();
+                ct.innerHTML = renderStudentsTabHTML();
+                renderStudentTable(); } else if (tab === 'chapters') ct.innerHTML = await renderChaptersTab();
+            else if (tab === 'questions') ct.innerHTML = await renderQuestionsTab();
+            else if (tab === 'attempts') ct.innerHTML = await renderAttemptsTab();
+            else if (tab === 'announcement') ct.innerHTML = await renderAnnouncementTab();
         }
 
-        function renderStudentTable() {
-            const tb = document.getElementById('adminStudentBody');
-            if (!tb) return;
-            tb.innerHTML = '';
-            studentResults.forEach((s, i) => {
-                tb.innerHTML += `<tr>
-                    <td><input value="${s.name}" onchange="window.updateStudent(${i},'name',this.value)"></td>
-                    <td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td>
-                    <td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value))"></td>
-                    <td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td>
-                    <td><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button>
-                    <button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`;
-            });
+        async function renderDashboard() {
+            const students = await getStudents();
+            const aSnap = await getDocs(collection(db, 'attempts'));
+            let totalA = 0,
+                passed = 0;
+            aSnap.forEach(d => { totalA++; if (d.data().score >= 20) passed++; });
+            const cSnap = await getDocs(collection(db, 'chapters'));
+            return `<h4>📊 Admin Dashboard</h4>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0;">
+                    <div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.8rem;">Students</div></div>
+                    <div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.8rem;">Chapters</div></div>
+                    <div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${totalA}</div><div style="font-size:0.8rem;">Attempts</div></div>
+                    <div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${passed}</div><div style="font-size:0.8rem;">Passed</div></div>
+                </div>`;
+        }
+
+        function renderStudentsTabHTML() {
+            return `<h4>📋 Student Results</h4>
+                <button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button>
+                <input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;">
+                <button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button>
+                <table class="admin-table"><thead><tr><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table>
+                <div id="studentAttemptsView" style="margin-top:1rem;"></div>`;
+        }
+
+        function renderStudentTable(filter = '') {
+            const tbody = document.getElementById('adminStudentBody'); if (!tbody) return;
+            tbody.innerHTML = '';
+            const filtered = filter ? studentResults.filter(s => s.matric.toUpperCase().includes(filter.toUpperCase())) :
+                studentResults;
+            filtered.forEach(s => { const i = studentResults.indexOf(s);
+                tbody.innerHTML +=
+                    `<tr><td><input value="${s.name}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value))"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`; });
         }
 
         window.updateStudent = (i, f, v) => { studentResults[i][f] = v; };
@@ -947,40 +1165,71 @@
         window.saveSingleStudent = async (i) => { await saveStudent(studentResults[i]);
             alert('Saved!'); };
         window.saveAllStudents = async () => { await saveAllStudents(studentResults);
-            alert('Saved!'); };
+            alert('All saved to Firebase!'); };
         window.deleteStudent = async (i) => { if (confirm('Delete?')) { if (studentResults[i].id) await deleteStudentFromDB(
                     studentResults[i].id);
                 studentResults.splice(i, 1);
                 renderStudentTable(); } };
-        window.saveAnnouncementMsg = async () => { await saveAnnouncementToDB(document.getElementById(
-                'announcementInput').value);
+        window.filterStudentTable = () => renderStudentTable(document.getElementById('studentSearchInput')?.value || '');
+        window.viewStudentAttempts = async (m) => { const snap = await getDocs(collection(db, 'attempts')); const att = [];
+            snap.forEach(d => { if (d.data().matric === m) att.push(d.data()); }); const v = document.getElementById(
+                'studentAttemptsView');
+            v.innerHTML = att.length ?
+                `<h5>📊 ${m}</h5><table class="admin-table"><tr><th>#</th><th>Score</th><th>Date</th></tr>${att.map((a,i)=>`<tr><td>${i+1}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>` :
+                '<p>No attempts.</p>'; };
+
+        async function renderChaptersTab() { const snap = await getDocs(collection(db, 'chapters')); const ch = [];
+            snap.forEach(d => ch.push({ id: d.id, ...d.data() })); return `<h4>📚 Chapters</h4><button class="btn btn-sm btn-success" onclick="window.showAddChapterForm()">+ Add</button>
+                <div id="addChapterForm" class="hidden" style="margin:1rem 0;"><input id="newChapterTitle" placeholder="Title"><input id="newChapterSummary" placeholder="Summary Link"><input id="newChapterFull" placeholder="Full Link"><button class="btn btn-sm btn-success" onclick="window.addChapter()">Save</button></div>
+                <table class="admin-table"><tr><th>Title</th><th>Status</th><th>Act</th></tr>${ch.map(c=>`<tr><td>${c.title||c.id}</td><td>${c.active?'✅':'🔒'}</td><td><button class="btn btn-sm btn-outline" onclick="window.toggleChapter('${c.id}',${!c.active})">Toggle</button><button class="btn btn-sm btn-danger" onclick="window.deleteChapter('${c.id}')">🗑</button></td></tr>`).join('')}</table>`; }
+        window.showAddChapterForm = () => document.getElementById('addChapterForm').classList.remove('hidden');
+        window.addChapter = async () => { const t = document.getElementById('newChapterTitle').value.trim(); if (!t) return alert(
+                'Title required'); await setDoc(doc(db, 'chapters', t.toLowerCase().replace(/\s+/g, '-')), { title: t,
+                summaryLink: document.getElementById('newChapterSummary').value, fullLink: document.getElementById(
+                    'newChapterFull').value, active: true }); showAdminTab('chapters'); };
+        window.toggleChapter = async (id, a) => { await updateDoc(doc(db, 'chapters', id), { active: a });
+            showAdminTab('chapters'); };
+        window.deleteChapter = async (id) => { if (confirm('Delete?')) { await deleteDoc(doc(db, 'chapters', id));
+                showAdminTab('chapters'); } };
+        async function renderQuestionsTab() { return `<h4>❓ Questions</h4><p>Manage questions via Firebase Console.</p>`; }
+        async function renderAttemptsTab() { const snap = await getDocs(collection(db, 'attempts')); const att = [];
+            snap.forEach(d => att.push(d.data()));
+            att.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); return `<h4>📊 All Attempts (${att.length})</h4>
+                <table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${att.map(a=>`<tr><td>${a.matric}</td><td>${a.score}/${a.total}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`; }
+        async function renderAnnouncementTab() { const msg = await getAnnouncement(); return `<h4>📢 Announcement</h4>
+                <textarea id="announcementInput" rows="3" style="width:100%;">${msg}</textarea>
+                <button class="btn btn-success" onclick="window.saveAnnouncementMsg()">💾 Save</button>
+                <button class="btn btn-outline mt-2" onclick="window.clearAnnouncementMsg()">🗑 Clear</button>`; }
+        window.saveAnnouncementMsg = async () => { await saveAnnouncementToDB(document.getElementById('announcementInput')
+                .value);
             loadAnnouncement();
             alert('Saved!'); };
+        window.clearAnnouncementMsg = async () => { await saveAnnouncementToDB('');
+            loadAnnouncement(); };
 
+        // ═══════════ EXPORT GLOBALS ═══════════
         window.navigateTo = navigateTo;
         window.scrollToTop = scrollToTop;
         window.hideAllSections = hideAllSections;
         window.showAdminTab = showAdminTab;
         window.logoutAdmin = logoutAdmin;
+        window.renderStudentTable = renderStudentTable;
 
-        // Seed Firebase on first run
-        (async () => {
-            const snap = await getDocs(collection(db, STUDENTS_COLLECTION));
-            if (snap.empty) { for (const s of defaultStudents) await setDoc(doc(collection(db, STUDENTS_COLLECTION)),
+        // ═══════════ SEED FIREBASE ON FIRST RUN ═══════════
+        (async function seedDefaults() {
+            const sSnap = await getDocs(collection(db, STUDENTS_COLLECTION));
+            if (sSnap.empty) { for (const s of defaultStudents) await setDoc(doc(collection(db, STUDENTS_COLLECTION)),
                     s); }
-            const aSnap = await getDoc(doc(db, SETTINGS_DOC));
-            if (!aSnap.exists()) await setDoc(doc(db, SETTINGS_DOC), { message: '' });
+            const chSnap = await getDoc(doc(db, 'chapters', 'chapter-1'));
+            if (!chSnap.exists()) await setDoc(doc(db, 'chapters', 'chapter-1'), { title: 'Chapter 1: Introduction & Fundamentals',
+                summaryLink: 'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view', fullLink: 'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',
+                active: true, createdAt: Date.now() });
+            const annSnap = await getDoc(doc(db, SETTINGS_DOC));
+            if (!annSnap.exists()) await setDoc(doc(db, SETTINGS_DOC), { message: '' });
+            console.log("🌱 Firestore seeded with default data");
         })();
 
-        // Auto-logout after 30 min
-        let inactivity;
-        function resetInactivity() { clearTimeout(inactivity);
-            inactivity = setTimeout(() => { if (currentAdminUser) { signOut(auth);
-                    alert('Auto-logged out');
-                    location.reload(); } }, 1800000); }
-        ['click', 'keypress', 'scroll', 'mousemove'].forEach(e => document.addEventListener(e, resetInactivity));
-
-        console.log("✅ MEE 206 Test Hub ready");
+        console.log("✅ MEE 206 Test Hub — Production Ready");
     </script>
 </body>
 </html>

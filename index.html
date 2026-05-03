@@ -32,7 +32,7 @@
         .nav-links a:hover, .nav-links a.active { background:rgba(255,255,255,0.15); }
         .nav-links a.disabled { opacity:0.5; pointer-events:none; cursor:not-allowed; }
         .hamburger { display:none; font-size:1.6rem; cursor:pointer; background:none; border:none; color:white; }
-        .master-container { width:100%; max-width:800px; background:var(--card-bg); border-radius:2rem; box-shadow:var(--shadow-card); padding:2.2rem 2rem; margin:1.5rem; border:1px solid rgba(255,255,255,0.6); }
+        .master-container { width:100%; max-width:850px; background:var(--card-bg); border-radius:2rem; box-shadow:var(--shadow-card); padding:2.2rem 2rem; margin:1.5rem; border:1px solid rgba(255,255,255,0.6); }
         .announcement-bar { background:#fff8e1; border-left:5px solid var(--accent); padding:0.8rem 1.2rem; border-radius:var(--radius-sm); margin-bottom:1.5rem; font-weight:500; display:none; }
         .academy-header { text-align:center; margin-bottom:2rem; }
         .academy-header h1 { font-size:2rem; font-weight:700; color:var(--primary); }
@@ -66,6 +66,13 @@
         .btn-whatsapp:hover { background:#1ebe57; }
         .score-big { font-size:3.8rem; font-weight:800; color:var(--primary); text-align:center; line-height:1; }
         .advice-box { background:#f6f9fc; padding:1.2rem; border-radius:14px; color:#1e3b4f; margin:1rem 0; border-left:4px solid var(--accent); }
+        .option-row { display:flex; align-items:center; gap:0.5rem; padding:0.7rem 1rem; margin:0.3rem 0; background:#f8fafc; border-radius:8px; cursor:pointer; transition:var(--transition); border:1px solid transparent; }
+        .option-row:hover { background:#eef3fa; border-color:var(--primary-light); }
+        .option-row input[type="radio"] { width:auto; margin:0; cursor:pointer; }
+        .option-row label { cursor:pointer; flex:1; font-weight:400; }
+        .review-card { padding:1rem; margin:0.5rem 0; border-radius:8px; border-left:4px solid; }
+        .review-correct { background:#f0faf4; border-color:var(--success); }
+        .review-wrong { background:#fdf2f2; border-color:var(--danger); }
         .pagination-grid { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.8rem 0 0.5rem; justify-content:center; }
         .page-num { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:var(--unanswered-bg); border-radius:10px; font-weight:700; cursor:pointer; color:#2c3e50; font-size:0.9rem; }
         .page-num.answered { background:var(--success); color:white; }
@@ -115,10 +122,10 @@
         <div class="academy-header">
             <h1>⚙️ MEE 206 <span>Test Hub</span></h1>
             <div class="subhead">Genius Point Academy • Tutor: Ó'YẸMÍ</div>
-            <div class="tutor-badge">Yakub Abideen</div>
+            <div class="tutor-badge">ALHAJI Yakub Opeyemi Abideen</div>
         </div>
 
-        <!-- ═══════════ WELCOME ═══════════ -->
+        <!-- WELCOME -->
         <div id="welcomeSection">
             <div class="course-intro"><h3>📚 MEE 206 – Basic Engineering Thermodynamics</h3><p style="color:var(--text-muted);">Master the fundamentals of energy, heat, work, and thermodynamic systems.</p><div class="topics"><span class="topic-tag">System & Control Volume</span><span class="topic-tag">Properties & States</span><span class="topic-tag">Zeroth Law</span><span class="topic-tag">Work & Heat</span><span class="topic-tag">1st Law</span><span class="topic-tag">Cycles & Processes</span></div></div>
             <h4 style="text-align:center;margin-bottom:0.5rem;">📖 Available Chapters</h4>
@@ -128,778 +135,526 @@
                 <div class="chapter-card locked">🔒 Chapter 3<br><small>Coming Soon</small></div>
                 <div class="chapter-card locked">🔒 Chapter 4<br><small>Coming Soon</small></div>
             </div>
-            <div class="section-card" style="margin-top:0;"><h2 style="text-align:center;">📋 Check Your Chapter 1 Result</h2><p style="text-align:center;color:var(--text-muted);margin-bottom:1.5rem;">Enter your Matriculation Number to view your score.</p><input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off"><button id="searchBtn" class="btn btn-full">🔍 Search Result</button><div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;"><a href="#" onclick="navigateTo('payment');return false;" class="btn btn-sm" style="background:var(--primary);color:white;">🆕 Take Test (₦200)</a><a href="#" onclick="navigateTo('payment');setTimeout(()=>document.getElementById('returnMatricInput').focus(),300);return false;" class="btn btn-sm btn-outline">🔁 Already Paid? Resume</a></div></div>
+            <div class="section-card" style="margin-top:0;">
+                <h2 style="text-align:center;">📋 Check Your Result</h2>
+                <p style="text-align:center;color:var(--text-muted);margin-bottom:1rem;">Enter your Matriculation Number.</p>
+                <input type="text" id="matricInput" placeholder="e.g. XYZ/12/3456" autocomplete="off">
+                <button id="searchBtn" class="btn btn-full">🔍 Search Result</button>
+                <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;">
+                    <a href="#" onclick="navigateTo('payment');return false;" class="btn btn-sm" style="background:var(--primary);color:white;">🆕 Take Online Test (₦200)</a>
+                    <a href="#" onclick="navigateTo('payment');setTimeout(()=>document.getElementById('returnMatricInput').focus(),300);return false;" class="btn btn-sm btn-outline">🔁 Already Paid? Resume</a>
+                </div>
+            </div>
         </div>
 
-        <!-- ═══════════ NOT FOUND ═══════════ -->
-        <div id="notFoundSection" class="section-card hidden"><h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3><p style="text-align:center;">We couldn't fetch a result for that matric number.</p><div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;"><button id="btnClaimTook" class="btn btn-outline btn-sm btn-auto">Yes, I took it</button><button id="btnWantTake" class="btn btn-sm btn-auto">No, I want to take test now</button></div><div id="queryArea" class="hidden" style="margin-top:1.5rem;"><p><strong>Trace your script:</strong></p><input type="text" id="queryName" placeholder="Full Name"><input type="text" id="queryMatric" placeholder="Matric Number"><button id="submitQueryBtn" class="btn btn-success btn-full">Submit Query to Admin</button><p style="font-size:0.8rem;margin-top:0.8rem;">📞 Or DM on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p></div></div>
+        <!-- NOT FOUND -->
+        <div id="notFoundSection" class="section-card hidden"><h3 style="color:var(--danger);text-align:center;">❌ Result Not Found</h3><p style="text-align:center;">We couldn't fetch a result for that matric number.</p><div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;justify-content:center;"><button id="btnClaimTook" class="btn btn-outline btn-sm btn-auto">Yes, I took the physical test</button><button id="btnWantTake" class="btn btn-sm btn-auto">No, I want to take online test</button></div><div id="queryArea" class="hidden" style="margin-top:1.5rem;"><p><strong>Trace your physical script:</strong></p><input type="text" id="queryName" placeholder="Full Name"><input type="text" id="queryMatric" placeholder="Matric Number"><button id="submitQueryBtn" class="btn btn-success btn-full">Submit Query to Admin</button><p style="font-size:0.8rem;margin-top:0.8rem;">📞 DM on WhatsApp: <a href="https://wa.me/2347050376975" target="_blank">07050376975</a></p></div></div>
 
-        <!-- ═══════════ REFLECTION ═══════════ -->
-        <div id="reflectionSection" class="section-card hidden"><h3>📝 Quick Reflection Before Your Score</h3><p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly.</p><form id="reflectionForm"><input type="text" id="studentName" placeholder="Full Name" required><input type="number" id="expectedScore" placeholder="Expected Score (out of 40)" required min="0" max="40"><textarea id="higherCause" placeholder="If score is HIGHER than expected, what caused it?" rows="2" required></textarea><textarea id="lowerCause" placeholder="If score is LOWER than expected, what caused it?" rows="2" required></textarea><textarea id="woefulCause" placeholder="Many performed woefully. What do you think caused this?" rows="2" required></textarea><button type="submit" class="btn btn-success btn-full">Submit & Proceed to Score</button></form></div>
+        <!-- REFLECTION (for physical test students) -->
+        <div id="reflectionSection" class="section-card hidden"><h3>📝 Quick Reflection Before Your Score</h3><p style="color:var(--text-muted);margin-bottom:1rem;">Please answer honestly. Submissions go to Admin.</p><form id="reflectionForm"><input type="text" id="studentName" placeholder="Full Name" required><input type="number" id="expectedScore" placeholder="Expected Score (out of 40)" required min="0" max="40"><textarea id="higherCause" placeholder="If score is HIGHER than expected, what caused it?" rows="2" required></textarea><textarea id="lowerCause" placeholder="If score is LOWER than expected, what caused it?" rows="2" required></textarea><textarea id="woefulCause" placeholder="Many performed woefully. What do you think caused this?" rows="2" required></textarea><button type="submit" class="btn btn-success btn-full">Submit & Proceed to Score</button></form></div>
 
-        <!-- ═══════════ RESULT ═══════════ -->
-        <div id="resultSection" class="section-card hidden"><div style="text-align:center;"><div class="score-big"><span id="displayScore">0</span>/40</div><p style="font-weight:600;font-size:1.2rem;"><span id="displayPercent">0</span>%</p><div class="advice-box" id="adviceText"></div></div><button id="viewScriptBtn" class="btn btn-outline btn-full">📄 Request Marked Paper & Corrections</button><div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;"><a id="driveLink" href="#" target="_blank" class="btn btn-success btn-full">View Your Full Result</a></div><div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;"><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-full">📝 View the Tutor's Marking Guide</a></div><hr><p style="text-align:center;"><strong>Solidify your knowledge?</strong></p><button id="retakeFromResultBtn" class="btn btn-full">🔁 Retake Chapter 1 CBT (₦200)</button><div id="resourceLinksArea" class="hidden mt-3"></div></div>
+        <!-- RESULT (for physical test) -->
+        <div id="resultSection" class="section-card hidden"><div style="text-align:center;"><div class="score-big"><span id="displayScore">0</span>/40</div><p style="font-weight:600;font-size:1.2rem;"><span id="displayPercent">0</span>%</p><div class="advice-box" id="adviceText"></div></div><button id="viewScriptBtn" class="btn btn-outline btn-full">📄 Request Marked Paper & Corrections</button><div id="scriptLinkArea" class="hidden" style="text-align:center;margin:1rem 0;"><a id="driveLink" href="#" target="_blank" class="btn btn-success btn-full">View Your Full Result</a></div><div id="markingGuideArea" style="text-align:center;margin:0.5rem 0;"><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-full">📝 View the Tutor's Marking Guide</a></div><hr><p style="text-align:center;"><strong>Solidify your knowledge?</strong></p><button id="retakeFromResultBtn" class="btn btn-full">🔁 Take Online CBT (₦200)</button><div id="resourceLinksArea" class="hidden mt-3"></div></div>
 
-        <!-- ═══════════ PAYMENT ═══════════ -->
-        <div id="paymentSection" class="section-card hidden"><h3>💳 Unlock CBT Test Access</h3><p>40 questions • 20 minutes • <strong>₦200 only</strong> • 168 hours access</p><div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;"><p><strong>📌 After payment you'll get:</strong></p><ul style="list-style:none;padding:0;font-size:0.9rem;"><li>✅ Chapter 1 Summary</li><li>✅ Full Chapter 1 Document</li><li>✅ Tutor's Marking Guide</li><li>✅ 40-Question CBT Test</li><li>✅ Score Recording & Attempt History</li></ul></div><input type="text" id="payName" placeholder="Full Name" required><input type="email" id="payEmail" placeholder="Email Address" required><input type="text" id="payMatric" placeholder="Matric Number" required><button id="payNowBtn" class="btn btn-accent btn-full">🔒 Pay ₦200 Now</button><p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Payment by Flutterwave • Beneficiary: Yakub Opeyemi Abideen</p><hr><p style="text-align:center;"><strong>Already paid?</strong></p><div style="display:flex;gap:0.5rem;"><input type="text" id="returnMatricInput" placeholder="Matric Number" style="flex:2;"><button id="checkPaymentStatusBtn" class="btn btn-outline btn-sm" style="flex:1;">🔍 Check</button></div><div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div><hr><p style="text-align:center;"><strong>Having issues?</strong></p><button id="showComplaintBtn" class="btn btn-outline btn-sm btn-auto">📝 Submit Complaint</button><div id="complaintFormArea" class="hidden complaint-box"><h4>📝 Payment Issue Complaint</h4><input type="text" id="complaintName" placeholder="Full Name"><input type="text" id="complaintMatric" placeholder="Matric Number"><input type="email" id="complaintEmail" placeholder="Email Address"><textarea id="complaintMessage" placeholder="Describe your issue... (e.g., paid but no access, wrong amount, etc.)" rows="3"></textarea><p style="font-size:0.8rem;"><strong>📎 Receipt (if available):</strong></p><input type="text" id="complaintReceipt" placeholder="Paste receipt link or transaction ID"><button id="submitComplaintBtn" class="btn btn-danger btn-sm">📤 Submit Complaint</button><p style="font-size:0.8rem;margin-top:0.5rem;">For immediate help: <button class="btn btn-whatsapp btn-sm" onclick="window.openWhatsAppHelp()">💬 Chat on WhatsApp Now</button></p></div></div>
+        <!-- RESULT FOR ONLINE TEST (with review) -->
+        <div id="onlineResultSection" class="section-card hidden"><div style="text-align:center;"><div class="score-big"><span id="onlineDisplayScore">0</span>/40</div><p style="font-weight:600;font-size:1.2rem;"><span id="onlineDisplayPercent">0</span>%</p><div class="advice-box" id="onlineAdviceText"></div></div><div id="onlineReviewArea" style="margin-top:1rem;"></div><div class="text-center mt-3"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline btn-sm">📘 Chapter 1 Summary</a> <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success btn-sm">📚 Full Chapter 1 PDF</a></div><hr><button id="retakeOnlineBtn" class="btn btn-full">🔁 Retake Test (₦200)</button><button id="viewHistoryBtn" class="btn btn-outline btn-full mt-2">📊 View My Attempt History</button></div>
 
-        <!-- ═══════════ STUDY GATEWAY ═══════════ -->
+        <!-- PAYMENT -->
+        <div id="paymentSection" class="section-card hidden"><h3>💳 Unlock Online CBT Test</h3><p>40 questions • 20 minutes • <strong>₦200 only</strong> • 168 hours access</p><div style="background:#f8fafc;padding:1rem;border-radius:8px;margin:1rem 0;"><p><strong>📌 After payment you'll get:</strong></p><ul style="list-style:none;padding:0;font-size:0.9rem;"><li>✅ Chapter 1 Summary</li><li>✅ Full Chapter 1 Document</li><li>✅ Tutor's Marking Guide</li><li>✅ 40-Question CBT Test</li><li>✅ Instant Review & Score</li><li>✅ Attempt History</li></ul></div><input type="text" id="payName" placeholder="Full Name" required><input type="email" id="payEmail" placeholder="Email Address" required><input type="text" id="payMatric" placeholder="Matric Number" required><button id="payNowBtn" class="btn btn-accent btn-full">🔒 Pay ₦200 Now</button><p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Payment by Flutterwave</p><hr><p style="text-align:center;"><strong>Already paid?</strong></p><div style="display:flex;gap:0.5rem;"><input type="text" id="returnMatricInput" placeholder="Matric Number" style="flex:2;"><button id="checkPaymentStatusBtn" class="btn btn-outline btn-sm" style="flex:1;">🔍 Check</button></div><div id="paymentStatusResult" style="margin-top:0.8rem;text-align:center;"></div><hr><p style="text-align:center;"><strong>Having issues?</strong></p><button id="showComplaintBtn" class="btn btn-outline btn-sm btn-auto">📝 Submit Complaint</button><div id="complaintFormArea" class="hidden complaint-box"><h4>📝 Payment Issue Complaint</h4><input type="text" id="complaintName" placeholder="Full Name"><input type="text" id="complaintMatric" placeholder="Matric Number"><input type="email" id="complaintEmail" placeholder="Email Address"><textarea id="complaintMessage" placeholder="Describe your issue..." rows="3"></textarea><p style="font-size:0.8rem;"><strong>📎 Receipt:</strong></p><input type="text" id="complaintReceipt" placeholder="Paste receipt link or transaction ID"><button id="submitComplaintBtn" class="btn btn-danger btn-sm">📤 Submit Complaint</button><p style="font-size:0.8rem;margin-top:0.5rem;">For immediate help: <button class="btn btn-whatsapp btn-sm" onclick="window.openWhatsAppHelp()">💬 Chat on WhatsApp Now</button></p></div></div>
+
+        <!-- STUDY GATEWAY -->
         <div id="studyGatewaySection" class="section-card hidden"><h3 style="text-align:center;">📚 Payment Successful! Prepare Before You Test</h3><p id="timeRemainingInfo" style="text-align:center;margin-bottom:1rem;font-weight:600;"></p><div style="display:grid;gap:0.8rem;margin-bottom:1.5rem;"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📘 Chapter 1 Summary</a><a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view?usp=drivesdk" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📚 Full Chapter 1 Document</a><a href="https://drive.google.com/file/d/15OzGNcCx98g5OtX5TtIQSga5gEAb2urB/view?usp=drive_link" target="_blank" class="btn btn-outline btn-sm" style="text-align:left;justify-content:flex-start;">📝 Tutor's Marking Guide</a></div><div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin-bottom:1.5rem;border-left:4px solid var(--accent);"><h4>⏱️ Test Tips</h4><ul style="list-style:none;padding:0;font-size:0.9rem;color:#4a4a4a;"><li>✅ 40 questions — 25 MCQs, 10 Fill-in-Gap, 5 True/False</li><li>✅ 20 minutes countdown</li><li>✅ Green = answered, Grey = unanswered</li><li>✅ Score ≥ 20/40 is a pass</li><li>✅ Retake multiple times within 168 hours</li></ul></div><button id="startTestFromGatewayBtn" class="btn btn-accent btn-full" style="font-size:1.1rem;padding:1rem;">🚀 I'm Ready — Start Test Now</button></div>
 
-        <!-- ═══════════ CBT ═══════════ -->
-        <div id="cbtSection" class="section-card hidden"><div style="display:flex;justify-content:space-between;align-items:center;"><h3>📝 CBT Interface</h3><span class="timer-box" id="timerDisplay">20:00</span></div><div style="margin:1.5rem 0;"><div style="font-weight:700;font-size:1.1rem;"><span id="qNumber"></span>. <span id="qText"></span></div><div id="optionsArea" style="margin-top:1.2rem;"></div></div><div style="display:flex;gap:1rem;"><button id="prevBtn" class="btn btn-outline btn-auto">◀ Previous</button><button id="nextBtn" class="btn btn-auto">Next ▶</button></div><button id="submitTestBtn" class="btn btn-success btn-full hidden" style="margin-top:1rem;">✅ Submit Final Test</button><div class="pagination-grid" id="paginationGrid"></div></div>
+        <!-- CBT -->
+        <div id="cbtSection" class="section-card hidden"><div style="display:flex;justify-content:space-between;align-items:center;"><h3>📝 CBT Interface</h3><span class="timer-box" id="timerDisplay">20:00</span></div><div style="margin:1.5rem 0;"><div style="font-weight:700;font-size:1.1rem;margin-bottom:1rem;"><span id="qNumber"></span>. <span id="qText"></span></div><div id="optionsArea"></div></div><div style="display:flex;gap:1rem;"><button id="prevBtn" class="btn btn-outline btn-auto">◀ Previous</button><button id="nextBtn" class="btn btn-auto">Next ▶</button></div><button id="submitTestBtn" class="btn btn-success btn-full hidden" style="margin-top:1rem;">✅ Submit Final Test</button><div class="pagination-grid" id="paginationGrid"></div></div>
 
-        <!-- ═══════════ ADMIN ═══════════ -->
+        <!-- ADMIN -->
         <div id="adminSection" class="section-card hidden"><h3>🔐 Admin Portal</h3><div id="adminLoginArea"><p>🔐 Admin Authentication Required</p><input type="email" id="adminEmail" placeholder="Admin Email"><input type="password" id="adminPassword" placeholder="Password"><button id="adminLoginBtn" class="btn btn-full">Login</button></div><div id="adminDashboard" class="hidden"><div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;"><button class="btn btn-sm btn-success" onclick="window.showAdminTab('dashboard')">📊 Dashboard</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('students')">📋 Students</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('chapters')">📚 Chapters</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('attempts')">📊 Attempts</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('payments')">💳 Payments</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('manageAccess')">🔑 Access</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announce</button></div><div id="adminTabContent"></div></div></div>
 
-       <div class="site-footer">
-            <p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p>
-            <p>© 2026 Genius Point Academy • MEE 206 Test Management • Tutor: Ó'YẸMÍ <span class="admin-dot" onclick="navigateTo('admin')" title="Admin Portal"></span></p>
-        </div>
+        <div class="site-footer"><p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p><p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: O'YEMI <span class="admin-dot" onclick="navigateTo('admin')" title="Admin Portal"></span></p></div>
     </div>
-
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-        import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+    import { getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyD8LZC6Gmsit7akAqVE71vv3RQDhXgu484", authDomain: "mee-206.firebaseapp.com", projectId: "mee-206", storageBucket: "mee-206.firebasestorage.app", messagingSenderId: "807703454680", appId: "1:807703454680:web:78c3c09c4e27e1f45688ad", measurementId: "G-10LSB25JED" };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const STUDENTS_COLLECTION = 'students';
-        const SETTINGS_DOC = 'settings/announcement';
-        let currentAdminUser = null;
-        let currentPayerMatric = null;
-        onAuthStateChanged(auth, (user) => { currentAdminUser = user; });
+    const firebaseConfig = { apiKey: "AIzaSyD8LZC6Gmsit7akAqVE71vv3RQDhXgu484", authDomain: "mee-206.firebaseapp.com", projectId: "mee-206", storageBucket: "mee-206.firebasestorage.app", messagingSenderId: "807703454680", appId: "1:807703454680:web:78c3c09c4e27e1f45688ad", measurementId: "G-10LSB25JED" };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    const STUDENTS_COLLECTION = 'students';
+    const SETTINGS_DOC = 'settings/announcement';
+    let currentAdminUser = null;
+    let currentPayerMatric = null;
+    let isOnlineTest = false;
+    onAuthStateChanged(auth, (user) => { currentAdminUser = user; });
 
-        const defaultStudents = [
-            { name: "Bamidele Tolani", matric: "FST/24/8492", score: 18, link: "https://drive.google.com/file/d/1xRnG4-GAD8l-x_dTYsOp9CeJkY071oLM/view?usp=drivesdk" },
-            { name: "Adewumi Winner", matric: "EEE/24/9945", score: 15, link: "https://drive.google.com/file/d/1S0tFu2F2YiM58_UpDNKKAYsjyGOn77_a/view?usp=drivesdk" },
-            { name: "Oyewole Aisha", matric: "EEE/24/0007", score: 19, link: "https://drive.google.com/file/d/1SwaJMHP7vykaDHZv8XtwIE-Tgcno2LoG/view?usp=drivesdk" },
-            { name: "Oluswgun", matric: "EEE/9995", score: 10, link: "https://drive.google.com/file/d/1tc4cvlKHvMYAMtFRBFgtCVZbdoxBM5IS/view?usp=drivesdk" },
-            { name: "Jimoh David", matric: "EEE/24/9974", score: 11, link: "https://drive.google.com/file/d/1zYT2ZbDdZ1BCNSHbhwCTQ2ruZBjf9BKi/view?usp=drivesdk" },
-            { name: "Unknown", matric: "EEE/24/9943", score: 24, link: "https://drive.google.com/file/d/1kmdQVd3aQX9LnuC6sYorjq8rBe2A0ixh/view?usp=drivesdk" },
-            { name: "Nifemi", matric: "MME/24/0863", score: 13, link: "https://drive.google.com/file/d/1OrGUAe3c1Wz8kqTgKqVo2waqBvmRbwS_/view?usp=drivesdk" },
-            { name: "Feranmi", matric: "MEE/24/0822", score: 17, link: "https://drive.google.com/file/d/17OQE0ghvhAYE1Rm3nU12HFyP6t7S0Pj2/view?usp=drivesdk" },
-            { name: "Muhammed Lucky", matric: "EEE/24/9978", score: 16, link: "https://drive.google.com/file/d/1oNNoYNb-XANR3Mo4SiCd3iQzYPhrk5Zi/view?usp=drivesdk" },
-            { name: "Olumayowa Daniel", matric: "EEE/24/9994", score: 37, link: "https://drive.google.com/file/d/1LEfcto_pLAGQK3yCbW_0LPRuYLM44k7c/view?usp=drivesdk" },
-            { name: "Akinbode Uthman", matric: "EEE/24/9950", score: 18, link: "https://drive.google.com/file/d/1CfB4pGxQZ6Q0jXqeK2P22dGpXnRO76Lx/view?usp=drivesdk" },
-            { name: "Olarewaju Oluwatobi", matric: "EEE/24/9991", score: 14, link: "https://drive.google.com/file/d/1qt_3F4PhUBuXFIjcWkzdyHVnJc9liYYG/view?usp=drivesdk" },
-            { name: "Mejabi Oladapo", matric: "AGE/24/0496", score: 16, link: "https://drive.google.com/file/d/1JSxqpY7zQsYk8CemsRbTMnXSiRDevms6/view?usp=drivesdk" },
-            { name: "Adekanbi Jesufemi", matric: "CPE/25/8116", score: 16, link: "https://drive.google.com/file/d/1jVGQsHxJSQAHU_6g3Sc1JeMv7nKfoib4/view?usp=drivesdk" },
-            { name: "Tofeek AbdulMalik", matric: "IPE/24/2613", score: 12, link: "https://drive.google.com/file/d/1l8uSTHsAmfXBjcaMiT-Dun2VFji16RH8/view?usp=drivesdk" },
-            { name: "Akinboyewa Joseph", matric: "CPE/25/8132", score: 16, link: "https://drive.google.com/file/d/1LizDG-G6qhg7vAh0pLg1Rr01T50E5xvm/view?usp=drivesdk" },
-            { name: "Agboola Oladimeji", matric: "EEE/25/8211", score: 7, link: "https://drive.google.com/file/d/1nQzc3XZduphmm0K_1ZJStWRu7UcdIkpV/view?usp=drivesdk" },
-            { name: "Owoseni Kenneth", matric: "EEE/24/0003", score: 12, link: "https://drive.google.com/file/d/15t9YednbQywCxxDRdcRJzYg6I47Z1aRL/view?usp=drivesdk" },
-            { name: "Lawal Adam", matric: "MNE/24/0974", score: 15, link: "https://drive.google.com/file/d/1DuRljTgrJdDQDQTVK0CNB3yDrCibBX_e/view?usp=drivesdk" },
-            { name: "Yunus AbdulRahmon", matric: "EEE/25/8296", score: 16, link: "https://drive.google.com/file/d/1gfzarApRQ7pR1dos9wga4pBpm9-1Ytdx/view?usp=drivesdk" },
-            { name: "Unknown", matric: "EEE/24/9931", score: 6, link: "https://drive.google.com/file/d/16nb2r8vnQVCFru2FjqqhYlWpfUnymOIk/view?usp=drivesdk" }
-        ];
+    const defaultStudents = [
+        { name: "Bamidele Tolani", matric: "FST/24/8492", score: 18, link: "https://drive.google.com/file/d/1xRnG4-GAD8l-x_dTYsOp9CeJkY071oLM/view?usp=drivesdk" },
+        { name: "Adewumi Winner", matric: "EEE/24/9945", score: 15, link: "https://drive.google.com/file/d/1S0tFu2F2YiM58_UpDNKKAYsjyGOn77_a/view?usp=drivesdk" },
+        { name: "Oyewole Aisha", matric: "EEE/24/0007", score: 19, link: "https://drive.google.com/file/d/1SwaJMHP7vykaDHZv8XtwIE-Tgcno2LoG/view?usp=drivesdk" },
+        { name: "Oluswgun", matric: "EEE/9995", score: 10, link: "https://drive.google.com/file/d/1tc4cvlKHvMYAMtFRBFgtCVZbdoxBM5IS/view?usp=drivesdk" },
+        { name: "Jimoh David", matric: "EEE/24/9974", score: 11, link: "https://drive.google.com/file/d/1zYT2ZbDdZ1BCNSHbhwCTQ2ruZBjf9BKi/view?usp=drivesdk" },
+        { name: "Unknown", matric: "EEE/24/9943", score: 24, link: "https://drive.google.com/file/d/1kmdQVd3aQX9LnuC6sYorjq8rBe2A0ixh/view?usp=drivesdk" },
+        { name: "Nifemi", matric: "MME/24/0863", score: 13, link: "https://drive.google.com/file/d/1OrGUAe3c1Wz8kqTgKqVo2waqBvmRbwS_/view?usp=drivesdk" },
+        { name: "Feranmi", matric: "MEE/24/0822", score: 17, link: "https://drive.google.com/file/d/17OQE0ghvhAYE1Rm3nU12HFyP6t7S0Pj2/view?usp=drivesdk" },
+        { name: "Muhammed Lucky", matric: "EEE/24/9978", score: 16, link: "https://drive.google.com/file/d/1oNNoYNb-XANR3Mo4SiCd3iQzYPhrk5Zi/view?usp=drivesdk" },
+        { name: "Olumayowa Daniel", matric: "EEE/24/9994", score: 37, link: "https://drive.google.com/file/d/1LEfcto_pLAGQK3yCbW_0LPRuYLM44k7c/view?usp=drivesdk" },
+        { name: "Akinbode Uthman", matric: "EEE/24/9950", score: 18, link: "https://drive.google.com/file/d/1CfB4pGxQZ6Q0jXqeK2P22dGpXnRO76Lx/view?usp=drivesdk" },
+        { name: "Olarewaju Oluwatobi", matric: "EEE/24/9991", score: 14, link: "https://drive.google.com/file/d/1qt_3F4PhUBuXFIjcWkzdyHVnJc9liYYG/view?usp=drivesdk" },
+        { name: "Mejabi Oladapo", matric: "AGE/24/0496", score: 16, link: "https://drive.google.com/file/d/1JSxqpY7zQsYk8CemsRbTMnXSiRDevms6/view?usp=drivesdk" },
+        { name: "Adekanbi Jesufemi", matric: "CPE/25/8116", score: 16, link: "https://drive.google.com/file/d/1jVGQsHxJSQAHU_6g3Sc1JeMv7nKfoib4/view?usp=drivesdk" },
+        { name: "Tofeek AbdulMalik", matric: "IPE/24/2613", score: 12, link: "https://drive.google.com/file/d/1l8uSTHsAmfXBjcaMiT-Dun2VFji16RH8/view?usp=drivesdk" },
+        { name: "Akinboyewa Joseph", matric: "CPE/25/8132", score: 16, link: "https://drive.google.com/file/d/1LizDG-G6qhg7vAh0pLg1Rr01T50E5xvm/view?usp=drivesdk" },
+        { name: "Agboola Oladimeji", matric: "EEE/25/8211", score: 7, link: "https://drive.google.com/file/d/1nQzc3XZduphmm0K_1ZJStWRu7UcdIkpV/view?usp=drivesdk" },
+        { name: "Owoseni Kenneth", matric: "EEE/24/0003", score: 12, link: "https://drive.google.com/file/d/15t9YednbQywCxxDRdcRJzYg6I47Z1aRL/view?usp=drivesdk" },
+        { name: "Lawal Adam", matric: "MNE/24/0974", score: 15, link: "https://drive.google.com/file/d/1DuRljTgrJdDQDQTVK0CNB3yDrCibBX_e/view?usp=drivesdk" },
+        { name: "Yunus AbdulRahmon", matric: "EEE/25/8296", score: 16, link: "https://drive.google.com/file/d/1gfzarApRQ7pR1dos9wga4pBpm9-1Ytdx/view?usp=drivesdk" },
+        { name: "Unknown", matric: "EEE/24/9931", score: 6, link: "https://drive.google.com/file/d/16nb2r8vnQVCFru2FjqqhYlWpfUnymOIk/view?usp=drivesdk" }
+    ];
 
-        let studentResults = [...defaultStudents];
-        let currentUser = null;
-        let activeTest = [], userAnswers = {}, currentIndex = 0, timerInterval, timeLeft = 1200;
+    let studentResults = [...defaultStudents];
+    let currentUser = null;
+    let activeTest = [], userAnswers = {}, currentIndex = 0, timerInterval, timeLeft = 1200;
 
-         // ══════════════════════════════════════
-            // FULL QUESTION BANKS (100 MCQ, 50 FITG, 25 T/F)
-            // ══════════════════════════════════════
-            const mcqBank = [
-                { q: "Thermodynamics is the science that deals with the interaction between energy, heat, work and:",
-                    options: ["Chemical systems", "Material systems", "Physical bounds", "Isolated zones"],
-                    ans: "Material systems" },
-                { q: "The word thermodynamics is derived from Greek words meaning:", options: ["Motion & Power",
-                        "Heat & Power/Motion", "Energy & Mass", "Work & Energy"
-                    ], ans: "Heat & Power/Motion" },
-                { q: "Everything external to a thermodynamic system is called:", options: ["Boundary", "Control volume",
-                        "Surroundings or environment", "Isolated zone"
-                    ], ans: "Surroundings or environment" },
-                { q: "The closed surface that separates the system from the surroundings is termed the:",
-                    options: ["Boundary", "Control Volume", "Wall", "Phase"], ans: "Boundary" },
-                { q: "The space containing mass/matter is called the:", options: ["Boundary envelope", "Surroundings",
-                        "Control volume", "Heterogeneous phase"
-                    ], ans: "Control volume" },
-                { q: "In which system is there no mass transfer across the boundary, though volume could change?",
-                    options: ["Open system", "Closed system", "Isolated system", "Steady state system"],
-                ans: "Closed system" },
-                { q: "A car radiator and an air compressor are examples of what type of system?", options: ["Closed",
-                        "Isolated", "Homogeneous", "Open"
-                    ], ans: "Open" },
-                { q: "Which system has a fixed quantity of mass and heat energy, with no interaction with its surrounding?",
-                    options: ["Closed", "Heterogeneous", "Open", "Isolated"], ans: "Isolated" },
-                { q: "A mixture of air and water vapour is an example of a:", options: ["Heterogeneous system",
-                        "Isolated system", "Homogeneous system", "Open system"
-                    ], ans: "Homogeneous system" },
-                { q: "Water plus oil is an example of a:", options: ["Homogeneous system", "Heterogeneous system",
-                        "Closed phase", "Derived state"
-                    ], ans: "Heterogeneous system" },
-                { q: "A quantity is said to be a property if its change in value between two states is independent of the:",
-                    options: ["Mass", "Process producing the change", "Temperature", "Surroundings"],
-                    ans: "Process producing the change" },
-                { q: "Which of these is NOT a fundamental property of pure substances?", options: ["Pressure",
-                        "Temperature", "Internal Energy", "Enthalpy"
-                    ], ans: "Enthalpy" },
-                { q: "The formula for Gibbs free energy (G) is:", options: ["G=U+pV", "G=H-TS", "G=U-TS", "G=P-TV"],
-                    ans: "G=H-TS" },
-                { q: "Intensive properties are independent of:", options: ["Temperature", "Pressure", "Mass of the system",
-                        "Specific volume"
-                    ], ans: "Mass of the system" },
-                { q: "The value of an extensive property increases as the system's ________ increases.", options: [
-                        "Temperature", "Pressure", "Mass", "Speed"
-                    ], ans: "Mass" },
-                { q: "Extensive properties divided by the unit mass associated with them give:", options: [
-                        "Specific properties", "Fundamental properties", "Homogeneous properties", "Exact differentials"
-                    ], ans: "Specific properties" },
-                { q: "If a system exhibits the same values of its properties at different times, it is said to be at:",
-                    options: ["Thermodynamic cycle", "Steady state", "Transient state", "Reversible state"],
-                ans: "Steady state" },
-                { q: "A process whose end state is equal in all extent to its initial state is a:", options: ["Cycle",
-                        "Non-flow process", "Steady flow process", "Transient process"
-                    ], ans: "Cycle" },
-                { q: "The differentials of point functions are:", options: ["Inexact", "Path dependent",
-                        "Exact or perfect", "Constant"
-                    ], ans: "Exact or perfect" },
-                { q: "Heat and Work are examples of:", options: ["Point functions", "Path functions", "Exact differentials",
-                        "Intensive properties"
-                    ], ans: "Path functions" },
-                { q: "A quasi-static process is a succession of equilibrium states characterized by:", options: [
-                        "Infinite slowness", "High speed", "Constant mass", "Transient heat"
-                    ], ans: "Infinite slowness" },
-                { q: "An adiabatic system is one which:", options: ["Has constant volume", "Has constant pressure",
-                        "Is thermally insulated from its surroundings", "Maintains constant entropy"
-                    ], ans: "Is thermally insulated from its surroundings" },
-                { q: "Which equation governs an isothermal process?", options: ["PV=C", "P/T=C", "V/T=C", "PV^γ=C"],
-                    ans: "PV=C" },
-                { q: "In an isochoric process, which property is constant?", options: ["Pressure", "Temperature", "Volume",
-                        "Entropy"
-                    ], ans: "Volume" },
-                { q: "The formula for thermal efficiency is:", options: ["1 + (Q2/Q1)", "1 - (Q2/Q1)", "(Q1+Q2)/Q1",
-                        "1 - (Q1/Q2)"
-                    ], ans: "1 - (Q2/Q1)" },
-                { q: "Which of the following is an example of an irreversible process?", options: [
-                        "Frictionless relative motion", "Isothermal expansion", "Throttling", "Polytropic expansion"
-                    ], ans: "Throttling" },
-                { q: "Energy transfer across a boundary solely as a result of a temperature difference is called:",
-                    options: ["Work", "Internal Energy", "Heat", "Enthalpy"], ans: "Heat" },
-                { q: "The zeroth law provides the basis for the measurement of:", options: ["Work", "Pressure",
-                        "Internal energy", "Temperature"
-                    ], ans: "Temperature" },
-                { q: "In practice, the third body referenced in the zeroth law is the:", options: ["Control volume",
-                        "Thermometer", "Surroundings", "Boundary"
-                    ], ans: "Thermometer" },
-                { q: "Helmholtz free energy (F) is given by:", options: ["F=U+pV", "F=H-TS", "F=U-TS", "F=G-TS"],
-                    ans: "F=U-TS" },
-                { q: "Enthalpy (H) is defined as:", options: ["H=U+pV", "H=U-pV", "H=G+TS", "H=U-TS"], ans: "H=U+pV" },
-                { q: "A system consisting of a single phase is called:", options: ["Heterogeneous", "Isolated",
-                        "Homogeneous", "Open"
-                    ], ans: "Homogeneous" },
-                { q: "A system with two or more phases is:", options: ["Homogeneous", "Heterogeneous", "Closed",
-                        "Adiabatic"
-                    ], ans: "Heterogeneous" },
-                { q: "Pure substances have how many fundamental properties?", options: ["3", "4", "5", "6"], ans: "5" },
-                { q: "Which property is NOT a point function?", options: ["Pressure", "Temperature", "Work", "Volume"],
-                    ans: "Work" },
-                { q: "The boundary of a system may be:", options: ["Fixed only", "Moving only", "Fixed or moving",
-                        "Invisible"
-                    ], ans: "Fixed or moving" },
-                { q: "A piston-cylinder arrangement is an example of:", options: ["Open system", "Isolated system",
-                        "Closed system", "Homogeneous system"
-                    ], ans: "Closed system" },
-                { q: "A water heater in a bathroom is an example of:", options: ["Closed system", "Open system",
-                        "Isolated system", "Heterogeneous system"
-                    ], ans: "Open system" },
-                { q: "Density (ρ) in kg/m³ is a:", options: ["Extensive property", "Specific property",
-                        "Fundamental property", "Path function"
-                    ], ans: "Specific property" },
-                { q: "Specific volume (ν) has units of:", options: ["kg/m³", "m³/kg", "kJ/kg", "m³"], ans: "m³/kg" },
-                { q: "A thermodynamic cycle restores which properties to initial values?", options: ["Heat and work",
-                        "Point functions (P,T,v)", "Path functions", "Mass and energy"
-                    ], ans: "Point functions (P,T,v)" },
-                { q: "The differential of work (δW) is:", options: ["Exact", "Perfect", "Inexact", "Zero"],
-                ans: "Inexact" },
-                { q: "Reversible process is also called:", options: ["Isothermal", "Quasi-static", "Adiabatic",
-                        "Isochoric"
-                    ], ans: "Quasi-static" },
-                { q: "Which is NOT a reversible process example?", options: ["Frictionless adiabatic expansion",
-                        "Isothermal compression", "Throttling", "Polytropic expansion"
-                    ], ans: "Throttling" },
-                { q: "Heat is a transient phenomenon because:", options: ["It is a property",
-                        "It flows due to temperature difference", "It is stored", "It is exact differential"
-                    ], ans: "It flows due to temperature difference" },
-                { q: "If energy interaction is NOT due to temperature difference, it must be:", options: ["Heat",
-                        "Internal energy", "Work", "Enthalpy"
-                    ], ans: "Work" },
-                { q: "Zeroth law enables comparison of temperatures using a:", options: ["Boundary",
-                        "Third body (thermometer)", "Control volume", "Cycle"
-                    ], ans: "Third body (thermometer)" },
-                { q: "In a steady flow process, mass entering ______ mass leaving.", options: ["is greater than",
-                        "is less than", "equals", "varies with"
-                    ], ans: "equals" },
-                { q: "Specific entropy (s) has units:", options: ["kJ/K", "kJ/kg·K", "kg/K", "kJ"], ans: "kJ/kg·K" },
-                { q: "The formula PV^γ = C represents:", options: ["Isothermal", "Adiabatic", "Isobaric", "Isochoric"],
-                    ans: "Adiabatic" },
-                { q: "Extensive property per unit mass gives:", options: ["Intensive property", "Specific property",
-                        "Fundamental property", "Path function"
-                    ], ans: "Specific property" },
-                { q: "Which is an intensive property?", options: ["Mass", "Volume", "Pressure", "Enthalpy"],
-                ans: "Pressure" },
-                { q: "Which is an extensive property?", options: ["Temperature", "Density", "Entropy (S)",
-                        "Specific volume"
-                    ], ans: "Entropy (S)" },
-                { q: "The change in a point function depends on:", options: ["Path", "End states only", "Time", "Mass"],
-                    ans: "End states only" },
-                { q: "Frictionless relative motion is:", options: ["Irreversible", "Reversible", "Non-quasi-static",
-                        "Adiabatic"
-                    ], ans: "Reversible" },
-                { q: "Throttling is an example of:", options: ["Reversible process", "Quasi-static process",
-                        "Irreversible process", "Isothermal process"
-                    ], ans: "Irreversible process" },
-                { q: "Combustion is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isentropic"],
-                    ans: "Irreversible" },
-                { q: "Diffusion is:", options: ["Reversible", "Irreversible", "Polytropic", "Cyclic"],
-                ans: "Irreversible" },
-                { q: "Free expansion is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isobaric"],
-                    ans: "Irreversible" },
-                { q: "Plastic deformation is:", options: ["Reversible", "Irreversible", "Isothermal", "Adiabatic"],
-                    ans: "Irreversible" },
-                { q: "In a closed system, ______ can cross boundary.", options: ["Mass", "Energy only",
-                        "Neither mass nor energy", "Only mass"
-                    ], ans: "Energy only" },
-                { q: "Control volume boundary is called:", options: ["Wall", "Control surface", "Phase boundary",
-                        "Envelope"
-                    ], ans: "Control surface" },
-                { q: "Internal energy (U) is a:", options: ["Path function", "Derived property", "Fundamental property",
-                        "Extensive property"
-                    ], ans: "Extensive property" },
-                { q: "Temperature and pressure are:", options: ["Extensive", "Intensive", "Path functions", "Specific"],
-                    ans: "Intensive" },
-                { q: "A process occurring at constant pressure is:", options: ["Isochoric", "Isothermal", "Isobaric",
-                        "Adiabatic"
-                    ], ans: "Isobaric" },
-                { q: "A process with constant entropy is:", options: ["Isothermal", "Isobaric", "Isentropic",
-                        "Isenthalpic"
-                    ], ans: "Isentropic" },
-                { q: "The potential for heat flow is:", options: ["Pressure difference", "Volume difference",
-                        "Temperature difference", "Mass"
-                    ], ans: "Temperature difference" },
-                { q: "Work is a ______ function.", options: ["Point", "Path", "State", "Exact"], ans: "Path" },
-                { q: "The first law of thermodynamics deals with:", options: ["Temperature measurement",
-                        "Energy conservation", "Entropy", "Cycle efficiency"
-                    ], ans: "Energy conservation" },
-                { q: "A closed system may exchange ______ with surroundings.", options: ["Mass", "Energy",
-                        "Both mass and energy", "Nothing"
-                    ], ans: "Energy" },
-                { q: "An isolated system exchanges ______ with surroundings.", options: ["Energy only", "Mass only",
-                        "Neither mass nor energy", "Both"
-                    ], ans: "Neither mass nor energy" },
-                { q: "Specific internal energy (u) is an ______ property.", options: ["Extensive", "Intensive", "Path",
-                        "Inexact"
-                    ], ans: "Intensive" },
-                { q: "The Greek word 'therme' means:", options: ["Power", "Motion", "Heat", "Energy"], ans: "Heat" },
-                { q: "'Dynamics' means:", options: ["Heat", "Power/Motion", "Temperature", "Work"],
-                ans: "Power/Motion" },
-                { q: "Applications of thermodynamics include all EXCEPT:", options: ["IC engines", "Refrigeration",
-                        "Nuclear plants", "Pure mathematics"
-                    ], ans: "Pure mathematics" },
-                { q: "Gas turbines are an application of:", options: ["Thermodynamics", "Fluid mechanics only",
-                        "Material science", "Circuit theory"
-                    ], ans: "Thermodynamics" },
-                { q: "Steam power plants rely on:", options: ["Thermodynamic principles", "Only mechanical laws",
-                        "Electrical theory", "Magnetism"
-                    ], ans: "Thermodynamic principles" },
-                { q: "A property depends upon the ______ of the system.", options: ["Path", "Process", "State",
-                        "Surroundings"
-                    ], ans: "State" },
-                { q: "Change of state involves change in:", options: ["Properties", "Boundary only", "Surroundings only",
-                        "Mass always"
-                    ], ans: "Properties" },
-                { q: "The five fundamental properties include:", options: ["P, T, V, m, S", "P, T, V, m, U",
-                        "P, T, V, H, S", "P, T, ρ, m, v"
-                    ], ans: "P, T, V, m, U" },
-                { q: "Derived properties include:", options: ["H, G, F", "P, T, V", "Mass, Volume", "Heat, Work"],
-                    ans: "H, G, F" },
-                { q: "A non-flow process has:", options: ["Mass crossing boundary", "Fixed mass within boundary",
-                        "Open system", "Steady flow"
-                    ], ans: "Fixed mass within boundary" },
-                { q: "A flow process occurs in:", options: ["Closed system", "Isolated system", "Open system",
-                        "Homogeneous only"
-                    ], ans: "Open system" },
-                { q: "Quasi-static means:", options: ["Very fast", "Infinitely slow", "Constant volume",
-                        "Constant pressure"
-                    ], ans: "Infinitely slow" },
-                { q: "A reversible process must pass through:", options: ["Different states on reverse",
-                        "Same states on reverse", "Any path", "Only adiabatic path"
-                    ], ans: "Same states on reverse" },
-                { q: "No real process is truly:", options: ["Irreversible", "Reversible", "Adiabatic", "Isothermal"],
-                    ans: "Reversible" },
-                { q: "Electricity flow through a resistance is:", options: ["Reversible", "Quasi-static", "Irreversible",
-                        "Isentropic"
-                    ], ans: "Irreversible" },
-                { q: "Heat transfer through a finite temperature difference is:", options: ["Reversible", "Quasi-static",
-                        "Irreversible", "Isothermal"
-                    ], ans: "Irreversible" },
-                { q: "Polytropic expansion of fluid is considered:", options: ["Reversible", "Always irreversible",
-                        "Non-quasi-static", "Adiabatic only"
-                    ], ans: "Reversible" },
-                { q: "In a cycle, the net change in internal energy is:", options: ["Positive", "Negative", "Zero",
-                        "Depends on path"
-                    ], ans: "Zero" },
-                { q: "The boundary of an open system is typically:", options: ["Fixed", "Moving or fixed", "Always moving",
-                        "Invisible"
-                    ], ans: "Moving or fixed" },
-                { q: "An isolated system has ______ interaction with surroundings.", options: ["Full", "Partial", "No",
-                        "Thermal only"
-                    ], ans: "No" },
-                { q: "Which law is the basis for temperature measurement?", options: ["First", "Second", "Zeroth",
-                        "Third"
-                    ], ans: "Zeroth" },
-                { q: "The efficiency formula 1-(Q2/Q1) applies to:", options: ["Heat engines", "Refrigerators",
-                        "Heat pumps", "All cycles"
-                    ], ans: "Heat engines" },
-                { q: "A process that is almost static is called:", options: ["Isothermal", "Quasi-static", "Adiabatic",
-                        "Cyclic"
-                    ], ans: "Quasi-static" },
-                { q: "Mass and energy both cross boundary in:", options: ["Closed system", "Open system",
-                        "Isolated system", "Steady state"
-                    ], ans: "Open system" },
-                { q: "The zeroth law uses a ______ as the third body.", options: ["Boundary", "Thermometer", "Piston",
-                        "Cylinder"
-                    ], ans: "Thermometer" },
-                { q: "Which is a derived property?", options: ["Pressure", "Temperature", "Gibbs free energy", "Mass"],
-                    ans: "Gibbs free energy" },
-                { q: "Specific volume v =", options: ["V/m", "m/V", "V·m", "m+V"], ans: "V/m" },
-                { q: "An ______ differential characterizes path functions.", options: ["Exact", "Perfect", "Inexact",
-                        "Zero"
-                    ], ans: "Inexact" },
-                { q: "Which is always true for a cycle?", options: ["ΔU > 0", "ΔU < 0", "ΔU = 0", "ΔU = Q"],
-                ans: "ΔU = 0" }
-            ];
+    // ═══════════════════════════════════════════
+    // FULL QUESTION BANKS (100 MCQ, 50 FITG, 25 TF)
+    // ═══════════════════════════════════════════
+    const mcqBank = [
+        { q: "Thermodynamics is the science that deals with the interaction between energy, heat, work and:", options: ["Chemical systems", "Material systems", "Physical bounds", "Isolated zones"], ans: "Material systems" },
+        { q: "The word thermodynamics is derived from Greek words meaning:", options: ["Motion & Power", "Heat & Power/Motion", "Energy & Mass", "Work & Energy"], ans: "Heat & Power/Motion" },
+        { q: "Everything external to a thermodynamic system is called:", options: ["Boundary", "Control volume", "Surroundings or environment", "Isolated zone"], ans: "Surroundings or environment" },
+        { q: "The closed surface that separates the system from the surroundings is termed the:", options: ["Boundary", "Control Volume", "Wall", "Phase"], ans: "Boundary" },
+        { q: "The space containing mass/matter is called the:", options: ["Boundary envelope", "Surroundings", "Control volume", "Heterogeneous phase"], ans: "Control volume" },
+        { q: "In which system is there no mass transfer across the boundary, though volume could change?", options: ["Open system", "Closed system", "Isolated system", "Steady state system"], ans: "Closed system" },
+        { q: "A car radiator and an air compressor are examples of what type of system?", options: ["Closed", "Isolated", "Homogeneous", "Open"], ans: "Open" },
+        { q: "Which system has a fixed quantity of mass and heat energy, with no interaction with its surrounding?", options: ["Closed", "Heterogeneous", "Open", "Isolated"], ans: "Isolated" },
+        { q: "A mixture of air and water vapour is an example of a:", options: ["Heterogeneous system", "Isolated system", "Homogeneous system", "Open system"], ans: "Homogeneous system" },
+        { q: "Water plus oil is an example of a:", options: ["Homogeneous system", "Heterogeneous system", "Closed phase", "Derived state"], ans: "Heterogeneous system" },
+        { q: "A quantity is said to be a property if its change in value between two states is independent of the:", options: ["Mass", "Process producing the change", "Temperature", "Surroundings"], ans: "Process producing the change" },
+        { q: "Which of these is NOT a fundamental property of pure substances?", options: ["Pressure", "Temperature", "Internal Energy", "Enthalpy"], ans: "Enthalpy" },
+        { q: "The formula for Gibbs free energy (G) is:", options: ["G=U+pV", "G=H-TS", "G=U-TS", "G=P-TV"], ans: "G=H-TS" },
+        { q: "Intensive properties are independent of:", options: ["Temperature", "Pressure", "Mass of the system", "Specific volume"], ans: "Mass of the system" },
+        { q: "The value of an extensive property increases as the system's ________ increases.", options: ["Temperature", "Pressure", "Mass", "Speed"], ans: "Mass" },
+        { q: "Extensive properties divided by the unit mass associated with them give:", options: ["Specific properties", "Fundamental properties", "Homogeneous properties", "Exact differentials"], ans: "Specific properties" },
+        { q: "If a system exhibits the same values of its properties at different times, it is said to be at:", options: ["Thermodynamic cycle", "Steady state", "Transient state", "Reversible state"], ans: "Steady state" },
+        { q: "A process whose end state is equal in all extent to its initial state is a:", options: ["Cycle", "Non-flow process", "Steady flow process", "Transient process"], ans: "Cycle" },
+        { q: "The differentials of point functions are:", options: ["Inexact", "Path dependent", "Exact or perfect", "Constant"], ans: "Exact or perfect" },
+        { q: "Heat and Work are examples of:", options: ["Point functions", "Path functions", "Exact differentials", "Intensive properties"], ans: "Path functions" },
+        { q: "A quasi-static process is a succession of equilibrium states characterized by:", options: ["Infinite slowness", "High speed", "Constant mass", "Transient heat"], ans: "Infinite slowness" },
+        { q: "An adiabatic system is one which:", options: ["Has constant volume", "Has constant pressure", "Is thermally insulated from its surroundings", "Maintains constant entropy"], ans: "Is thermally insulated from its surroundings" },
+        { q: "Which equation governs an isothermal process?", options: ["PV=C", "P/T=C", "V/T=C", "PV^γ=C"], ans: "PV=C" },
+        { q: "In an isochoric process, which property is constant?", options: ["Pressure", "Temperature", "Volume", "Entropy"], ans: "Volume" },
+        { q: "The formula for thermal efficiency is:", options: ["1 + (Q2/Q1)", "1 - (Q2/Q1)", "(Q1+Q2)/Q1", "1 - (Q1/Q2)"], ans: "1 - (Q2/Q1)" },
+        { q: "Which of the following is an example of an irreversible process?", options: ["Frictionless relative motion", "Isothermal expansion", "Throttling", "Polytropic expansion"], ans: "Throttling" },
+        { q: "Energy transfer across a boundary solely as a result of a temperature difference is called:", options: ["Work", "Internal Energy", "Heat", "Enthalpy"], ans: "Heat" },
+        { q: "The zeroth law provides the basis for the measurement of:", options: ["Work", "Pressure", "Internal energy", "Temperature"], ans: "Temperature" },
+        { q: "In practice, the third body referenced in the zeroth law is the:", options: ["Control volume", "Thermometer", "Surroundings", "Boundary"], ans: "Thermometer" },
+        { q: "Helmholtz free energy (F) is given by:", options: ["F=U+pV", "F=H-TS", "F=U-TS", "F=G-TS"], ans: "F=U-TS" },
+        { q: "Enthalpy (H) is defined as:", options: ["H=U+pV", "H=U-pV", "H=G+TS", "H=U-TS"], ans: "H=U+pV" },
+        { q: "A system consisting of a single phase is called:", options: ["Heterogeneous", "Isolated", "Homogeneous", "Open"], ans: "Homogeneous" },
+        { q: "A system with two or more phases is:", options: ["Homogeneous", "Heterogeneous", "Closed", "Adiabatic"], ans: "Heterogeneous" },
+        { q: "Pure substances have how many fundamental properties?", options: ["3", "4", "5", "6"], ans: "5" },
+        { q: "Which property is NOT a point function?", options: ["Pressure", "Temperature", "Work", "Volume"], ans: "Work" },
+        { q: "The boundary of a system may be:", options: ["Fixed only", "Moving only", "Fixed or moving", "Invisible"], ans: "Fixed or moving" },
+        { q: "A piston-cylinder arrangement is an example of:", options: ["Open system", "Isolated system", "Closed system", "Homogeneous system"], ans: "Closed system" },
+        { q: "A water heater in a bathroom is an example of:", options: ["Closed system", "Open system", "Isolated system", "Heterogeneous system"], ans: "Open system" },
+        { q: "Density (ρ) in kg/m³ is a:", options: ["Extensive property", "Specific property", "Fundamental property", "Path function"], ans: "Specific property" },
+        { q: "Specific volume (ν) has units of:", options: ["kg/m³", "m³/kg", "kJ/kg", "m³"], ans: "m³/kg" },
+        { q: "A thermodynamic cycle restores which properties to initial values?", options: ["Heat and work", "Point functions (P,T,v)", "Path functions", "Mass and energy"], ans: "Point functions (P,T,v)" },
+        { q: "The differential of work (δW) is:", options: ["Exact", "Perfect", "Inexact", "Zero"], ans: "Inexact" },
+        { q: "Reversible process is also called:", options: ["Isothermal", "Quasi-static", "Adiabatic", "Isochoric"], ans: "Quasi-static" },
+        { q: "Which is NOT a reversible process example?", options: ["Frictionless adiabatic expansion", "Isothermal compression", "Throttling", "Polytropic expansion"], ans: "Throttling" },
+        { q: "Heat is a transient phenomenon because:", options: ["It is a property", "It flows due to temperature difference", "It is stored", "It is exact differential"], ans: "It flows due to temperature difference" },
+        { q: "If energy interaction is NOT due to temperature difference, it must be:", options: ["Heat", "Internal energy", "Work", "Enthalpy"], ans: "Work" },
+        { q: "Zeroth law enables comparison of temperatures using a:", options: ["Boundary", "Third body (thermometer)", "Control volume", "Cycle"], ans: "Third body (thermometer)" },
+        { q: "In a steady flow process, mass entering ______ mass leaving.", options: ["is greater than", "is less than", "equals", "varies with"], ans: "equals" },
+        { q: "Specific entropy (s) has units:", options: ["kJ/K", "kJ/kg·K", "kg/K", "kJ"], ans: "kJ/kg·K" },
+        { q: "The formula PV^γ = C represents:", options: ["Isothermal", "Adiabatic", "Isobaric", "Isochoric"], ans: "Adiabatic" },
+        { q: "Extensive property per unit mass gives:", options: ["Intensive property", "Specific property", "Fundamental property", "Path function"], ans: "Specific property" },
+        { q: "Which is an intensive property?", options: ["Mass", "Volume", "Pressure", "Enthalpy"], ans: "Pressure" },
+        { q: "Which is an extensive property?", options: ["Temperature", "Density", "Entropy (S)", "Specific volume"], ans: "Entropy (S)" },
+        { q: "The change in a point function depends on:", options: ["Path", "End states only", "Time", "Mass"], ans: "End states only" },
+        { q: "Frictionless relative motion is:", options: ["Irreversible", "Reversible", "Non-quasi-static", "Adiabatic"], ans: "Reversible" },
+        { q: "Throttling is an example of:", options: ["Reversible process", "Quasi-static process", "Irreversible process", "Isothermal process"], ans: "Irreversible process" },
+        { q: "Combustion is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isentropic"], ans: "Irreversible" },
+        { q: "Diffusion is:", options: ["Reversible", "Irreversible", "Polytropic", "Cyclic"], ans: "Irreversible" },
+        { q: "Free expansion is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isobaric"], ans: "Irreversible" },
+        { q: "Plastic deformation is:", options: ["Reversible", "Irreversible", "Isothermal", "Adiabatic"], ans: "Irreversible" },
+        { q: "In a closed system, ______ can cross boundary.", options: ["Mass", "Energy only", "Neither mass nor energy", "Only mass"], ans: "Energy only" },
+        { q: "Control volume boundary is called:", options: ["Wall", "Control surface", "Phase boundary", "Envelope"], ans: "Control surface" },
+        { q: "Internal energy (U) is a:", options: ["Path function", "Derived property", "Fundamental property", "Extensive property"], ans: "Extensive property" },
+        { q: "Temperature and pressure are:", options: ["Extensive", "Intensive", "Path functions", "Specific"], ans: "Intensive" },
+        { q: "A process occurring at constant pressure is:", options: ["Isochoric", "Isothermal", "Isobaric", "Adiabatic"], ans: "Isobaric" },
+        { q: "A process with constant entropy is:", options: ["Isothermal", "Isobaric", "Isentropic", "Isenthalpic"], ans: "Isentropic" },
+        { q: "The potential for heat flow is:", options: ["Pressure difference", "Volume difference", "Temperature difference", "Mass"], ans: "Temperature difference" },
+        { q: "Work is a ______ function.", options: ["Point", "Path", "State", "Exact"], ans: "Path" },
+        { q: "The first law of thermodynamics deals with:", options: ["Temperature measurement", "Energy conservation", "Entropy", "Cycle efficiency"], ans: "Energy conservation" },
+        { q: "A closed system may exchange ______ with surroundings.", options: ["Mass", "Energy", "Both mass and energy", "Nothing"], ans: "Energy" },
+        { q: "An isolated system exchanges ______ with surroundings.", options: ["Energy only", "Mass only", "Neither mass nor energy", "Both"], ans: "Neither mass nor energy" },
+        { q: "Specific internal energy (u) is an ______ property.", options: ["Extensive", "Intensive", "Path", "Inexact"], ans: "Intensive" },
+        { q: "The Greek word 'therme' means:", options: ["Power", "Motion", "Heat", "Energy"], ans: "Heat" },
+        { q: "'Dynamics' means:", options: ["Heat", "Power/Motion", "Temperature", "Work"], ans: "Power/Motion" },
+        { q: "Applications of thermodynamics include all EXCEPT:", options: ["IC engines", "Refrigeration", "Nuclear plants", "Pure mathematics"], ans: "Pure mathematics" },
+        { q: "Gas turbines are an application of:", options: ["Thermodynamics", "Fluid mechanics only", "Material science", "Circuit theory"], ans: "Thermodynamics" },
+        { q: "Steam power plants rely on:", options: ["Thermodynamic principles", "Only mechanical laws", "Electrical theory", "Magnetism"], ans: "Thermodynamic principles" },
+        { q: "A property depends upon the ______ of the system.", options: ["Path", "Process", "State", "Surroundings"], ans: "State" },
+        { q: "Change of state involves change in:", options: ["Properties", "Boundary only", "Surroundings only", "Mass always"], ans: "Properties" },
+        { q: "The five fundamental properties include:", options: ["P, T, V, m, S", "P, T, V, m, U", "P, T, V, H, S", "P, T, ρ, m, v"], ans: "P, T, V, m, U" },
+        { q: "Derived properties include:", options: ["H, G, F", "P, T, V", "Mass, Volume", "Heat, Work"], ans: "H, G, F" },
+        { q: "A non-flow process has:", options: ["Mass crossing boundary", "Fixed mass within boundary", "Open system", "Steady flow"], ans: "Fixed mass within boundary" },
+        { q: "A flow process occurs in:", options: ["Closed system", "Isolated system", "Open system", "Homogeneous only"], ans: "Open system" },
+        { q: "Quasi-static means:", options: ["Very fast", "Infinitely slow", "Constant volume", "Constant pressure"], ans: "Infinitely slow" },
+        { q: "A reversible process must pass through:", options: ["Different states on reverse", "Same states on reverse", "Any path", "Only adiabatic path"], ans: "Same states on reverse" },
+        { q: "No real process is truly:", options: ["Irreversible", "Reversible", "Adiabatic", "Isothermal"], ans: "Reversible" },
+        { q: "Electricity flow through a resistance is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isentropic"], ans: "Irreversible" },
+        { q: "Heat transfer through a finite temperature difference is:", options: ["Reversible", "Quasi-static", "Irreversible", "Isothermal"], ans: "Irreversible" },
+        { q: "Polytropic expansion of fluid is considered:", options: ["Reversible", "Always irreversible", "Non-quasi-static", "Adiabatic only"], ans: "Reversible" },
+        { q: "In a cycle, the net change in internal energy is:", options: ["Positive", "Negative", "Zero", "Depends on path"], ans: "Zero" },
+        { q: "The boundary of an open system is typically:", options: ["Fixed", "Moving or fixed", "Always moving", "Invisible"], ans: "Moving or fixed" },
+        { q: "An isolated system has ______ interaction with surroundings.", options: ["Full", "Partial", "No", "Thermal only"], ans: "No" },
+        { q: "Which law is the basis for temperature measurement?", options: ["First", "Second", "Zeroth", "Third"], ans: "Zeroth" },
+        { q: "The efficiency formula 1-(Q2/Q1) applies to:", options: ["Heat engines", "Refrigerators", "Heat pumps", "All cycles"], ans: "Heat engines" },
+        { q: "A process that is almost static is called:", options: ["Isothermal", "Quasi-static", "Adiabatic", "Cyclic"], ans: "Quasi-static" },
+        { q: "Mass and energy both cross boundary in:", options: ["Closed system", "Open system", "Isolated system", "Steady state"], ans: "Open system" },
+        { q: "The zeroth law uses a ______ as the third body.", options: ["Boundary", "Thermometer", "Piston", "Cylinder"], ans: "Thermometer" },
+        { q: "Which is a derived property?", options: ["Pressure", "Temperature", "Gibbs free energy", "Mass"], ans: "Gibbs free energy" },
+        { q: "Specific volume v =", options: ["V/m", "m/V", "V·m", "m+V"], ans: "V/m" },
+        { q: "An ______ differential characterizes path functions.", options: ["Exact", "Perfect", "Inexact", "Zero"], ans: "Inexact" },
+        { q: "Which is always true for a cycle?", options: ["ΔU > 0", "ΔU < 0", "ΔU = 0", "ΔU = Q"], ans: "ΔU = 0" }
+    ];
 
-            const fitgBank = [
-                { q: "The boundary of a system may either be fixed or ____________ depending on the system type.",
-                    ans: "moving" },
-                { q: "The space containing mass/matter is called the ____________ volume.", ans: "control" },
-                { q: "A system consisting of a single phase is termed a ____________ system.", ans: "homogeneous" },
-                { q: "A system consisting of two or more phases is called a ____________ system.", ans: "heterogeneous" },
-                { q: "Pure substances have ____________ fundamental properties.", ans: "five" },
-                { q: "Enthalpy (H) is given by the formula H = ____________.", ans: "U + pV" },
-                { q: "Helmholtz free energy (F) is given by the formula F = ____________.", ans: "U - TS" },
-                { q: "An extensive property divided by the unit mass associated with it gives its ____________ property.",
-                    ans: "specific" },
-                { q: "A ____________ is a process or series of processes whose end state is equal in all extent to its initial state.",
-                    ans: "cycle" },
-                { q: "The differentials of point functions are ____________ differentials.", ans: "exact" },
-                { q: "The differentials of path functions are ____________ differentials.", ans: "inexact" },
-                { q: "A ____________ process is a transformation from one equilibrium state to another with some properties varying.",
-                    ans: "process" },
-                { q: "A characteristic feature of a quasi-static process is infinite ____________.", ans: "slowness" },
-                { q: "The equation governing an adiabatic process is ____________.", ans: "PV^γ = C" },
-                { q: "In an ____________ process, the pressure of the system or fluid is constant.", ans: "isobaric" },
-                { q: "In an ____________ process, the entropy of the system or fluid is constant.", ans: "isentropic" },
-                { q: "Heat transfer occurs solely because of the ____________ difference between two systems.",
-                    ans: "temperature" },
-                { q: "The thermometer is the third body used to calibrate the ____________ law of thermodynamics.",
-                    ans: "zeroth" },
-                { q: "Gibbs free energy G is given by ____________.", ans: "H - TS" },
-                { q: "A closed system has fixed ____________.", ans: "mass" },
-                { q: "An open system allows both mass and ____________ to cross its boundary.", ans: "energy" },
-                { q: "An isolated system has no interaction with its ____________.", ans: "surroundings" },
-                { q: "Water plus steam is an example of a ____________ system.", ans: "heterogeneous" },
-                { q: "Mixture of air and water vapour is a ____________ system.", ans: "homogeneous" },
-                { q: "Pressure and temperature are examples of ____________ properties.", ans: "intensive" },
-                { q: "Mass and volume are examples of ____________ properties.", ans: "extensive" },
-                { q: "Density is an example of a ____________ property.", ans: "specific" },
-                { q: "The change in a point function is independent of the ____________.", ans: "path" },
-                { q: "Work and heat are ____________ functions.", ans: "path" },
-                { q: "A thermodynamic cycle returns to its ____________ state.", ans: "initial" },
-                { q: "In a steady state, properties do not change with ____________.", ans: "time" },
-                { q: "The zeroth law is the basis for ____________ measurement.", ans: "temperature" },
-                { q: "A quasi-static process is also called a ____________ process.", ans: "reversible" },
-                { q: "Throttling is an ____________ process.", ans: "irreversible" },
-                { q: "Frictionless adiabatic expansion is ____________.", ans: "reversible" },
-                { q: "Energy transfer not due to temperature difference is ____________.", ans: "work" },
-                { q: "The control volume boundary is called the control ____________.", ans: "surface" },
-                { q: "Specific volume is volume per unit ____________.", ans: "mass" },
-                { q: "The formula for thermal efficiency is 1 - (Q2/____________).", ans: "Q1" },
-                { q: "An isothermal process follows the equation PV = ____________.", ans: "C" },
-                { q: "An isochoric process has constant ____________.", ans: "volume" },
-                { q: "Heat is a ____________ phenomenon.", ans: "transient" },
-                { q: "The differential of internal energy dU is an ____________ differential.", ans: "exact" },
-                { q: "The differential of work δW is an ____________ differential.", ans: "inexact" },
-                { q: "In a flow process, mass enters and ____________ through the boundary.", ans: "leaves" },
-                { q: "A system at steady state has properties that are ____________ with time.", ans: "constant" },
-                { q: "The first law of thermodynamics is about ____________ conservation.", ans: "energy" },
-                { q: "Piston-cylinder is an example of a ____________ system.", ans: "closed" },
-                { q: "Car radiator is an example of an ____________ system.", ans: "open" },
-                { q: "Total mass remains constant in a ____________ flow process.", ans: "steady" }
-            ];
+    const fitgBank = [
+        { q: "The boundary of a system may either be fixed or ____________ depending on the system type.", ans: "moving" },
+        { q: "The space containing mass/matter is called the ____________ volume.", ans: "control" },
+        { q: "A system consisting of a single phase is termed a ____________ system.", ans: "homogeneous" },
+        { q: "A system consisting of two or more phases is called a ____________ system.", ans: "heterogeneous" },
+        { q: "Pure substances have ____________ fundamental properties.", ans: "five" },
+        { q: "Enthalpy (H) is given by the formula H = ____________.", ans: "U + pV" },
+        { q: "Helmholtz free energy (F) is given by the formula F = ____________.", ans: "U - TS" },
+        { q: "An extensive property divided by the unit mass associated with it gives its ____________ property.", ans: "specific" },
+        { q: "A ____________ is a process or series of processes whose end state is equal in all extent to its initial state.", ans: "cycle" },
+        { q: "The differentials of point functions are ____________ differentials.", ans: "exact" },
+        { q: "The differentials of path functions are ____________ differentials.", ans: "inexact" },
+        { q: "A ____________ process is a transformation from one equilibrium state to another with some properties varying.", ans: "process" },
+        { q: "A characteristic feature of a quasi-static process is infinite ____________.", ans: "slowness" },
+        { q: "The equation governing an adiabatic process is ____________.", ans: "PV^γ = C" },
+        { q: "In an ____________ process, the pressure of the system or fluid is constant.", ans: "isobaric" },
+        { q: "In an ____________ process, the entropy of the system or fluid is constant.", ans: "isentropic" },
+        { q: "Heat transfer occurs solely because of the ____________ difference between two systems.", ans: "temperature" },
+        { q: "The thermometer is the third body used to calibrate the ____________ law of thermodynamics.", ans: "zeroth" },
+        { q: "Gibbs free energy G is given by ____________.", ans: "H - TS" },
+        { q: "A closed system has fixed ____________.", ans: "mass" },
+        { q: "An open system allows both mass and ____________ to cross its boundary.", ans: "energy" },
+        { q: "An isolated system has no interaction with its ____________.", ans: "surroundings" },
+        { q: "Water plus steam is an example of a ____________ system.", ans: "heterogeneous" },
+        { q: "Mixture of air and water vapour is a ____________ system.", ans: "homogeneous" },
+        { q: "Pressure and temperature are examples of ____________ properties.", ans: "intensive" },
+        { q: "Mass and volume are examples of ____________ properties.", ans: "extensive" },
+        { q: "Density is an example of a ____________ property.", ans: "specific" },
+        { q: "The change in a point function is independent of the ____________.", ans: "path" },
+        { q: "Work and heat are ____________ functions.", ans: "path" },
+        { q: "A thermodynamic cycle returns to its ____________ state.", ans: "initial" },
+        { q: "In a steady state, properties do not change with ____________.", ans: "time" },
+        { q: "The zeroth law is the basis for ____________ measurement.", ans: "temperature" },
+        { q: "A quasi-static process is also called a ____________ process.", ans: "reversible" },
+        { q: "Throttling is an ____________ process.", ans: "irreversible" },
+        { q: "Frictionless adiabatic expansion is ____________.", ans: "reversible" },
+        { q: "Energy transfer not due to temperature difference is ____________.", ans: "work" },
+        { q: "The control volume boundary is called the control ____________.", ans: "surface" },
+        { q: "Specific volume is volume per unit ____________.", ans: "mass" },
+        { q: "The formula for thermal efficiency is 1 - (Q2/____________).", ans: "Q1" },
+        { q: "An isothermal process follows the equation PV = ____________.", ans: "C" },
+        { q: "An isochoric process has constant ____________.", ans: "volume" },
+        { q: "Heat is a ____________ phenomenon.", ans: "transient" },
+        { q: "The differential of internal energy dU is an ____________ differential.", ans: "exact" },
+        { q: "The differential of work δW is an ____________ differential.", ans: "inexact" },
+        { q: "In a flow process, mass enters and ____________ through the boundary.", ans: "leaves" },
+        { q: "A system at steady state has properties that are ____________ with time.", ans: "constant" },
+        { q: "The first law of thermodynamics is about ____________ conservation.", ans: "energy" },
+        { q: "Piston-cylinder is an example of a ____________ system.", ans: "closed" },
+        { q: "Car radiator is an example of an ____________ system.", ans: "open" },
+        { q: "Total mass remains constant in a ____________ flow process.", ans: "steady" }
+    ];
 
-            const tfBank = [
-                { q: "The boundary of a thermodynamic system must always be fixed and cannot move.", ans: "False" },
-                { q: "An isolated system has a fixed quantity of mass and heat energy that cannot cross the boundary.",
-                    ans: "True" },
-                { q: "Internal energy and Entropy are examples of derived properties.", ans: "False" },
-                { q: "Density and specific volume are examples of extensive properties.", ans: "False" },
-                { q: "Heat and work are point functions because they depend on the end states.", ans: "False" },
-                { q: "A quasi-static process is also called a reversible process.", ans: "True" },
-                { q: "An adiabatic system can exchange work with its surroundings, but not heat.", ans: "True" },
-                { q: "Frictionless relative motion is an example of an irreversible process.", ans: "False" },
-                { q: "Combustion, diffusion, and throttling are examples of irreversible processes.", ans: "True" },
-                { q: "If the energy interaction between the system and surroundings is not due to temperature difference, it must be work.",
-                    ans: "True" },
-                { q: "Heat is a transient phenomenon.", ans: "True" },
-                { q: "The zeroth law provides the basis for pressure measurement.", ans: "False" },
-                { q: "A closed system allows mass transfer across its boundary.", ans: "False" },
-                { q: "Temperature is an extensive property.", ans: "False" },
-                { q: "Enthalpy is a fundamental property.", ans: "False" },
-                { q: "In a thermodynamic cycle, the final state is identical to the initial state.", ans: "True" },
-                { q: "Path functions have exact differentials.", ans: "False" },
-                { q: "A homogeneous system has two or more phases.", ans: "False" },
-                { q: "Specific properties are extensive properties per unit mass.", ans: "True" },
-                { q: "Isothermal expansion is an irreversible process.", ans: "False" },
-                { q: "Free expansion is a reversible process.", ans: "False" },
-                { q: "Plastic deformation is irreversible.", ans: "True" },
-                { q: "Work is a point function.", ans: "False" },
-                { q: "The control volume contains mass/matter.", ans: "True" },
-                { q: "Heat flows from lower to higher temperature naturally.", ans: "False" }
-            ];
-        async function getStudents() { try { const snap = await getDocs(collection(db, STUDENTS_COLLECTION)); const arr = []; snap.forEach(d => arr.push({ id: d.id, ...d.data() })); return arr.length ? arr : [...defaultStudents]; } catch (e) { return [...defaultStudents]; } }
-        async function saveStudent(s) { if (s.id) await updateDoc(doc(db, STUDENTS_COLLECTION, s.id), s); else { const ref = doc(collection(db, STUDENTS_COLLECTION)); await setDoc(ref, s); s.id = ref.id; } }
-        async function deleteStudentFromDB(id) { await deleteDoc(doc(db, STUDENTS_COLLECTION, id)); }
-        async function saveAllStudents(arr) { for (const s of arr) await saveStudent(s); }
-        async function getAnnouncement() { const snap = await getDoc(doc(db, SETTINGS_DOC)); return snap.exists() ? snap.data().message || '' : ''; }
-        async function saveAnnouncementToDB(msg) { await setDoc(doc(db, SETTINGS_DOC), { message: msg }, { merge: true }); }
+    const tfBank = [
+        { q: "The boundary of a thermodynamic system must always be fixed and cannot move.", ans: "False" },
+        { q: "An isolated system has a fixed quantity of mass and heat energy that cannot cross the boundary.", ans: "True" },
+        { q: "Internal energy and Entropy are examples of derived properties.", ans: "False" },
+        { q: "Density and specific volume are examples of extensive properties.", ans: "False" },
+        { q: "Heat and work are point functions because they depend on the end states.", ans: "False" },
+        { q: "A quasi-static process is also called a reversible process.", ans: "True" },
+        { q: "An adiabatic system can exchange work with its surroundings, but not heat.", ans: "True" },
+        { q: "Frictionless relative motion is an example of an irreversible process.", ans: "False" },
+        { q: "Combustion, diffusion, and throttling are examples of irreversible processes.", ans: "True" },
+        { q: "If the energy interaction between the system and surroundings is not due to temperature difference, it must be work.", ans: "True" },
+        { q: "Heat is a transient phenomenon.", ans: "True" },
+        { q: "The zeroth law provides the basis for pressure measurement.", ans: "False" },
+        { q: "A closed system allows mass transfer across its boundary.", ans: "False" },
+        { q: "Temperature is an extensive property.", ans: "False" },
+        { q: "Enthalpy is a fundamental property.", ans: "False" },
+        { q: "In a thermodynamic cycle, the final state is identical to the initial state.", ans: "True" },
+        { q: "Path functions have exact differentials.", ans: "False" },
+        { q: "A homogeneous system has two or more phases.", ans: "False" },
+        { q: "Specific properties are extensive properties per unit mass.", ans: "True" },
+        { q: "Isothermal expansion is an irreversible process.", ans: "False" },
+        { q: "Free expansion is a reversible process.", ans: "False" },
+        { q: "Plastic deformation is irreversible.", ans: "True" },
+        { q: "Work is a point function.", ans: "False" },
+        { q: "The control volume contains mass/matter.", ans: "True" },
+        { q: "Heat flows from lower to higher temperature naturally.", ans: "False" }
+    ];
 
-        const welcome = document.getElementById('welcomeSection');
-        const notFound = document.getElementById('notFoundSection');
-        const reflection = document.getElementById('reflectionSection');
-        const result = document.getElementById('resultSection');
-        const payment = document.getElementById('paymentSection');
-        const studyGateway = document.getElementById('studyGatewaySection');
-        const cbt = document.getElementById('cbtSection');
-        const admin = document.getElementById('adminSection');
+    // ═══════════ FIREBASE CRUD ═══════════
+    async function getStudents() { try { const snap = await getDocs(collection(db, STUDENTS_COLLECTION)); const arr = []; snap.forEach(d => arr.push({ id: d.id, ...d.data() })); return arr.length ? arr : [...defaultStudents]; } catch (e) { return [...defaultStudents]; } }
+    async function saveStudent(s) { if (s.id) await updateDoc(doc(db, STUDENTS_COLLECTION, s.id), s); else { const ref = doc(collection(db, STUDENTS_COLLECTION)); await setDoc(ref, s); s.id = ref.id; } }
+    async function deleteStudentFromDB(id) { await deleteDoc(doc(db, STUDENTS_COLLECTION, id)); }
+    async function saveAllStudents(arr) { for (const s of arr) await saveStudent(s); }
+    async function getAnnouncement() { const snap = await getDoc(doc(db, SETTINGS_DOC)); return snap.exists() ? snap.data().message || '' : ''; }
+    async function saveAnnouncementToDB(msg) { await setDoc(doc(db, SETTINGS_DOC), { message: msg }, { merge: true }); }
 
-        function hideAllSections() { [welcome, notFound, reflection, result, payment, studyGateway, cbt, admin].forEach(s => s.classList.add('hidden')); }
-        function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
+    // ═══════════ DOM REFS ═══════════
+    const welcome = document.getElementById('welcomeSection');
+    const notFound = document.getElementById('notFoundSection');
+    const reflection = document.getElementById('reflectionSection');
+    const result = document.getElementById('resultSection');
+    const onlineResult = document.getElementById('onlineResultSection');
+    const payment = document.getElementById('paymentSection');
+    const studyGateway = document.getElementById('studyGatewaySection');
+    const cbt = document.getElementById('cbtSection');
+    const admin = document.getElementById('adminSection');
 
-        function navigateTo(target) {
-            hideAllSections(); closeMenu();
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            if (target === 'welcome' || target === 'chapter1') { welcome.classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); }
-            else if (target === 'payment') payment.classList.remove('hidden');
-            else if (target === 'admin') { admin.classList.remove('hidden'); document.getElementById('navAdmin').classList.add('active'); if (currentAdminUser) { document.getElementById('adminLoginArea').classList.add('hidden'); document.getElementById('adminDashboard').classList.remove('hidden'); showAdminTab('dashboard'); } else { document.getElementById('adminLoginArea').classList.remove('hidden'); document.getElementById('adminDashboard').classList.add('hidden'); } }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function hideAllSections() { [welcome, notFound, reflection, result, onlineResult, payment, studyGateway, cbt, admin].forEach(s => s.classList.add('hidden')); }
+    function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
 
-        document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
-        window.addEventListener('scroll', () => document.getElementById('backToTopBtn').classList.toggle('visible', window.scrollY > 300));
+    function navigateTo(target) {
+        hideAllSections(); closeMenu();
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        if (target === 'welcome' || target === 'chapter1') { welcome.classList.remove('hidden'); document.getElementById('navHome').classList.add('active'); }
+        else if (target === 'payment') payment.classList.remove('hidden');
+        else if (target === 'admin') { admin.classList.remove('hidden'); if (currentAdminUser) { document.getElementById('adminLoginArea').classList.add('hidden'); document.getElementById('adminDashboard').classList.remove('hidden'); showAdminTab('dashboard'); } else { document.getElementById('adminLoginArea').classList.remove('hidden'); document.getElementById('adminDashboard').classList.add('hidden'); } }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-        async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg; bar.style.display = 'block'; } else bar.style.display = 'none'; }
-        loadAnnouncement();
+    document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+    window.addEventListener('scroll', () => document.getElementById('backToTopBtn').classList.toggle('visible', window.scrollY > 300));
 
-        document.getElementById('searchBtn').addEventListener('click', async () => { studentResults = await getStudents(); const matric = document.getElementById('matricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric number'); currentUser = studentResults.find(s => s.matric.toUpperCase() === matric); hideAllSections(); if (currentUser) { if (currentUser.id) { try { await updateDoc(doc(db, STUDENTS_COLLECTION, currentUser.id), { checkedAt: Date.now() }); } catch(e){} } document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : ''; reflection.classList.remove('hidden'); } else notFound.classList.remove('hidden'); });
-        document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
-        document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted!'));
-        document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
+    async function loadAnnouncement() { const msg = await getAnnouncement(); const bar = document.getElementById('announcementBar'); if (msg) { bar.textContent = '📢 ' + msg; bar.style.display = 'block'; } else bar.style.display = 'none'; }
+    loadAnnouncement();
 
-        document.getElementById('reflectionForm').addEventListener('submit', function(e) { e.preventDefault(); const fd = new FormData(); fd.append('Name', document.getElementById('studentName').value); fd.append('Matric', currentUser.matric); fd.append('Expected', document.getElementById('expectedScore').value); fd.append('Higher', document.getElementById('higherCause').value); fd.append('Lower', document.getElementById('lowerCause').value); fd.append('Woeful', document.getElementById('woefulCause').value); fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd }); hideAllSections(); showResult(currentUser); });
-
-        function showResult(u) {
-            document.getElementById('displayScore').innerText = u.score;
-            document.getElementById('displayPercent').innerText = ((u.score / 40) * 100).toFixed(1);
-            const score = u.score;
-            let adviceList = [];
-            if (score < 10) { adviceList = ["📚 Don't give up! Re-read the summary and retake.", "💪 Focus on basic terminologies first.", "🌟 Download the full PDF and study carefully.", "🔥 Consistent revision is key. Retake!", "🚀 Review the Marking Guide and retake!"]; }
-            else if (score < 15) { adviceList = ["📖 Focus on open vs closed systems.", "🎯 Review intensive vs extensive properties.", "🔍 Fix gaps in homogeneous vs heterogeneous.", "🏗️ Solidify point functions and cycles.", "💡 Re-read and retake — you'll improve!"]; }
-            else if (score < 20) { adviceList = ["👍 Focus on missed questions.", "📈 Review irreversible vs reversible.", "🎓 Focus on zeroth law and work vs heat.", "🧠 Give it another pass!", "⚡ Refine derived properties (H, G, F)."]; }
-            else if (score < 30) { adviceList = ["👏 Good job! Review few mistakes.", "🏆 Polish weak areas.", "📊 Solid performance!", "🎖️ Chapter 2 will build on this.", "🔬 You'll hit 35+ with more attention!"]; }
-            else { adviceList = ["🌟 Exceptional! Ready for Chapter 2!", "🏅 Outstanding understanding!", "💎 Top-tier result!", "🚀 Crushing it!", "👑 A+ material!"]; }
-            document.getElementById('adviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
-            document.getElementById('driveLink').href = u.link;
-            result.classList.remove('hidden');
-        }
-        document.getElementById('viewScriptBtn').addEventListener('click', () => document.getElementById('scriptLinkArea').classList.remove('hidden'));
-        document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
-
-        // ═══════════ COMPLAINT FORM ═══════════
-        document.getElementById('showComplaintBtn').addEventListener('click', () => { document.getElementById('complaintFormArea').classList.toggle('hidden'); });
-        document.getElementById('submitComplaintBtn').addEventListener('click', async () => {
-            const name = document.getElementById('complaintName').value.trim();
-            const matric = document.getElementById('complaintMatric').value.trim();
-            const email = document.getElementById('complaintEmail').value.trim();
-            const message = document.getElementById('complaintMessage').value.trim();
-            const receipt = document.getElementById('complaintReceipt').value.trim();
-            if (!name || !matric || !message) return alert('Fill at least: Name, Matric, and Message');
-            const fd = new FormData();
-            fd.append('Subject', 'Payment Issue Complaint');
-            fd.append('Name', name); fd.append('Matric', matric); fd.append('Email', email);
-            fd.append('Message', message); fd.append('Receipt', receipt);
-            try {
-                await fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd });
-                alert('✅ Complaint submitted! We will review and respond within 24 hours. For immediate help, use WhatsApp.');
-                document.getElementById('complaintFormArea').classList.add('hidden');
-                document.getElementById('complaintName').value = ''; document.getElementById('complaintMatric').value = '';
-                document.getElementById('complaintEmail').value = ''; document.getElementById('complaintMessage').value = '';
-                document.getElementById('complaintReceipt').value = '';
-            } catch(e) { alert('❌ Error submitting. Please use WhatsApp for immediate help.'); }
-        });
-        window.openWhatsAppHelp = function() {
-            const msg = encodeURIComponent("Hello, I have an issue with my MEE 206 test payment. I paid but cannot access the test. Please help.");
-            window.open(`https://wa.me/2347050376975?text=${msg}`, '_blank');
-        };
-
-        // ═══════════ PAYMENT ═══════════
-        document.getElementById('payNowBtn').addEventListener('click', () => { const n = document.getElementById('payName').value.trim(); const e = document.getElementById('payEmail').value.trim(); const m = document.getElementById('payMatric').value.trim(); if (!n || !e || !m) return alert('Fill all fields'); FlutterwaveCheckout({ public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X", tx_ref: "MEE206-" + Date.now(), amount: 200, currency: "NGN", payment_options: "card, banktransfer, ussd", customer: { email: e, name: n }, customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" }, callback: async function(response) { const matric = document.getElementById('payMatric').value.trim().toUpperCase(); try { await setDoc(doc(db, 'payments', matric), { matric, name: n, email: e, paidAt: Date.now(), expiresAt: Date.now() + (168 * 60 * 60 * 1000), txRef: response.tx_ref || 'N/A', attempts: 0 }, { merge: true }); } catch(e) {} hideAllSections(); showStudyGateway(matric); } }); });
-        document.getElementById('checkPaymentStatusBtn').addEventListener('click', async () => { const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric'); const rd = document.getElementById('paymentStatusResult'); rd.innerHTML = '🔄 Checking...'; try { const snap = await getDoc(doc(db, 'payments', matric)); if (snap.exists()) { const d = snap.data(); const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000)); rd.innerHTML = h > 0 ? `<div style="background:#f0faf4;padding:1rem;border-radius:8px;"><p>✅ Access found! ⏱️ ${h}h remaining</p><button class="btn btn-accent btn-sm" onclick="window.resumeAccess('${matric}')">📚 Resume</button></div>` : `<div style="background:#fdf2f2;padding:1rem;border-radius:8px;"><p>⚠️ Expired. Pay again or submit complaint below.</p></div>`; } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No record. Pay first or submit complaint.</p></div>`; } catch(e) { rd.innerHTML = '❌ Error. Submit complaint below.'; } });
-        window.resumeAccess = function(m) { document.getElementById('payMatric').value = m; hideAllSections(); showStudyGateway(m); };
-
-        function showStudyGateway(matric) { currentPayerMatric = matric || document.getElementById('payMatric')?.value || ''; hideAllSections(); checkRemainingTime(currentPayerMatric); studyGateway.classList.remove('hidden'); }
-        async function checkRemainingTime(matric) { if (!matric) return; try { const snap = await getDoc(doc(db, 'payments', matric.toUpperCase())); if (snap.exists()) { const h = Math.max(0, Math.floor(((snap.data().expiresAt||0) - Date.now()) / 3600000)); const ti = document.getElementById('timeRemainingInfo'); if (ti) { ti.innerHTML = h > 0 ? `⏱️ <strong>${h} hours remaining</strong>` : '⚠️ Expired'; ti.style.color = h > 0 ? 'var(--success)' : 'var(--danger)'; document.getElementById('startTestFromGatewayBtn').disabled = h <= 0; } } } catch(e) {} }
-        document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => { if (confirm('Start test?')) { hideAllSections(); initializeCBT(); } });
-
-        function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
-        function initializeCBT() { activeTest = [...shuffle(mcqBank).slice(0, 25), ...shuffle(fitgBank).slice(0, 10), ...shuffle(tfBank).slice(0, 5)]; userAnswers = {}; currentIndex = 0; timeLeft = 1200; cbt.classList.remove('hidden'); renderQuestion(); startTimer(); renderPagination(); }
-        function renderQuestion() { const q = activeTest[currentIndex]; document.getElementById('qNumber').innerText = currentIndex + 1; document.getElementById('qText').innerText = q.q; const oa = document.getElementById('optionsArea'); oa.innerHTML = ''; if (q.options) { q.options.forEach(opt => { oa.innerHTML += `<label style="display:block;margin:8px 0;"><input type="radio" name="cbt" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt.replace(/'/g,"\\'")}')"> ${opt}</label>`; }); } else { oa.innerHTML = `<input type="text" value="${(userAnswers[currentIndex]||'').replace(/"/g,'&quot;')}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;">`; } document.getElementById('submitTestBtn').classList.toggle('hidden', currentIndex !== activeTest.length - 1); document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('active', i === currentIndex)); }
-        window.saveAnswer = function(v) { if (v) userAnswers[currentIndex] = v; else delete userAnswers[currentIndex]; document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i])); };
-        function renderPagination() { const g = document.getElementById('paginationGrid'); g.innerHTML = ''; activeTest.forEach((_, i) => { const d = document.createElement('div'); d.className = 'page-num'; d.innerText = i + 1; d.onclick = () => { currentIndex = i; renderQuestion(); }; g.appendChild(d); }); }
-        document.getElementById('prevBtn').addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; renderQuestion(); } });
-        document.getElementById('nextBtn').addEventListener('click', () => { if (currentIndex < activeTest.length - 1) { currentIndex++; renderQuestion(); } });
-        function startTimer() { clearInterval(timerInterval); timerInterval = setInterval(() => { timeLeft--; document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`; if (timeLeft <= 0) { clearInterval(timerInterval); alert('Time up!'); submitCBT(); } }, 1000); }
-        document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit?')) submitCBT(); });
-
-        async function submitCBT() { clearInterval(timerInterval); let score = 0; activeTest.forEach((q, i) => { if ((userAnswers[i] || '').trim().toLowerCase() === q.ans.toLowerCase()) score++; }); const matric = document.getElementById('payMatric')?.value || currentPayerMatric || 'Unknown'; try { await setDoc(doc(collection(db, 'attempts')), { matric, score, total: activeTest.length, chapter: 'chapter-1', timestamp: Date.now() }); const pr = doc(db, 'payments', matric.toUpperCase()); const ps = await getDoc(pr); if (ps.exists()) await updateDoc(pr, { attempts: (ps.data().attempts||0) + 1 }); } catch(e) {} hideAllSections(); const perc = ((score / activeTest.length) * 100).toFixed(1); document.getElementById('displayScore').innerText = score; document.getElementById('displayPercent').innerText = perc; document.getElementById('adviceText').innerText = score >= 20 ? "Pass! Well done." : "Not a pass yet. Retake!"; document.getElementById('resourceLinksArea').classList.remove('hidden'); document.getElementById('resourceLinksArea').innerHTML = `<div class="text-center mt-3"><a href="https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view" target="_blank" class="btn btn-outline btn-sm">📘 Summary</a> <a href="https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view" target="_blank" class="btn btn-success btn-sm">📚 Full PDF</a></div><div style="margin-top:1rem;padding:1rem;background:#f0faf4;border-radius:8px;text-align:center;"><p><strong>📊 Saved!</strong></p><button class="btn btn-sm btn-outline mt-2" onclick="window.showOwnAttempts('${matric}')">📋 History</button></div>`; result.classList.remove('hidden'); }
-        window.showOwnAttempts = async function(m) { const s = await getDocs(collection(db, 'attempts')); const a = []; s.forEach(d => { if (d.data().matric === m) a.push(d.data()); }); a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0)); let h = '<h4>📊 History</h4>'; a.forEach((x,i) => { h += `<div style="padding:0.6rem;margin:0.3rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${x.score>=20?'var(--success)':'var(--danger)'};">#${i+1}: ${x.score}/${x.total} — ${new Date(x.timestamp).toLocaleString()}</div>`; }); document.getElementById('resourceLinksArea').innerHTML += h; };
-
-        // ═══════════ ADMIN ═══════════
-        document.getElementById('adminLoginBtn').addEventListener('click', async () => { const e=document.getElementById('adminEmail').value.trim(); const p=document.getElementById('adminPassword').value; if(!e||!p)return alert('Enter credentials'); try{await signInWithEmailAndPassword(auth,e,p);document.getElementById('adminLoginArea').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');showAdminTab('dashboard');}catch(err){alert('Login failed: '+err.message);} });
-        function logoutAdmin(){signOut(auth).then(()=>{document.getElementById('adminLoginArea').classList.remove('hidden');document.getElementById('adminDashboard').classList.add('hidden');});}
-
-        async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'manageAccess':ct.innerHTML=await renderManageAccessTab();setTimeout(()=>attachManageAccessListeners(),200);break;case'announcement':ct.innerHTML=await renderAnnouncementTab();break;}}
-
-        async function renderDashboard(){const students=await getStudents();const aSnap=await getDocs(collection(db,'attempts'));let ta=0,psd=0;aSnap.forEach(d=>{ta++;if(d.data().score>=20)psd++;});const pSnap=await getDocs(collection(db,'payments'));let pd=0;pSnap.forEach(d=>{if(d.data().paidAt)pd++;});const cSnap=await getDocs(collection(db,'chapters'));let ck=0;students.forEach(s=>{if(s.checkedAt)ck++;});return `<h4>📊 Dashboard</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem;margin:1.5rem 0;"><div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.75rem;">Students</div></div><div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.75rem;">Chapters</div></div><div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${ta}</div><div style="font-size:0.75rem;">Attempts</div></div><div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${psd}</div><div style="font-size:0.75rem;">Passed</div></div><div style="background:#f5f0ff;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#6b21a8;">${pd}</div><div style="font-size:0.75rem;">Paid</div></div><div style="background:#e0f7fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#00695c;">${ck}</div><div style="font-size:0.75rem;">Checked</div></div></div>`;}
-
-        function renderStudentsTabHTML(){return `<h4>📋 Students (${studentResults.length})</h4><button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button><input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;"><button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button><table class="admin-table"><thead><tr><th>#</th><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>✓</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table><div id="studentAttemptsView" style="margin-top:1rem;"></div>`;}
-        function renderStudentTable(filter=''){const tb=document.getElementById('adminStudentBody');if(!tb)return;tb.innerHTML='';const ff=filter?studentResults.filter(s=>s.matric.toUpperCase().includes(filter.toUpperCase())):studentResults;if(!ff.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;">No students.</td></tr>';return;}ff.forEach(s=>{const i=studentResults.indexOf(s);tb.innerHTML+=`<tr><td>${i+1}</td><td><input value="${s.name.replace(/"/g,'&quot;')}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value)||0)"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td>${s.checkedAt?'✅':'—'}</td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`;});}
-        window.updateStudent=(i,f,v)=>{studentResults[i][f]=v;};
-        window.addStudentRow=()=>{studentResults.push({name:'New',matric:'NEW',score:0,link:'#'});renderStudentTable();};
-        window.saveSingleStudent=async(i)=>{await saveStudent(studentResults[i]);alert('Saved!');};
-        window.saveAllStudents=async()=>{if(!confirm(`Save all?`))return;await saveAllStudents(studentResults);alert('Saved!');};
-        window.deleteStudent=async(i)=>{if(!confirm('Delete?'))return;if(studentResults[i].id)await deleteStudentFromDB(studentResults[i].id);studentResults.splice(i,1);renderStudentTable();};
-        window.filterStudentTable=()=>renderStudentTable(document.getElementById('studentSearchInput')?.value||'');
-        window.viewStudentAttempts=async(m)=>{const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>{if(d.data().matric===m)a.push(d.data());});const v=document.getElementById('studentAttemptsView');v.innerHTML=a.length?`<h5>📊 ${m}</h5><table class="admin-table"><tr><th>#</th><th>Score</th><th>Date</th></tr>${a.map((x,i)=>`<tr><td>${i+1}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`:'<p>No attempts.</p>';};
-
-        async function renderChaptersTab(){const s=await getDocs(collection(db,'chapters'));const c=[];s.forEach(d=>c.push({id:d.id,...d.data()}));return `<h4>📚 Chapters</h4><button class="btn btn-sm btn-success" onclick="window.showAddChapterForm()">+ Add</button><div id="addChapterForm" class="hidden" style="margin:1rem 0;padding:1rem;background:#f8fafc;border-radius:8px;"><input id="newChapterTitle" placeholder="Title"><input id="newChapterSummary" placeholder="Summary Link"><input id="newChapterFull" placeholder="Full Link"><button class="btn btn-sm btn-success" onclick="window.addChapter()">Save</button></div><table class="admin-table"><tr><th>Title</th><th>Status</th><th>Act</th></tr>${c.map(x=>`<tr><td>${x.title||x.id}</td><td>${x.active?'✅':'🔒'}</td><td><button class="btn btn-sm btn-outline" onclick="window.toggleChapter('${x.id}',${!x.active})">Toggle</button><button class="btn btn-sm btn-danger" onclick="window.deleteChapter('${x.id}')">🗑</button></td></tr>`).join('')}</table>`;}
-        window.showAddChapterForm=()=>document.getElementById('addChapterForm').classList.remove('hidden');
-        window.addChapter=async()=>{const t=document.getElementById('newChapterTitle').value.trim();if(!t)return alert('Title required');await setDoc(doc(db,'chapters',t.toLowerCase().replace(/\s+/g,'-')),{title:t,summaryLink:document.getElementById('newChapterSummary').value,fullLink:document.getElementById('newChapterFull').value,active:true});showAdminTab('chapters');};
-        window.toggleChapter=async(id,a)=>{await updateDoc(doc(db,'chapters',id),{active:a});showAdminTab('chapters');};
-        window.deleteChapter=async(id)=>{if(!confirm('Delete?'))return;await deleteDoc(doc(db,'chapters',id));showAdminTab('chapters');};
-
-        async function renderAttemptsTab(){const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0));return `<h4>📊 Attempts (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`;}
-        async function renderPaymentsTab(){const s=await getDocs(collection(db,'payments'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.paidAt||0)-(x.paidAt||0));return `<h4>💳 Payments (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Paid</th><th>Expires</th><th>Att</th><th>Status</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.name||''}</td><td>${x.paidAt?new Date(x.paidAt).toLocaleString():''}</td><td>${x.expiresAt?new Date(x.expiresAt).toLocaleString():''}</td><td>${x.attempts||0}</td><td>${(x.expiresAt>Date.now())?'✅':'⚠️'}</td></tr>`).join('')}</table>`;}
-// ═══════════ MANAGE ACCESS TAB ═══════════
-async function renderManageAccessTab() {
-    const pSnap = await getDocs(collection(db, 'payments'));
-    const payments = [];
-    pSnap.forEach(d => payments.push({ id: d.id, ...d.data() }));
-    payments.sort((a, b) => (b.expiresAt || 0) - (a.expiresAt || 0));
-    return `<h4>🔑 Manual Access Management</h4>
-        <div style="background:#f8fafc;padding:1.2rem;border-radius:12px;margin:1rem 0;border:1px solid var(--border-light);">
-            <h5 style="margin-bottom:0.8rem;">➕ Grant Access</h5>
-            <input type="text" id="manualMatric" placeholder="Matric Number (Required)">
-            <input type="text" id="manualName" placeholder="Student Name (Optional)">
-            <input type="email" id="manualEmail" placeholder="Email (Optional)">
-            <select id="manualDuration">
-                <option value="24">24 hours</option>
-                <option value="72">3 days</option>
-                <option value="168" selected>7 days</option>
-                <option value="336">14 days</option>
-                <option value="720">30 days</option>
-                <option value="8760">1 year</option>
-            </select>
-            <button class="btn btn-sm btn-success" id="grantAccessBtn">✅ Grant Access</button>
-        </div>
-        <div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;margin:1rem 0;">
-            <h5 style="margin-bottom:0.8rem;">🔍 Check / Revoke Access</h5>
-            <div style="display:flex;gap:0.5rem;">
-                <input type="text" id="checkMatricInput" placeholder="Enter Matric Number" style="flex:2;">
-                <button class="btn btn-sm btn-outline" id="checkAccessBtn" style="flex:1;">🔍 Check</button>
-            </div>
-            <div id="manualAccessResult" style="margin-top:0.8rem;"></div>
-        </div>
-        <div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin:1rem 0;">
-            <h5 style="margin-bottom:0.8rem;">📋 Active Access Records (${payments.length})</h5>
-            <div style="overflow-x:auto;">
-                <table class="admin-table">
-                    <thead><tr><th>Matric</th><th>Name</th><th>Expires</th><th>Hrs Left</th><th>Source</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        ${payments.length === 0 
-                            ? '<tr><td colspan="6" style="text-align:center;padding:1rem;">No access records yet.</td></tr>'
-                            : payments.map(p => {
-                                const hoursLeft = Math.max(0, Math.floor(((p.expiresAt || 0) - Date.now()) / 3600000));
-                                const isActive = (p.expiresAt || 0) > Date.now();
-                                return `<tr style="${isActive ? '' : 'opacity:0.5;'}">
-                                    <td><strong>${p.matric}</strong></td>
-                                    <td>${p.name || '—'}</td>
-                                    <td>${p.expiresAt ? new Date(p.expiresAt).toLocaleDateString() : '—'}</td>
-                                    <td style="color:${hoursLeft > 24 ? 'var(--success)' : hoursLeft > 0 ? 'var(--accent)' : 'var(--danger)'};">${isActive ? hoursLeft + 'h' : 'Expired'}</td>
-                                    <td>${p.manualGrant ? '👤 Manual' : '💳 Paid'}</td>
-                                    <td style="display:flex;gap:0.3rem;flex-wrap:wrap;">
-                                        <button class="btn btn-sm btn-outline extend7Btn" data-matric="${p.matric}">+7d</button>
-                                        <button class="btn btn-sm btn-outline extend30Btn" data-matric="${p.matric}">+30d</button>
-                                        <button class="btn btn-sm btn-danger revokeBtn" data-matric="${p.matric}">🗑</button>
-                                    </td>
-                                </tr>`;
-                            }).join('')
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>`;
-}
-
-// ═══════════ ATTACH EVENT LISTENERS AFTER RENDERING ═══════════
-function attachManageAccessListeners() {
-    // Grant Access button
-    const grantBtn = document.getElementById('grantAccessBtn');
-    if (grantBtn) {
-        grantBtn.addEventListener('click', async () => {
-            const matric = document.getElementById('manualMatric').value.trim().toUpperCase();
-            const name = document.getElementById('manualName').value.trim();
-            const email = document.getElementById('manualEmail').value.trim();
-            const dur = parseInt(document.getElementById('manualDuration').value);
-            if (!matric) return alert('Enter matric number');
-            try {
-                await setDoc(doc(db, 'payments', matric), {
-                    matric: matric,
-                    name: name || 'Manual Grant',
-                    email: email || '',
-                    paidAt: Date.now(),
-                    expiresAt: Date.now() + (dur * 3600000),
-                    manualGrant: true,
-                    attempts: 0
-                }, { merge: true });
-                alert(`✅ Access granted for ${matric} (${dur} hours)`);
-                document.getElementById('manualMatric').value = '';
-                document.getElementById('manualName').value = '';
-                document.getElementById('manualEmail').value = '';
-                showAdminTab('manageAccess');
-            } catch (e) {
-                alert('❌ Error: ' + e.message);
+    // ═══════════ SEARCH (Physical Test Result) ═══════════
+    document.getElementById('searchBtn').addEventListener('click', async () => {
+        studentResults = await getStudents();
+        const matric = document.getElementById('matricInput').value.trim().toUpperCase();
+        if (!matric) return alert('Enter matric number');
+        currentUser = studentResults.find(s => s.matric.toUpperCase() === matric);
+        hideAllSections();
+        if (currentUser) {
+            isOnlineTest = false;
+            if (currentUser.id) { try { await updateDoc(doc(db, STUDENTS_COLLECTION, currentUser.id), { checkedAt: Date.now() }); } catch(e){} }
+            document.getElementById('studentName').value = currentUser.name !== "Unknown" ? currentUser.name : '';
+            reflection.classList.remove('hidden');
+        } else {
+            // Check if they have online attempts
+            const aSnap = await getDocs(collection(db, 'attempts'));
+            let hasAttempts = false;
+            aSnap.forEach(d => { if (d.data().matric === matric) hasAttempts = true; });
+            if (hasAttempts) {
+                isOnlineTest = true;
+                currentPayerMatric = matric;
+                showOnlineHistory(matric);
+            } else {
+                notFound.classList.remove('hidden');
             }
+        }
+    });
+
+    document.getElementById('btnClaimTook').addEventListener('click', () => document.getElementById('queryArea').classList.remove('hidden'));
+    document.getElementById('submitQueryBtn').addEventListener('click', () => alert('Query submitted! We will investigate.'));
+    document.getElementById('btnWantTake').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
+
+    // ═══════════ SHOW ONLINE ATTEMPT HISTORY ═══════════
+    async function showOnlineHistory(matric) {
+        const aSnap = await getDocs(collection(db, 'attempts'));
+        const attempts = [];
+        aSnap.forEach(d => { if (d.data().matric === matric) attempts.push(d.data()); });
+        attempts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        
+        document.getElementById('onlineDisplayScore').innerText = attempts[0]?.score || 0;
+        document.getElementById('onlineDisplayPercent').innerText = attempts.length > 0 ? ((attempts[0].score / 40) * 100).toFixed(1) : '0';
+        const sc = attempts[0]?.score || 0;
+        let adviceList = [];
+        if (sc < 10) { adviceList = ["📚 Don't give up! Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner. Focus on understanding basic terminologies first — system, boundary, control volume. Download the full Chapter 1 PDF and study carefully before retaking. Consistent revision is key — many students who scored low ended up with A's! Review the Tutor's Marking Guide to see exactly how questions are graded, then retake with confidence!", "💪 You have room to grow! Thermodynamics builds layer by layer. Focus on open vs closed systems, intensive vs extensive properties, and the zeroth law. Each retake builds your knowledge stronger.", "🌟 This score doesn't define you. It shows where you need to focus. Study the marking guide carefully — understanding WHY answers are correct is more important than memorizing them. You'll improve with each attempt!", "🔥 Turn this around! Many students who scored low on their first attempt ended up with A's after consistent revision. The key is understanding the concepts, not just memorizing. Retake and watch your score climb!", "🚀 Ready for lift-off? Review the Tutor's Marking Guide, study the summary, and retake. Each attempt teaches you something new. You have 168 hours of access — make them count!" ]; }
+        else if (sc < 15) { adviceList = ["📖 You're getting there! Focus on the concepts of open vs closed systems and properties. Review intensive vs extensive properties and thermodynamic processes. Identify your weak spots — were you mixing up homogeneous vs heterogeneous systems? Solidify your understanding of point functions, path functions, and cycles. Re-read the summary, then retake — you'll see improvement!", "🎯 Halfway to mastery! Pay special attention to reversible vs irreversible processes and the differences between isothermal, adiabatic, isobaric, and isochoric processes. These are foundational concepts.", "🔍 Building your foundation. Chapter 1 is the bedrock of thermodynamics. Focus on the zeroth law and how it enables temperature measurement. Understanding this makes everything else easier.", "🏗️ You're constructing knowledge. Each wrong answer shows you exactly where to focus. Review the questions you missed, understand the correct answers, and retake with purpose.", "💡 Light bulb moments ahead! Sometimes concepts click on the second or third review. Don't just retake blindly — study the specific topics you got wrong first." ]; }
+        else if (sc < 20) { adviceList = ["👍 Not bad! Focus on the exact questions you missed and understand WHY the correct answer is right. Review irreversible vs reversible processes, isothermal vs adiabatic equations. With a bit more focused study on the zeroth law and work vs heat concepts, you'll cross the 20-mark threshold. Give it another pass — you're closer than you think! Refine your knowledge of derived properties like H, G, and F.", "📈 Close to passing! You're just a few marks away from the pass mark. Review the formula for thermal efficiency, Gibbs free energy, and Helmholtz free energy. These derived properties often appear in tests.", "🎓 Almost there! Focus on the distinction between point functions and path functions. Remember: thermodynamic properties are point functions; heat and work are path functions. This distinction is crucial.", "🧠 Your brain is absorbing thermodynamics! Concepts take time to settle. Pay attention to the characteristics of quasi-static processes and the conditions for reversibility.", "⚡ Momentum is building! You've grasped the basics. Now refine your knowledge of specific properties, intensive vs extensive properties, and the five fundamental properties of pure substances." ]; }
+        else if (sc < 30) { adviceList = ["👏 Good job! You have a solid grasp of Chapter 1. Review your few mistakes to ensure you're fully prepared for Chapter 2. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy. You've mastered most concepts — check which few questions you missed and make sure you understand them completely. Keep this momentum going into Chapter 2!", "🏆 Well done! You're demonstrating strong understanding of thermodynamics fundamentals. Focus on the efficiency formula 1-(Q2/Q1) and its application to heat engines. Understanding this prepares you for more advanced topics.", "📊 Solid performance! You clearly studied the material. Review the concept of control volume vs control surface and the distinction between homogeneous and heterogeneous systems. These small details can push you to 35+!", "🎖️ Above average excellence! Chapter 2 will build directly on what you already know well. Make sure you're solid on the zeroth law, the concept of thermal equilibrium, and how thermometers work as the third body.", "🔬 Strong foundation detected! With a bit more attention to detail on derived properties, specific volume calculations, and the governing equations for different processes, you'll be hitting 35+ next time!" ]; }
+        else { adviceList = ["🌟 Exceptional! You've demonstrated mastery of Chapter 1. Keep this standard of excellence as we move into Chapter 2! Your understanding of thermodynamics fundamentals is outstanding — you're ready for more advanced concepts. Share your study strategies with classmates — you could be a peer tutor! This level of understanding will serve you throughout your engineering journey. Your grasp of systems, properties, cycles, and the zeroth law is superb!", "🏅 Outstanding performance! You clearly put in the work and it shows. Thermodynamics is the foundation of mechanical engineering, and you've built yours on solid rock. Chapter 2 awaits your excellence!", "💎 Top-tier result! Your understanding of the interaction between energy, heat, work, and material systems is exceptional. This knowledge will serve you in IC engines, refrigeration, and power plants.", "🚀 Crushing it! From the zeroth law to thermal efficiency, you've shown complete mastery. Keep this momentum going — you're setting yourself up for a strong grade in MEE 206.", "👑 A+ material! Your grasp of fundamental properties, derived properties, path functions, point functions, and thermodynamic cycles is superb. You're ready to tackle the Second Law with confidence!" ]; }
+        document.getElementById('onlineAdviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
+        
+        let historyHTML = '<h4>📊 Your Online Test Attempt History</h4>';
+        attempts.forEach((a, i) => {
+            historyHTML += `<div style="padding:0.6rem;margin:0.3rem 0;background:#f8fafc;border-radius:8px;border-left:4px solid ${a.score>=20?'var(--success)':'var(--danger)'};"><strong>Attempt ${i+1}:</strong> ${a.score}/${a.total||40} (${((a.score/(a.total||40))*100).toFixed(1)}%) — ${new Date(a.timestamp).toLocaleString()}</div>`;
         });
+        document.getElementById('onlineReviewArea').innerHTML = historyHTML;
+        onlineResult.classList.remove('hidden');
     }
 
-    // Check Access button
-    const checkBtn = document.getElementById('checkAccessBtn');
-    if (checkBtn) {
-        checkBtn.addEventListener('click', async () => {
-            const matric = document.getElementById('checkMatricInput').value.trim().toUpperCase();
-            if (!matric) return alert('Enter matric number');
-            const rd = document.getElementById('manualAccessResult');
-            rd.innerHTML = '🔄 Checking...';
-            try {
-                const snap = await getDoc(doc(db, 'payments', matric));
-                if (snap.exists()) {
-                    const d = snap.data();
-                    const h = Math.max(0, Math.floor(((d.expiresAt || 0) - Date.now()) / 3600000));
-                    const isActive = (d.expiresAt || 0) > Date.now();
-                    rd.innerHTML = `<div style="background:${isActive ? '#f0faf4' : '#fdf2f2'};padding:1rem;border-radius:8px;">
-                        <p><strong>Matric:</strong> ${d.matric} | <strong>Name:</strong> ${d.name || 'N/A'}</p>
-                        <p><strong>Status:</strong> ${isActive ? '✅ Active' : '⚠️ Expired'} | <strong>Hours Left:</strong> ${h}</p>
-                        <p><strong>Source:</strong> ${d.manualGrant ? '👤 Manual Grant' : '💳 Payment'} | <strong>Attempts:</strong> ${d.attempts || 0}</p>
-                        <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
-                            <button class="btn btn-sm btn-outline" id="extend7Btn">+7 Days</button>
-                            <button class="btn btn-sm btn-outline" id="extend30Btn">+30 Days</button>
-                            <button class="btn btn-sm btn-danger" id="revokeBtn">🗑 Revoke</button>
-                        </div>
-                    </div>`;
-                    document.getElementById('extend7Btn').addEventListener('click', () => extendAccess(matric, 168));
-                    document.getElementById('extend30Btn').addEventListener('click', () => extendAccess(matric, 720));
-                    document.getElementById('revokeBtn').addEventListener('click', () => { revokeAccess(matric);
-                        rd.innerHTML = ''; });
-                } else {
-                    rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No access record found for <strong>${matric}</strong></p><p>Use the Grant Access form above to add them.</p></div>`;
-                }
-            } catch (e) {
-                rd.innerHTML = '❌ Error: ' + e.message;
-            }
+    // ═══════════ REFLECTION (Physical Test) ═══════════
+    document.getElementById('reflectionForm').addEventListener('submit', function(e) { e.preventDefault(); const fd = new FormData(); fd.append('Name', document.getElementById('studentName').value); fd.append('Matric', currentUser.matric); fd.append('Expected', document.getElementById('expectedScore').value); fd.append('Higher', document.getElementById('higherCause').value); fd.append('Lower', document.getElementById('lowerCause').value); fd.append('Woeful', document.getElementById('woefulCause').value); fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd }); hideAllSections(); showResult(currentUser); });
+
+    function showResult(u) {
+        document.getElementById('displayScore').innerText = u.score;
+        document.getElementById('displayPercent').innerText = ((u.score / 40) * 100).toFixed(1);
+        const score = u.score;
+        let adviceList = [];
+        if (score < 10) { adviceList = ["📚 Don't give up! This is just the beginning. Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner. Focus on understanding the basic terminologies first — system, boundary, control volume. Download the full Chapter 1 PDF and study pages 1-5 carefully before retaking. Many students who scored low on their first attempt ended up with A's. The key? Consistent revision and practice. Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence!", "💪 You have room to grow! Thermodynamics builds layer by layer. Focus on understanding the basic terminologies first — system, boundary, control volume. Each concept you master now will serve you throughout your engineering career.", "🌟 This score doesn't define you. It shows where you need to focus. Download the full Chapter 1 PDF and study carefully before retaking. Every wrong answer is a learning opportunity.", "🔥 Turn this around! Many students who scored low on their first attempt ended up with A's. Consistent revision is key. Review the marking guide and retake.", "🚀 Ready for lift-off? Review the Tutor's Marking Guide to see exactly how questions are graded. Then retake with confidence! You have all the resources you need." ]; }
+        else if (score < 15) { adviceList = ["📖 You're getting there! You have some foundation but significant gaps. Focus on the concepts of open vs closed systems and properties. Review intensive vs extensive properties and thermodynamic processes. Look at your marked script — were you mixing up homogeneous vs heterogeneous systems? Fix those gaps! Chapter 1 is the bedrock of thermodynamics. Solidify your understanding of point functions, path functions, and cycles. Sometimes things click on the second or third review. Re-read the summary, then retake!", "🎯 Halfway to mastery! Review the areas you got wrong. Pay special attention to intensive vs extensive properties and thermodynamic processes like isothermal, adiabatic, and isochoric.", "🔍 Identify your weak spots. Look at your marked script. Were you mixing up homogeneous vs heterogeneous systems? Understanding the phase distinction is important.", "🏗️ Building your foundation. Chapter 1 is the bedrock. Solidify your understanding of point functions, path functions, and cycles — these concepts appear throughout thermodynamics.", "💡 Light bulb moments ahead! Sometimes concepts click on the second or third review. Re-read the summary, then retake — you'll see improvement with each attempt." ]; }
+        else if (score < 20) { adviceList = ["👍 Not bad! You're above average but not quite at the pass mark. Focus on the exact questions you missed and understand WHY the correct answer is right. Review irreversible vs reversible processes, isothermal vs adiabatic equations. With a bit more focused study on the zeroth law and work vs heat concepts, you'll cross the 20-mark threshold. Thermodynamics concepts take time to settle. Give it another pass — you're closer than you think! Refine your knowledge of derived properties like H, G, and F.", "📈 Close to passing! You're just a few marks away from the pass mark. Review irreversible vs reversible processes and the conditions that make a process reversible or irreversible.", "🎓 Almost there! Focus on the zeroth law and work vs heat concepts. Understanding the difference between point functions and path functions is crucial for scoring higher.", "🧠 Your brain is absorbing thermodynamics! Concepts take time to settle. Give it another pass — you're closer than you think. Focus on the formula for thermal efficiency.", "⚡ Momentum is building! Refine your knowledge of derived properties (H, G, F) and specific properties. These are common areas where students lose marks." ]; }
+        else if (score < 30) { adviceList = ["👏 Good job! You have a solid grasp of Chapter 1. Review your few mistakes to ensure you're fully prepared for Chapter 2. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy. You've mastered most concepts — check which few questions you missed and make sure you understand them completely. Keep this momentum going into Chapter 2 — it builds directly on what you already know well!", "🏆 Well done! You're demonstrating strong understanding of thermodynamics fundamentals. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy.", "📊 Solid performance! You've mastered most concepts. Check which few questions you missed and make sure you understand them completely. These small corrections push you to excellence.", "🎖️ Above average excellence! Chapter 2 will build on what you already know well. Make sure you're comfortable with all five fundamental properties and three derived properties.", "🔬 Strong foundation detected! You clearly studied. With a bit more attention to detail on the efficiency formula and the distinction between reversible and irreversible processes, you'll hit 35+!" ]; }
+        else { adviceList = ["🌟 Exceptional! You've demonstrated mastery of Chapter 1. Keep this standard of excellence as we move into Chapter 2! Your understanding of thermodynamics fundamentals is outstanding — you're ready for more advanced concepts like the Second Law. Share your study strategies with classmates — you could be a peer tutor! This level of understanding will serve you well not just in MEE 206 but throughout your engineering journey. Your grasp of systems, properties, cycles, and the zeroth law is superb. Chapter 2 awaits — you're ready!", "🏅 Outstanding performance! Your understanding of thermodynamics fundamentals is excellent. You're ready for more advanced concepts. Consider helping your classmates who are struggling.", "💎 Top-tier result! You clearly put in the work. Share your study strategies with classmates — you could be a peer tutor. Teaching others reinforces your own knowledge.", "🚀 Crushing it! This level of understanding will serve you well not just in MEE 206 but throughout your engineering journey. From IC engines to power plants, thermodynamics is everywhere.", "👑 A+ material! Your grasp of systems, properties, cycles, and the zeroth law is superb. Chapter 2 awaits — you're ready to tackle the Second Law of Thermodynamics!" ]; }
+        document.getElementById('adviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
+        document.getElementById('driveLink').href = u.link;
+        result.classList.remove('hidden');
+    }
+    document.getElementById('viewScriptBtn').addEventListener('click', () => document.getElementById('scriptLinkArea').classList.remove('hidden'));
+    document.getElementById('retakeFromResultBtn').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
+
+    // ═══════════ VIEW HISTORY (Online Test) ═══════════
+    document.getElementById('viewHistoryBtn').addEventListener('click', async () => {
+        if (currentPayerMatric) await showOnlineHistory(currentPayerMatric);
+    });
+    document.getElementById('retakeOnlineBtn').addEventListener('click', () => { hideAllSections(); payment.classList.remove('hidden'); });
+
+    // ═══════════ COMPLAINT ═══════════
+    document.getElementById('showComplaintBtn').addEventListener('click', () => { document.getElementById('complaintFormArea').classList.toggle('hidden'); });
+    document.getElementById('submitComplaintBtn').addEventListener('click', async () => {
+        const name = document.getElementById('complaintName').value.trim();
+        const matric = document.getElementById('complaintMatric').value.trim();
+        const email = document.getElementById('complaintEmail').value.trim();
+        const message = document.getElementById('complaintMessage').value.trim();
+        const receipt = document.getElementById('complaintReceipt').value.trim();
+        if (!name || !matric || !message) return alert('Fill at least: Name, Matric, and Message');
+        const fd = new FormData();
+        fd.append('Subject', 'Payment Issue Complaint');
+        fd.append('Name', name); fd.append('Matric', matric); fd.append('Email', email);
+        fd.append('Message', message); fd.append('Receipt', receipt);
+        try { await fetch("https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com", { method: "POST", body: fd }); alert('✅ Complaint submitted!'); document.getElementById('complaintFormArea').classList.add('hidden'); } catch(e) { alert('❌ Error. Use WhatsApp.'); }
+    });
+    window.openWhatsAppHelp = function() { window.open(`https://wa.me/2347050376975?text=${encodeURIComponent("Hello, I have an issue with my MEE 206 test payment. I paid but cannot access the test. Please help.")}`, '_blank'); };
+
+    // ═══════════ PAYMENT ═══════════
+    document.getElementById('payNowBtn').addEventListener('click', () => { const n = document.getElementById('payName').value.trim(); const e = document.getElementById('payEmail').value.trim(); const m = document.getElementById('payMatric').value.trim(); if (!n || !e || !m) return alert('Fill all fields'); FlutterwaveCheckout({ public_key: "FLWPUBK-ecb42c20330fa61e3768ae1bdba3e657-X", tx_ref: "MEE206-" + Date.now(), amount: 200, currency: "NGN", payment_options: "card, banktransfer, ussd", customer: { email: e, name: n }, customizations: { title: "MEE 206 CBT Access", description: "Chapter 1 Test • Yakub Opeyemi Abideen" }, callback: async function(response) { const matric = m.toUpperCase(); try { await setDoc(doc(db, 'payments', matric), { matric, name: n, email: e, paidAt: Date.now(), expiresAt: Date.now() + (168 * 60 * 60 * 1000), txRef: response.tx_ref || 'N/A', attempts: 0 }, { merge: true }); } catch(e) {} hideAllSections(); showStudyGateway(matric); } }); });
+    document.getElementById('checkPaymentStatusBtn').addEventListener('click', async () => { const matric = document.getElementById('returnMatricInput').value.trim().toUpperCase(); if (!matric) return alert('Enter matric'); const rd = document.getElementById('paymentStatusResult'); rd.innerHTML = '🔄 Checking...'; try { const snap = await getDoc(doc(db, 'payments', matric)); if (snap.exists()) { const d = snap.data(); const h = Math.max(0, Math.floor(((d.expiresAt||0) - Date.now()) / 3600000)); rd.innerHTML = h > 0 ? `<div style="background:#f0faf4;padding:1rem;border-radius:8px;"><p>✅ Access found! ⏱️ ${h}h remaining</p><button class="btn btn-accent btn-sm" onclick="window.resumeAccess('${matric}')">📚 Resume</button></div>` : `<div style="background:#fdf2f2;padding:1rem;border-radius:8px;"><p>⚠️ Expired. Pay again or submit complaint.</p></div>`; } else rd.innerHTML = `<div style="background:#fff8e1;padding:1rem;border-radius:8px;"><p>❌ No record. Pay first or submit complaint.</p></div>`; } catch(e) { rd.innerHTML = '❌ Error.'; } });
+    window.resumeAccess = function(m) { document.getElementById('payMatric').value = m; hideAllSections(); showStudyGateway(m); };
+
+    function showStudyGateway(matric) { currentPayerMatric = matric || document.getElementById('payMatric')?.value || ''; hideAllSections(); checkRemainingTime(currentPayerMatric); studyGateway.classList.remove('hidden'); }
+    async function checkRemainingTime(matric) { if (!matric) return; try { const snap = await getDoc(doc(db, 'payments', matric.toUpperCase())); if (snap.exists()) { const h = Math.max(0, Math.floor(((snap.data().expiresAt||0) - Date.now()) / 3600000)); const ti = document.getElementById('timeRemainingInfo'); if (ti) { ti.innerHTML = h > 0 ? `⏱️ <strong>${h} hours remaining</strong>` : '⚠️ Expired'; ti.style.color = h > 0 ? 'var(--success)' : 'var(--danger)'; document.getElementById('startTestFromGatewayBtn').disabled = h <= 0; } } } catch(e) {} }
+    document.getElementById('startTestFromGatewayBtn').addEventListener('click', () => { if (confirm('Start test? 20-min timer begins immediately.')) { isOnlineTest = true; hideAllSections(); initializeCBT(); } });
+
+    // ═══════════ CBT ENGINE ═══════════
+    function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+    function initializeCBT() { activeTest = [...shuffle(mcqBank).slice(0, 25), ...shuffle(fitgBank).slice(0, 10), ...shuffle(tfBank).slice(0, 5)]; userAnswers = {}; currentIndex = 0; timeLeft = 1200; cbt.classList.remove('hidden'); renderQuestion(); startTimer(); renderPagination(); }
+    function renderQuestion() { const q = activeTest[currentIndex]; document.getElementById('qNumber').innerText = currentIndex + 1; document.getElementById('qText').innerText = q.q; const oa = document.getElementById('optionsArea'); oa.innerHTML = ''; if (q.options) { q.options.forEach(opt => { oa.innerHTML += `<div class="option-row"><input type="radio" name="cbt" id="opt_${opt}" value="${opt}" ${userAnswers[currentIndex]===opt?'checked':''} onchange="window.saveAnswer('${opt.replace(/'/g,"\\'")}')"><label for="opt_${opt}">${opt}</label></div>`; }); } else { oa.innerHTML = `<input type="text" value="${(userAnswers[currentIndex]||'').replace(/"/g,'&quot;')}" onkeyup="window.saveAnswer(this.value)" style="width:100%;padding:10px;" placeholder="Type your answer...">`; } document.getElementById('submitTestBtn').classList.toggle('hidden', currentIndex !== activeTest.length - 1); document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('active', i === currentIndex)); }
+    window.saveAnswer = function(v) { if (v) userAnswers[currentIndex] = v; else delete userAnswers[currentIndex]; document.querySelectorAll('.page-num').forEach((el, i) => el.classList.toggle('answered', !!userAnswers[i])); };
+    function renderPagination() { const g = document.getElementById('paginationGrid'); g.innerHTML = ''; activeTest.forEach((_, i) => { const d = document.createElement('div'); d.className = 'page-num'; d.innerText = i + 1; d.onclick = () => { currentIndex = i; renderQuestion(); }; g.appendChild(d); }); }
+    document.getElementById('prevBtn').addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; renderQuestion(); } });
+    document.getElementById('nextBtn').addEventListener('click', () => { if (currentIndex < activeTest.length - 1) { currentIndex++; renderQuestion(); } });
+    function startTimer() { clearInterval(timerInterval); timerInterval = setInterval(() => { timeLeft--; document.getElementById('timerDisplay').innerText = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`; if (timeLeft <= 0) { clearInterval(timerInterval); alert('Time up! Submitting...'); submitCBT(); } }, 1000); }
+    document.getElementById('submitTestBtn').addEventListener('click', () => { if (confirm('Submit your test?')) submitCBT(); });
+
+    // ═══════════ SUBMIT CBT WITH FULL REVIEW ═══════════
+    async function submitCBT() {
+        clearInterval(timerInterval);
+        let score = 0;
+        const reviewItems = [];
+        activeTest.forEach((q, i) => {
+            const userAns = (userAnswers[i] || '').trim();
+            const isCorrect = userAns.toLowerCase() === q.ans.toLowerCase();
+            if (isCorrect) score++;
+            reviewItems.push({ q: q.q, userAns: userAns || 'Skipped', correctAns: q.ans, isCorrect, type: q.type || (q.options ? 'mcq' : 'fitg') });
         });
+        const matric = currentPayerMatric || document.getElementById('payMatric')?.value || 'Unknown';
+        try { await setDoc(doc(collection(db, 'attempts')), { matric, score, total: activeTest.length, chapter: 'chapter-1', timestamp: Date.now() }); const pr = doc(db, 'payments', matric.toUpperCase()); const ps = await getDoc(pr); if (ps.exists()) await updateDoc(pr, { attempts: (ps.data().attempts||0) + 1 }); } catch(e) {}
+        hideAllSections();
+        const perc = ((score / activeTest.length) * 100).toFixed(1);
+        document.getElementById('onlineDisplayScore').innerText = score;
+        document.getElementById('onlineDisplayPercent').innerText = perc;
+        const sc = score;
+        let adviceList = [];
+        if (sc < 10) { adviceList = ["📚 Don't give up! Re-read the Chapter 1 summary thoroughly and retake the test. Every expert was once a beginner. Focus on understanding basic terminologies first — system, boundary, control volume. Download the full Chapter 1 PDF and study carefully before retaking. Consistent revision is key — many students who scored low ended up with A's! Review the Tutor's Marking Guide to see exactly how questions are graded, then retake with confidence!", "💪 You have room to grow! Thermodynamics builds layer by layer. Focus on open vs closed systems, intensive vs extensive properties, and the zeroth law. Each retake builds your knowledge stronger.", "🌟 This score doesn't define you. It shows where you need to focus. Study the marking guide carefully — understanding WHY answers are correct is more important than memorizing them. You'll improve with each attempt!", "🔥 Turn this around! Many students who scored low on their first attempt ended up with A's after consistent revision. The key is understanding the concepts, not just memorizing. Retake and watch your score climb!", "🚀 Ready for lift-off? Review the Tutor's Marking Guide, study the summary, and retake. Each attempt teaches you something new. You have 168 hours of access — make them count!" ]; }
+        else if (sc < 15) { adviceList = ["📖 You're getting there! Focus on the concepts of open vs closed systems and properties. Review intensive vs extensive properties and thermodynamic processes. Identify your weak spots — were you mixing up homogeneous vs heterogeneous systems? Solidify your understanding of point functions, path functions, and cycles. Re-read the summary, then retake — you'll see improvement!", "🎯 Halfway to mastery! Pay special attention to reversible vs irreversible processes and the differences between isothermal, adiabatic, isobaric, and isochoric processes. These are foundational concepts.", "🔍 Building your foundation. Chapter 1 is the bedrock of thermodynamics. Focus on the zeroth law and how it enables temperature measurement. Understanding this makes everything else easier.", "🏗️ You're constructing knowledge. Each wrong answer shows you exactly where to focus. Review the questions you missed, understand the correct answers, and retake with purpose.", "💡 Light bulb moments ahead! Sometimes concepts click on the second or third review. Don't just retake blindly — study the specific topics you got wrong first." ]; }
+        else if (sc < 20) { adviceList = ["👍 Not bad! Focus on the exact questions you missed and understand WHY the correct answer is right. Review irreversible vs reversible processes, isothermal vs adiabatic equations. With a bit more focused study on the zeroth law and work vs heat concepts, you'll cross the 20-mark threshold. Give it another pass — you're closer than you think! Refine your knowledge of derived properties like H, G, and F.", "📈 Close to passing! You're just a few marks away from the pass mark. Review the formula for thermal efficiency, Gibbs free energy, and Helmholtz free energy. These derived properties often appear in tests.", "🎓 Almost there! Focus on the distinction between point functions and path functions. Remember: thermodynamic properties are point functions; heat and work are path functions. This distinction is crucial.", "🧠 Your brain is absorbing thermodynamics! Concepts take time to settle. Pay attention to the characteristics of quasi-static processes and the conditions for reversibility.", "⚡ Momentum is building! You've grasped the basics. Now refine your knowledge of specific properties, intensive vs extensive properties, and the five fundamental properties of pure substances." ]; }
+        else if (sc < 30) { adviceList = ["👏 Good job! You have a solid grasp of Chapter 1. Review your few mistakes to ensure you're fully prepared for Chapter 2. Polish those final weak areas — perhaps the formula for thermal efficiency or Gibbs free energy. You've mastered most concepts — check which few questions you missed and make sure you understand them completely. Keep this momentum going into Chapter 2!", "🏆 Well done! You're demonstrating strong understanding of thermodynamics fundamentals. Focus on the efficiency formula 1-(Q2/Q1) and its application to heat engines. Understanding this prepares you for more advanced topics.", "📊 Solid performance! You clearly studied the material. Review the concept of control volume vs control surface and the distinction between homogeneous and heterogeneous systems. These small details can push you to 35+!", "🎖️ Above average excellence! Chapter 2 will build directly on what you already know well. Make sure you're solid on the zeroth law, the concept of thermal equilibrium, and how thermometers work as the third body.", "🔬 Strong foundation detected! With a bit more attention to detail on derived properties, specific volume calculations, and the governing equations for different processes, you'll be hitting 35+ next time!" ]; }
+        else { adviceList = ["🌟 Exceptional! You've demonstrated mastery of Chapter 1. Keep this standard of excellence as we move into Chapter 2! Your understanding of thermodynamics fundamentals is outstanding — you're ready for more advanced concepts. Share your study strategies with classmates — you could be a peer tutor! This level of understanding will serve you throughout your engineering journey. Your grasp of systems, properties, cycles, and the zeroth law is superb!", "🏅 Outstanding performance! You clearly put in the work and it shows. Thermodynamics is the foundation of mechanical engineering, and you've built yours on solid rock. Chapter 2 awaits your excellence!", "💎 Top-tier result! Your understanding of the interaction between energy, heat, work, and material systems is exceptional. This knowledge will serve you in IC engines, refrigeration, and power plants.", "🚀 Crushing it! From the zeroth law to thermal efficiency, you've shown complete mastery. Keep this momentum going — you're setting yourself up for a strong grade in MEE 206.", "👑 A+ material! Your grasp of fundamental properties, derived properties, path functions, point functions, and thermodynamic cycles is superb. You're ready to tackle the Second Law with confidence!" ]; }
+        document.getElementById('onlineAdviceText').innerHTML = adviceList[Math.floor(Math.random() * adviceList.length)];
+        
+        // Build full review
+        let reviewHTML = '<h4>📋 Full Test Review — See What You Missed</h4>';
+        reviewItems.forEach((item, i) => {
+            reviewHTML += `<div class="review-card ${item.isCorrect ? 'review-correct' : 'review-wrong'}"><p><strong>Q${i+1}:</strong> ${item.q}</p><p>Your Answer: <strong style="color:${item.isCorrect ? 'var(--success)' : 'var(--danger)'};">${item.userAns}</strong></p>${!item.isCorrect ? `<p>Correct Answer: <strong style="color:var(--success);">${item.correctAns}</strong></p>` : '<p style="color:var(--success);">✅ Correct!</p>'}</div>`;
+        });
+        document.getElementById('onlineReviewArea').innerHTML = reviewHTML;
+        onlineResult.classList.remove('hidden');
     }
 
-    // Extend +7d buttons
-    document.querySelectorAll('.extend7Btn').forEach(btn => {
-        btn.addEventListener('click', function() { extendAccess(this.dataset.matric, 168); });
-    });
+    // ═══════════ ADMIN ═══════════
+    document.getElementById('adminLoginBtn').addEventListener('click', async () => { const e=document.getElementById('adminEmail').value.trim(); const p=document.getElementById('adminPassword').value; if(!e||!p)return alert('Enter credentials'); try{await signInWithEmailAndPassword(auth,e,p);document.getElementById('adminLoginArea').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');showAdminTab('dashboard');}catch(err){alert('Login failed: '+err.message);} });
+    function logoutAdmin(){signOut(auth).then(()=>{document.getElementById('adminLoginArea').classList.remove('hidden');document.getElementById('adminDashboard').classList.add('hidden');});}
 
-    // Extend +30d buttons
-    document.querySelectorAll('.extend30Btn').forEach(btn => {
-        btn.addEventListener('click', function() { extendAccess(this.dataset.matric, 720); });
-    });
+    async function showAdminTab(tab){const ct=document.getElementById('adminTabContent');switch(tab){case'dashboard':ct.innerHTML=await renderDashboard();break;case'students':ct.innerHTML='<p style="text-align:center;padding:2rem;">🔄 Loading...</p>';studentResults=await getStudents();ct.innerHTML=renderStudentsTabHTML();setTimeout(()=>renderStudentTable(),100);break;case'chapters':ct.innerHTML=await renderChaptersTab();break;case'attempts':ct.innerHTML=await renderAttemptsTab();break;case'payments':ct.innerHTML=await renderPaymentsTab();break;case'manageAccess':ct.innerHTML=await renderManageAccessTab();setTimeout(()=>attachManageAccessListeners(),200);break;case'announcement':ct.innerHTML=await renderAnnouncementTab();setTimeout(()=>attachAnnouncementListeners(),200);break;}}
 
-    // Revoke buttons
-    document.querySelectorAll('.revokeBtn').forEach(btn => {
-        btn.addEventListener('click', function() { revokeAccess(this.dataset.matric); });
-    });
-}
+    async function renderDashboard(){const students=await getStudents();const aSnap=await getDocs(collection(db,'attempts'));let ta=0,psd=0;aSnap.forEach(d=>{ta++;if(d.data().score>=20)psd++;});const pSnap=await getDocs(collection(db,'payments'));let pd=0;pSnap.forEach(d=>{if(d.data().paidAt)pd++;});const cSnap=await getDocs(collection(db,'chapters'));let ck=0;students.forEach(s=>{if(s.checkedAt)ck++;});return `<h4>📊 Dashboard</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem;margin:1.5rem 0;"><div style="background:#f0faf4;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--success);">${students.length}</div><div style="font-size:0.75rem;">Students</div></div><div style="background:#eef3fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--primary);">${cSnap.size}</div><div style="font-size:0.75rem;">Chapters</div></div><div style="background:#fff8e1;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--accent);">${ta}</div><div style="font-size:0.75rem;">Attempts</div></div><div style="background:#fdf2f2;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:var(--danger);">${psd}</div><div style="font-size:0.75rem;">Passed</div></div><div style="background:#f5f0ff;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#6b21a8;">${pd}</div><div style="font-size:0.75rem;">Paid</div></div><div style="background:#e0f7fa;padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:2rem;font-weight:800;color:#00695c;">${ck}</div><div style="font-size:0.75rem;">Checked</div></div></div>`;}
 
-async function extendAccess(matric, hours) {
-    if (!confirm(`Extend access for ${matric} by ${hours} hours?`)) return;
-    try {
-        const ref = doc(db, 'payments', matric.toUpperCase());
-        const snap = await getDoc(ref);
-        const currentExpiry = snap.exists() ? (snap.data().expiresAt || Date.now()) : Date.now();
-        await setDoc(ref, {
-            matric: matric.toUpperCase(),
-            expiresAt: currentExpiry + (hours * 3600000),
-            extendedAt: Date.now(),
-            extendedBy: hours
-        }, { merge: true });
-        alert(`✅ Extended by ${hours} hours for ${matric}`);
-        showAdminTab('manageAccess');
-    } catch (e) {
-        alert('❌ Error: ' + e.message);
+    function renderStudentsTabHTML(){return `<h4>📋 Students (${studentResults.length})</h4><button class="btn btn-sm btn-success" onclick="window.addStudentRow()">+ Add</button><input type="text" id="studentSearchInput" placeholder="🔍 Search matric..." onkeyup="window.filterStudentTable()" style="width:200px;padding:0.5rem;margin-left:0.5rem;"><button class="btn btn-sm btn-outline" onclick="window.saveAllStudents()">💾 Save All</button><table class="admin-table"><thead><tr><th>#</th><th>Name</th><th>Matric</th><th>Score</th><th>Link</th><th>✓</th><th>Act</th></tr></thead><tbody id="adminStudentBody"></tbody></table><div id="studentAttemptsView" style="margin-top:1rem;"></div>`;}
+    function renderStudentTable(filter=''){const tb=document.getElementById('adminStudentBody');if(!tb)return;tb.innerHTML='';const ff=filter?studentResults.filter(s=>s.matric.toUpperCase().includes(filter.toUpperCase())):studentResults;if(!ff.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;">No students.</td></tr>';return;}ff.forEach(s=>{const i=studentResults.indexOf(s);tb.innerHTML+=`<tr><td>${i+1}</td><td><input value="${s.name.replace(/"/g,'&quot;')}" onchange="window.updateStudent(${i},'name',this.value)"></td><td><input value="${s.matric}" onchange="window.updateStudent(${i},'matric',this.value)"></td><td><input type="number" value="${s.score}" onchange="window.updateStudent(${i},'score',parseInt(this.value)||0)"></td><td><input value="${s.link}" onchange="window.updateStudent(${i},'link',this.value)"></td><td>${s.checkedAt?'✅':'—'}</td><td><button class="btn btn-sm btn-outline" onclick="window.viewStudentAttempts('${s.matric}')">📊</button><button class="btn btn-sm btn-success" onclick="window.saveSingleStudent(${i})">💾</button><button class="btn btn-sm btn-danger" onclick="window.deleteStudent(${i})">🗑</button></td></tr>`;});}
+    window.updateStudent=(i,f,v)=>{studentResults[i][f]=v;};
+    window.addStudentRow=()=>{studentResults.push({name:'New',matric:'NEW',score:0,link:'#'});renderStudentTable();};
+    window.saveSingleStudent=async(i)=>{await saveStudent(studentResults[i]);alert('Saved!');};
+    window.saveAllStudents=async()=>{if(!confirm(`Save all?`))return;await saveAllStudents(studentResults);alert('Saved!');};
+    window.deleteStudent=async(i)=>{if(!confirm('Delete?'))return;if(studentResults[i].id)await deleteStudentFromDB(studentResults[i].id);studentResults.splice(i,1);renderStudentTable();};
+    window.filterStudentTable=()=>renderStudentTable(document.getElementById('studentSearchInput')?.value||'');
+    window.viewStudentAttempts=async(m)=>{const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>{if(d.data().matric===m)a.push(d.data());});const v=document.getElementById('studentAttemptsView');v.innerHTML=a.length?`<h5>📊 ${m}</h5><table class="admin-table"><tr><th>#</th><th>Score</th><th>Date</th></tr>${a.map((x,i)=>`<tr><td>${i+1}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`:'<p>No attempts.</p>';};
+
+    async function renderChaptersTab(){const s=await getDocs(collection(db,'chapters'));const c=[];s.forEach(d=>c.push({id:d.id,...d.data()}));return `<h4>📚 Chapters</h4><button class="btn btn-sm btn-success" onclick="window.showAddChapterForm()">+ Add</button><div id="addChapterForm" class="hidden" style="margin:1rem 0;padding:1rem;background:#f8fafc;border-radius:8px;"><input id="newChapterTitle" placeholder="Title"><input id="newChapterSummary" placeholder="Summary Link"><input id="newChapterFull" placeholder="Full Link"><button class="btn btn-sm btn-success" onclick="window.addChapter()">Save</button></div><table class="admin-table"><tr><th>Title</th><th>Status</th><th>Act</th></tr>${c.map(x=>`<tr><td>${x.title||x.id}</td><td>${x.active?'✅':'🔒'}</td><td><button class="btn btn-sm btn-outline" onclick="window.toggleChapter('${x.id}',${!x.active})">Toggle</button><button class="btn btn-sm btn-danger" onclick="window.deleteChapter('${x.id}')">🗑</button></td></tr>`).join('')}</table>`;}
+    window.showAddChapterForm=()=>document.getElementById('addChapterForm').classList.remove('hidden');
+    window.addChapter=async()=>{const t=document.getElementById('newChapterTitle').value.trim();if(!t)return alert('Title required');await setDoc(doc(db,'chapters',t.toLowerCase().replace(/\s+/g,'-')),{title:t,summaryLink:document.getElementById('newChapterSummary').value,fullLink:document.getElementById('newChapterFull').value,active:true});showAdminTab('chapters');};
+    window.toggleChapter=async(id,a)=>{await updateDoc(doc(db,'chapters',id),{active:a});showAdminTab('chapters');};
+    window.deleteChapter=async(id)=>{if(!confirm('Delete?'))return;await deleteDoc(doc(db,'chapters',id));showAdminTab('chapters');};
+
+    async function renderAttemptsTab(){const s=await getDocs(collection(db,'attempts'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.timestamp||0)-(x.timestamp||0));return `<h4>📊 Attempts (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Score</th><th>Date</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.score}/${x.total}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join('')}</table>`;}
+    async function renderPaymentsTab(){const s=await getDocs(collection(db,'payments'));const a=[];s.forEach(d=>a.push(d.data()));a.sort((x,y)=>(y.paidAt||0)-(x.paidAt||0));return `<h4>💳 Payments (${a.length})</h4><table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Paid</th><th>Expires</th><th>Att</th><th>Status</th></tr>${a.map(x=>`<tr><td>${x.matric}</td><td>${x.name||''}</td><td>${x.paidAt?new Date(x.paidAt).toLocaleString():''}</td><td>${x.expiresAt?new Date(x.expiresAt).toLocaleString():''}</td><td>${x.attempts||0}</td><td>${(x.expiresAt>Date.now())?'✅':'⚠️'}</td></tr>`).join('')}</table>`;}
+
+    // ═══════════ ANNOUNCEMENT ═══════════
+    async function renderAnnouncementTab(){const msg=await getAnnouncement();return `<h4>📢 Announcement Banner</h4><p style="color:var(--text-muted);font-size:0.85rem;">This appears at the top of the welcome page for all students.</p><textarea id="announcementInput" rows="4" style="width:100%;margin:0.8rem 0;">${msg||''}</textarea><div style="display:flex;gap:0.5rem;"><button class="btn btn-sm btn-success" id="saveAnnounceBtn">💾 Save</button><button class="btn btn-sm btn-outline" id="clearAnnounceBtn">🗑 Clear</button></div>${msg?`<div style="background:#f0faf4;padding:1rem;border-radius:8px;margin-top:1rem;"><p><strong>📢 Current:</strong> ${msg}</p></div>`:'<div style="background:#fff8e1;padding:1rem;border-radius:8px;margin-top:1rem;"><p>No announcement set.</p></div>'}`;}
+    function attachAnnouncementListeners(){const sb=document.getElementById('saveAnnounceBtn');const cb=document.getElementById('clearAnnounceBtn');if(sb){sb.addEventListener('click',async()=>{const msg=document.getElementById('announcementInput').value.trim();if(!msg)return alert('Enter a message');await saveAnnouncementToDB(msg);await loadAnnouncement();alert('✅ Saved!');showAdminTab('announcement');});}if(cb){cb.addEventListener('click',async()=>{if(!confirm('Clear?'))return;await saveAnnouncementToDB('');await loadAnnouncement();alert('🗑 Cleared.');showAdminTab('announcement');});}}
+
+    // ═══════════ MANAGE ACCESS ═══════════
+    async function renderManageAccessTab(){const pSnap=await getDocs(collection(db,'payments'));const payments=[];pSnap.forEach(d=>payments.push({id:d.id,...d.data()}));payments.sort((a,b)=>(b.expiresAt||0)-(a.expiresAt||0));return `<h4>🔑 Manual Access Management</h4><div style="background:#f8fafc;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>➕ Grant Access</h5><input type="text" id="manualMatric" placeholder="Matric Number (Required)"><input type="text" id="manualName" placeholder="Student Name (Optional)"><input type="email" id="manualEmail" placeholder="Email (Optional)"><select id="manualDuration"><option value="24">24 hours</option><option value="72">3 days</option><option value="168" selected>7 days</option><option value="336">14 days</option><option value="720">30 days</option><option value="8760">1 year</option></select><button class="btn btn-sm btn-success" id="grantAccessBtn">✅ Grant Access</button></div><div style="background:#fdf2f2;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>🔍 Check / Revoke</h5><div style="display:flex;gap:0.5rem;"><input type="text" id="checkMatricInput" placeholder="Matric Number" style="flex:2;"><button class="btn btn-sm btn-outline" id="checkAccessBtn" style="flex:1;">🔍 Check</button></div><div id="manualAccessResult" style="margin-top:0.8rem;"></div></div><div style="background:#fff8e1;padding:1.2rem;border-radius:12px;margin:1rem 0;"><h5>📋 Active Access (${payments.length})</h5><table class="admin-table"><tr><th>Matric</th><th>Name</th><th>Expires</th><th>Hrs Left</th><th>Source</th><th>Act</th></tr>${payments.map(p=>{const h=Math.max(0,Math.floor(((p.expiresAt||0)-Date.now())/3600000));const active=(p.expiresAt||0)>Date.now();return`<tr style="${active?'':'opacity:0.5;'}"><td><strong>${p.matric}</strong></td><td>${p.name||'—'}</td><td>${p.expiresAt?new Date(p.expiresAt).toLocaleDateString():'—'}</td><td style="color:${h>24?'var(--success)':h>0?'var(--accent)':'var(--danger)'};">${active?h+'h':'Expired'}</td><td>${p.manualGrant?'👤 Manual':'💳 Paid'}</td><td><button class="btn btn-sm btn-outline extend7Btn" data-matric="${p.matric}">+7d</button><button class="btn btn-sm btn-outline extend30Btn" data-matric="${p.matric}">+30d</button><button class="btn btn-sm btn-danger revokeBtn" data-matric="${p.matric}">🗑</button></td></tr>`;}).join('')}</table></div>`;}
+    function attachManageAccessListeners(){
+        const gb=document.getElementById('grantAccessBtn');if(gb){gb.addEventListener('click',async()=>{const m=document.getElementById('manualMatric').value.trim().toUpperCase();const n=document.getElementById('manualName').value.trim();const e=document.getElementById('manualEmail').value.trim();const d=parseInt(document.getElementById('manualDuration').value);if(!m)return alert('Enter matric');try{await setDoc(doc(db,'payments',m),{matric:m,name:n||'Manual Grant',email:e||'',paidAt:Date.now(),expiresAt:Date.now()+(d*3600000),manualGrant:true,attempts:0},{merge:true});alert(`✅ Access granted for ${m} (${d}h)`);document.getElementById('manualMatric').value='';document.getElementById('manualName').value='';document.getElementById('manualEmail').value='';showAdminTab('manageAccess');}catch(e){alert('❌ Error: '+e.message);}});}
+        const cb=document.getElementById('checkAccessBtn');if(cb){cb.addEventListener('click',async()=>{const m=document.getElementById('checkMatricInput').value.trim().toUpperCase();if(!m)return alert('Enter matric');const rd=document.getElementById('manualAccessResult');rd.innerHTML='🔄 Checking...';try{const snap=await getDoc(doc(db,'payments',m));if(snap.exists()){const d=snap.data();const h=Math.max(0,Math.floor(((d.expiresAt||0)-Date.now())/3600000));const active=(d.expiresAt||0)>Date.now();rd.innerHTML=`<div style="background:${active?'#f0faf4':'#fdf2f2'};padding:1rem;border-radius:8px;"><p>Matric: ${d.matric} | Name: ${d.name||'N/A'} | Status: ${active?'✅ Active':'⚠️ Expired'} | Hours: ${h} | Source: ${d.manualGrant?'👤 Manual':'💳 Paid'}</p><button class="btn btn-sm btn-outline" id="ext7Btn">+7d</button> <button class="btn btn-sm btn-outline" id="ext30Btn">+30d</button> <button class="btn btn-sm btn-danger" id="revBtn">🗑</button></div>`;document.getElementById('ext7Btn').addEventListener('click',()=>extendAccess(m,168));document.getElementById('ext30Btn').addEventListener('click',()=>extendAccess(m,720));document.getElementById('revBtn').addEventListener('click',()=>{revokeAccess(m);rd.innerHTML='';});}else rd.innerHTML='<div style="background:#fff8e1;padding:1rem;border-radius:8px;">❌ No record for '+m+'</div>';}catch(e){rd.innerHTML='❌ Error: '+e.message;}});}
+        document.querySelectorAll('.extend7Btn').forEach(b=>b.addEventListener('click',function(){extendAccess(this.dataset.matric,168);}));
+        document.querySelectorAll('.extend30Btn').forEach(b=>b.addEventListener('click',function(){extendAccess(this.dataset.matric,720);}));
+        document.querySelectorAll('.revokeBtn').forEach(b=>b.addEventListener('click',function(){revokeAccess(this.dataset.matric);}));
     }
-}
+    async function extendAccess(matric,hours){if(!confirm(`Extend ${matric} by ${hours}h?`))return;const ref=doc(db,'payments',matric.toUpperCase());const snap=await getDoc(ref);const cur=snap.exists()?(snap.data().expiresAt||Date.now()):Date.now();await setDoc(ref,{matric:matric.toUpperCase(),expiresAt:cur+(hours*3600000),extendedAt:Date.now(),extendedBy:hours},{merge:true});alert(`✅ Extended by ${hours}h`);showAdminTab('manageAccess');}
+    async function revokeAccess(matric){if(!confirm(`Revoke ALL access for ${matric}?`))return;await deleteDoc(doc(db,'payments',matric.toUpperCase()));alert(`🗑 Revoked`);showAdminTab('manageAccess');}
 
-async function revokeAccess(matric) {
-    if (!confirm(`⚠️ Revoke ALL access for ${matric}? This cannot be undone.`)) return;
-    try {
-        await deleteDoc(doc(db, 'payments', matric.toUpperCase()));
-        alert(`🗑 Access revoked for ${matric}`);
-        showAdminTab('manageAccess');
-    } catch (e) {
-        alert('❌ Error: ' + e.message);
-    }
-}
+    // ═══════════ EXPORTS ═══════════
+    window.navigateTo=navigateTo;window.scrollToTop=scrollToTop;window.hideAllSections=hideAllSections;
+    window.showAdminTab=showAdminTab;window.logoutAdmin=logoutAdmin;window.renderStudentTable=renderStudentTable;
+    window.openWhatsAppHelp=openWhatsAppHelp;window.resumeAccess=resumeAccess;
+    window.saveAnswer=saveAnswer;window.filterStudentTable=filterStudentTable;
+    window.viewStudentAttempts=viewStudentAttempts;window.saveSingleStudent=saveSingleStudent;
+    window.saveAllStudents=saveAllStudents;window.deleteStudent=deleteStudent;
+    window.addStudentRow=addStudentRow;window.updateStudent=updateStudent;
+    window.showAddChapterForm=showAddChapterForm;window.addChapter=addChapter;
+    window.toggleChapter=toggleChapter;window.deleteChapter=deleteChapter;
+    window.extendAccess=extendAccess;window.revokeAccess=revokeAccess;
 
-// Make these available globally
-window.extendAccess = extendAccess;
-window.revokeAccess = revokeAccess;
-
-        window.navigateTo = navigateTo;
-window.scrollToTop = scrollToTop;
-window.hideAllSections = hideAllSections;
-window.showAdminTab = showAdminTab;
-window.logoutAdmin = logoutAdmin;
-window.renderStudentTable = renderStudentTable;
-window.openWhatsAppHelp = openWhatsAppHelp;
-window.resumeAccess = resumeAccess;
-window.showOwnAttempts = showOwnAttempts;
-window.saveAnswer = saveAnswer;
-window.filterStudentTable = filterStudentTable;
-window.viewStudentAttempts = viewStudentAttempts;
-window.saveSingleStudent = saveSingleStudent;
-window.saveAllStudents = saveAllStudents;
-window.deleteStudent = deleteStudent;
-window.addStudentRow = addStudentRow;
-window.updateStudent = updateStudent;
-window.showAddChapterForm = showAddChapterForm;
-window.addChapter = addChapter;
-window.toggleChapter = toggleChapter;
-window.deleteChapter = deleteChapter;
-window.saveAnnouncementMsg = saveAnnouncementMsg;
-window.clearAnnouncementMsg = clearAnnouncementMsg;
-    </script>
+    // ═══════════ SEED ═══════════
+    (async function seed(){const ss=await getDocs(collection(db,STUDENTS_COLLECTION));if(ss.empty){for(const s of defaultStudents)await setDoc(doc(collection(db,STUDENTS_COLLECTION)),s);}const cs=await getDoc(doc(db,'chapters','chapter-1'));if(!cs.exists())await setDoc(doc(db,'chapters','chapter-1'),{title:'Chapter 1',summaryLink:'https://drive.google.com/file/d/1WRrGTvJKN4d08B9JqtVsmODxslcu-3Ps/view',fullLink:'https://drive.google.com/file/d/1HIA5EKb0RFRkJP8UD8ZKAiRHbGvCH5No/view',active:true});const as=await getDoc(doc(db,SETTINGS_DOC));if(!as.exists())await setDoc(doc(db,SETTINGS_DOC),{message:''});console.log("🌱 Seeded");})();
+</script>
 </body>
 </html>

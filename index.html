@@ -79,6 +79,8 @@
         .back-to-top:hover { background:#092d45; transform:translateY(-3px); }
         .site-footer { text-align:center; padding:1.5rem; margin-top:2rem; border-top:2px solid var(--border-light); color:var(--text-muted); font-size:0.85rem; }
         .site-footer a { color:var(--primary-light); text-decoration:none; font-weight:600; }
+        .admin-dot { display:inline-block; width:8px; height:8px; background:var(--text-muted); border-radius:50%; cursor:pointer; margin:0 0.5rem; vertical-align:middle; opacity:0.4; transition:var(--transition); }
+        .admin-dot:hover { opacity:1; background:var(--primary); }
         .admin-table { width:100%; border-collapse:collapse; font-size:0.85rem; margin:1rem 0; }
         .admin-table th, .admin-table td { border:1px solid var(--border-light); padding:0.6rem; text-align:left; }
         .admin-table th { background:var(--primary); color:white; }
@@ -104,7 +106,6 @@
             <a class="disabled">📗 Chapter 2</a>
             <a class="disabled">📙 Chapter 3</a>
             <a class="disabled">📕 Chapter 4</a>
-            <a onclick="navigateTo('admin')" id="navAdmin">🔐 Admin</a>
         </div>
     </nav>
     <button class="back-to-top" id="backToTopBtn" title="Back to top" onclick="scrollToTop()">↑</button>
@@ -151,7 +152,10 @@
         <!-- ═══════════ ADMIN ═══════════ -->
         <div id="adminSection" class="section-card hidden"><h3>🔐 Admin Portal</h3><div id="adminLoginArea"><p>🔐 Admin Authentication Required</p><input type="email" id="adminEmail" placeholder="Admin Email"><input type="password" id="adminPassword" placeholder="Password"><button id="adminLoginBtn" class="btn btn-full">Login</button></div><div id="adminDashboard" class="hidden"><div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;"><button class="btn btn-sm btn-success" onclick="window.showAdminTab('dashboard')">📊 Dashboard</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('students')">📋 Students</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('chapters')">📚 Chapters</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('attempts')">📊 Attempts</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('payments')">💳 Payments</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('manageAccess')">🔑 Access</button><button class="btn btn-sm btn-outline" onclick="window.showAdminTab('announcement')">📢 Announce</button></div><div id="adminTabContent"></div></div></div>
 
-        <div class="site-footer"><p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p><p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: Yakub Opeyemi Abideen</p></div>
+       <div class="site-footer">
+            <p>📞 <a href="https://wa.me/2347050376975" target="_blank">Chat on WhatsApp</a> • 📧 <a href="mailto:helpinghandshallneverfall@gmail.com">Click for Mail</a></p>
+            <p>© 2024 Genius Point Academy • MEE 206 Test Management • Tutor: Yakub Opeyemi Abideen <span class="admin-dot" onclick="navigateTo('admin')" title="Admin Portal"></span></p>
+        </div>
     </div>
 
     <script type="module">
